@@ -206,8 +206,8 @@ $$;
 
 revoke all on function public.is_org_member(uuid) from public;
 revoke all on function public.has_org_role(uuid, public.membership_role[]) from public;
-grant execute on function public.is_org_member(uuid) to authenticated, anon;
-grant execute on function public.has_org_role(uuid, public.membership_role[]) to authenticated, anon;
+grant execute on function public.is_org_member(uuid) to authenticated;
+grant execute on function public.has_org_role(uuid, public.membership_role[]) to authenticated;
 
 -- Bootstrap function: authenticated creator creates an organisation and its first admin membership atomically.
 create or replace function public.create_organization(p_legal_name text, p_display_name text)
@@ -273,8 +273,6 @@ create policy "applicants_org_recruitment_update" on public.applicants for updat
   using (public.has_org_role(organization_id, array['agency_admin','operations_manager','recruitment_officer']::public.membership_role[]))
   with check (public.has_org_role(organization_id, array['agency_admin','operations_manager','recruitment_officer']::public.membership_role[]));
 
-create policy "job_openings_public_published_read" on public.job_openings for select to anon, authenticated
-  using (status = 'published' or public.has_org_role(organization_id, array['agency_admin','operations_manager','recruitment_officer']::public.membership_role[]));
 create policy "job_openings_recruitment_manage" on public.job_openings for all to authenticated
   using (public.has_org_role(organization_id, array['agency_admin','operations_manager','recruitment_officer']::public.membership_role[]))
   with check (public.has_org_role(organization_id, array['agency_admin','operations_manager','recruitment_officer']::public.membership_role[]));
@@ -303,7 +301,8 @@ create policy "audit_logs_authorised_read" on public.audit_logs for select to au
   using (public.has_org_role(organization_id, array['agency_admin','auditor']::public.membership_role[]));
 -- No client-facing INSERT/UPDATE/DELETE policy on audit_logs. API writes via controlled server-side path.
 
--- Do not grant table-wide writes to anon. Authenticated grants are further constrained by RLS.
+-- No direct anonymous table access. Public job listings will be exposed through a deliberately limited API DTO.
+-- Authenticated grants are further constrained by RLS.
 grant select, update on public.profiles to authenticated;
 grant select, update on public.organizations to authenticated;
 grant select, insert, update on public.memberships to authenticated;
@@ -314,6 +313,5 @@ grant select, insert, update on public.applications to authenticated;
 grant select, insert, update on public.clients to authenticated;
 grant select, insert, update on public.caregivers to authenticated;
 grant select on public.audit_logs to authenticated;
-grant select on public.job_openings to anon;
 
 commit;
