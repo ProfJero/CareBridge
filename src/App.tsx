@@ -126,7 +126,7 @@ function App() {
    const ok=!memberError&&((members||[]).some(m=>['agency_admin','operations_manager','recruitment_officer','care_coordinator','clinical_supervisor','finance_officer','auditor'].includes(m.role))||!!platformAdmin)
    if(alive)setAccess(ok?'allowed':'denied');if(!ok)await supabase!.auth.signOut()
   }
-  void verify();const {data:sub}=supabase!.auth.onAuthStateChange(()=>{void verify()})
+  void verify();const {data:sub}=supabase!.auth.onAuthStateChange((event)=>{if(event==='SIGNED_OUT'&&alive)setAccess('signed-out')})
   return()=>{alive=false;sub.subscription.unsubscribe()}
  },[path])
  function go(to:string){history.pushState({},'',to);setPath(to);scrollTo(0,0)}
