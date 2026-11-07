@@ -206,8 +206,8 @@ $$;
 
 revoke all on function public.is_org_member(uuid) from public;
 revoke all on function public.has_org_role(uuid, public.membership_role[]) from public;
-grant execute on function public.is_org_member(uuid) to authenticated;
-grant execute on function public.has_org_role(uuid, public.membership_role[]) to authenticated;
+grant execute on function public.is_org_member(uuid) to authenticated, anon;
+grant execute on function public.has_org_role(uuid, public.membership_role[]) to authenticated, anon;
 
 -- Bootstrap function: authenticated creator creates an organisation and its first admin membership atomically.
 create or replace function public.create_organization(p_legal_name text, p_display_name text)
