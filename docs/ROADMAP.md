@@ -25,10 +25,13 @@ Acceptance: clean install, typecheck and production build pass; documentation ma
 Acceptance: users can sign in, join only authorised organisations, switch tenant context safely, and cannot access another tenant's data. Privileged roles are audited.
 
 ## Milestone 2 — Recruitment and workforce
-- [ ] Job openings
-- [ ] Applicant portal and application lifecycle
-- [ ] Private CV/certificate uploads
-- [ ] Recruitment review, interview and decision workflow
+- [x] Recruitment workspace UI prototype (local demo data only)
+- [x] Candidate-facing careers and two-step application UI prototype
+- [x] Recruitment schema migration for documents, application events, interviews and references
+- [ ] Public job DTO/API and transactional application submission
+- [ ] Applicant authentication and application status tracking
+- [ ] Private CV/certificate storage, scanning and authorised downloads
+- [ ] Persistent recruitment review, interview and decision API
 - [ ] Credential verification and expiry tracking
 - [ ] Caregiver/staff profiles, competencies and availability
 

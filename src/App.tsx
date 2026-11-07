@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import RecruitmentWorkspace from './components/RecruitmentWorkspace'
 import {
   Activity, AlertCircle, ArrowDownRight, ArrowUpRight, Bell, CalendarDays,
   CheckCircle2, ChevronDown, ClipboardList, Clock3, FileText, HeartHandshake,
@@ -6,7 +7,7 @@ import {
   ShieldCheck, Stethoscope, Users, Wallet, X, UserRound, BriefcaseBusiness,
 } from 'lucide-react'
 
-type Section = 'Overview' | 'Clients' | 'Caregivers' | 'Care plans' | 'Schedule' | 'Visits' | 'Recruitment' | 'Finance' | 'Reports' | 'Messages' | 'Settings'
+type Section = 'Overview' | 'Clients' | 'Caregivers' | 'Care plans' | 'Schedule' | 'Visits' | 'Recruitment' | 'Finance' | 'Reports' | 'Messages' | 'Settings' | 'Careers'
 
 const navigation: { label: Section; icon: typeof LayoutDashboard; group: string }[] = [
   { label: 'Overview', icon: LayoutDashboard, group: 'WORKSPACE' },
@@ -88,7 +89,7 @@ function App() {
 
           {showNotice && <div className="notice"><div className="notice-icon"><AlertCircle size={18}/></div><div><strong>Welcome to your CareBridge workspace</strong><p>This is a starter environment with sample records. Connect Supabase and configure access policies before entering real client or clinical information.</p></div><button aria-label="Dismiss notice" onClick={() => setShowNotice(false)}><X size={17}/></button></div>}
 
-          {active === 'Overview' ? <>
+          {active === 'Recruitment' ? <RecruitmentWorkspace /> : active === 'Careers' ? <RecruitmentWorkspace initialPortal /> : active === 'Overview' ? <>
             <div className="stat-grid">{stats.map((stat) => { const Icon = stat.icon; return <article className="stat-card" key={stat.label}><div className="stat-top"><span>{stat.label}</span><div className={`stat-icon ${stat.tone}`}><Icon size={18}/></div></div><div className="stat-value">{stat.value}</div><div className="stat-change">{stat.positive === true ? <ArrowUpRight size={14}/> : stat.positive === false ? <ArrowDownRight size={14}/> : <span className="change-dot"/>}<span>{stat.change}</span><small>{stat.positive !== null ? 'vs last month' : 'applications'}</small></div></article> })}</div>
             <div className="content-grid">
               <section className="panel visits-panel"><div className="panel-heading"><div><h2>Today's visits</h2><p>Care delivery at a glance</p></div><button className="text-button" onClick={() => setActive('Schedule')}>View schedule <ArrowUpRight size={14}/></button></div><div className="visit-summary"><div><span className="summary-number">34</span><span>Total visits</span></div><div><span className="summary-number green-text">18</span><span>Completed</span></div><div><span className="summary-number violet-text">8</span><span>In progress</span></div><div><span className="summary-number amber-text">8</span><span>Upcoming</span></div></div><div className="table-wrap"><table><thead><tr><th>CAREGIVER / CLIENT</th><th>SERVICE</th><th>TIME</th><th>STATUS</th></tr></thead><tbody>{visits.map(v => <tr key={v.name}><td><div className="person-cell"><div className={`person-avatar ${v.color}`}>{v.initials}</div><div><strong>{v.name}</strong><span>{v.client}</span></div></div></td><td>{v.type}</td><td className="time-cell">{v.time}</td><td><span className={`status-pill ${v.status === 'In progress' ? 'status-progress' : 'status-upcoming'}`}>{v.status}</span></td></tr>)}</tbody></table></div><button className="mobile-view-all" onClick={() => setActive('Visits')}>View all visits</button></section>
