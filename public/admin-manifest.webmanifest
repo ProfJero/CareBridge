@@ -1,0 +1,19 @@
+{
+  "id": "/admin-app",
+  "name": "CareBridge Admin",
+  "short_name": "CB Admin",
+  "description": "Secure CareBridge agency management workspace.",
+  "start_url": "/admin/login",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f4f8f7",
+  "theme_color": "#102b46",
+  "icons": [
+    {
+      "src": "/carebridge-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

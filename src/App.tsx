@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
+import { supabase, isSupabaseConfigured } from './lib/supabase'
 import RecruitmentWorkspace from './components/RecruitmentWorkspace'
 import {
   Activity, AlertCircle, ArrowDownRight, ArrowUpRight, Bell, CalendarDays,
@@ -43,7 +44,7 @@ const applications = [
   { name: 'Abigail Mensimah', role: 'Caregiver', date: 'Yesterday', status: 'Shortlisted' },
 ]
 
-function App() {
+function AdminDashboard() {
   const [active, setActive] = useState<Section>('Overview')
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [search, setSearch] = useState('')
@@ -104,4 +105,49 @@ function App() {
   )
 }
 
+
+type AccessState = 'checking' | 'signed-out' | 'allowed' | 'denied'
+function App() {
+ const [path,setPath]=useState(window.location.pathname),[access,setAccess]=useState<AccessState>('checking')
+ const [email,setEmail]=useState(''),[password,setPassword]=useState(''),[error,setError]=useState(''),[busy,setBusy]=useState(false)
+ useEffect(()=>{const pop=()=>setPath(window.location.pathname);window.addEventListener('popstate',pop);return()=>window.removeEventListener('popstate',pop)},[])
+ useEffect(()=>{const m=document.querySelector<HTMLLinkElement>('link[rel="manifest"]');if(m)m.href=path.startsWith('/admin')?'/admin-manifest.webmanifest':'/manifest.webmanifest'},[path])
+ useEffect(()=>{
+  if(!path.startsWith('/admin'))return
+  if(!isSupabaseConfigured||!supabase){setAccess('signed-out');return}
+  let alive=true
+  const verify=async()=>{
+   const {data}=await supabase!.auth.getSession()
+   if(!data.session){if(alive)setAccess('signed-out');return}
+   const [{data:members,error:memberError},{data:platformAdmin}]=await Promise.all([
+    supabase!.from('memberships').select('role,status').eq('user_id',data.session.user.id).eq('status','active'),
+    supabase!.from('platform_admins').select('user_id').eq('user_id',data.session.user.id).maybeSingle()
+   ])
+   const ok=!memberError&&((members||[]).some(m=>['agency_admin','operations_manager','recruitment_officer','care_coordinator','clinical_supervisor','finance_officer','auditor'].includes(m.role))||!!platformAdmin)
+   if(alive)setAccess(ok?'allowed':'denied');if(!ok)await supabase!.auth.signOut()
+  }
+  void verify();const {data:sub}=supabase!.auth.onAuthStateChange((event)=>{if(event==='SIGNED_OUT'&&alive)setAccess('signed-out')})
+  return()=>{alive=false;sub.subscription.unsubscribe()}
+ },[path])
+ function go(to:string){history.pushState({},'',to);setPath(to);scrollTo(0,0)}
+ async function login(e:FormEvent){e.preventDefault();if(!supabase)return;setBusy(true);setError('')
+  const {error:err}=await supabase.auth.signInWithPassword({email:email.trim(),password})
+  if(err){setError('Unable to sign in. Check your email and password, then try again.');setBusy(false);return}
+  const {data:user}=await supabase.auth.getUser(),id=user.user?.id
+  const [{data:members,error:memberError},{data:platformAdmin}]=id?await Promise.all([
+   supabase.from('memberships').select('role,status').eq('user_id',id).eq('status','active'),
+   supabase.from('platform_admins').select('user_id').eq('user_id',id).maybeSingle()
+  ]):[{data:[],error:null},{data:null}]
+  const ok=!memberError&&((members||[]).some(m=>['agency_admin','operations_manager','recruitment_officer','care_coordinator','clinical_supervisor','finance_officer','auditor'].includes(m.role))||!!platformAdmin)
+  if(!ok){await supabase.auth.signOut();setAccess('denied');setError('This account does not have an active CareBridge administrator or staff role.')}
+  else{setAccess('allowed');go('/admin')}
+  setBusy(false)
+ }
+ if(!path.startsWith('/admin'))return <RecruitmentWorkspace initialPortal/>
+ if(access==='allowed')return <><div className="admin-session-bar"><span><ShieldCheck size={16}/> Secure administrator workspace</span><button onClick={async()=>{await supabase?.auth.signOut();setAccess('signed-out');go('/admin/login')}}>Sign out</button></div><AdminDashboard/></>
+ return <main className="admin-login-page"><button className="admin-back-link" onClick={()=>go('/')}>← Back to CareBridge careers</button><section className="admin-login-card"><div className="admin-login-mark"><ShieldCheck size={25}/></div><span className="admin-login-kicker">CAREBRIDGE ADMINISTRATION</span><h1>Welcome back</h1><p>Sign in with your authorised agency account to continue to the management workspace.</p>
+ {!isSupabaseConfigured&&<div className="admin-config-warning">Admin sign-in is not active yet. Configure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY, apply the database migrations and create authorised staff memberships.</div>}
+ {error&&<div className="admin-login-error">{error}</div>}<form onSubmit={login}><label>Email address<input type="email" autoComplete="username" required value={email} onChange={e=>setEmail(e.target.value)} placeholder="admin@youragency.com"/></label><label>Password<input type="password" autoComplete="current-password" required value={password} onChange={e=>setPassword(e.target.value)} placeholder="Enter your password"/></label><button type="submit" disabled={!isSupabaseConfigured||busy}>{busy?'Signing in…':'Sign in securely'} <ArrowUpRight size={17}/></button></form><div className="admin-login-foot"><ShieldCheck size={14}/> Access is restricted to approved CareBridge staff.</div></section></main>
+}
 export default App
+

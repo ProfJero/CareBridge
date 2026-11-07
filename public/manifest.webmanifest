@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "CareBridge Careers",
+  "short_name": "CareBridge",
+  "description": "Explore opportunities and apply to join CareBridge.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f4f8f7",
+  "theme_color": "#168f7e",
+  "icons": [
+    {
+      "src": "/carebridge-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
