@@ -31,7 +31,7 @@ CareBridge is a modular home healthcare operations platform for organisations de
 | Hosting | Cloudflare Pages (planned) | Static web deployment |
 | PWA | Workbox/service worker (planned) | Installable caregiver experience; offline workflow later |
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/DATA_MODEL.md](docs/DATA_MODEL.md), [docs/SECURITY_AND_PRIVACY.md](docs/SECURITY_AND_PRIVACY.md), [docs/WORKFLOWS.md](docs/WORKFLOWS.md), and [docs/ROADMAP.md](docs/ROADMAP.md).
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/DATA_MODEL.md](docs/DATA_MODEL.md), [docs/SECURITY_AND_PRIVACY.md](docs/SECURITY_AND_PRIVACY.md), [docs/WORKFLOWS.md](docs/WORKFLOWS.md), and [docs/ROADMAP.md](docs/ROADMAP.md). Recruitment UX and delivery details are in [docs/UX_DESIGN_BENCHMARKS.md](docs/UX_DESIGN_BENCHMARKS.md) and [docs/RECRUITMENT_WORKFLOWS.md](docs/RECRUITMENT_WORKFLOWS.md).
 
 ## Run locally
 
