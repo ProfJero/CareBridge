@@ -48,7 +48,6 @@ function AdminDashboard() {
   const [active, setActive] = useState<Section>('Overview')
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [search, setSearch] = useState('')
-  const [showNotice, setShowNotice] = useState(true)
 
   const title = active === 'Overview' ? 'Good morning, Admin' : active
   const subtitle = active === 'Overview'
@@ -88,7 +87,6 @@ function AdminDashboard() {
         <div className="page-content">
           <div className="page-heading"><div><div className="eyebrow"><span className="live-dot"/> ORGANISATION OVERVIEW</div><h1>{title}</h1><p>{subtitle}</p></div><div className="heading-actions"><button className="button button-secondary"><CalendarDays size={16}/> Today <ChevronDown size={14}/></button><button className="button button-primary" onClick={() => setActive(active === 'Overview' ? 'Clients' : active)}><Plus size={17}/> {active === 'Overview' ? 'New client' : `Add to ${active}`}</button></div></div>
 
-          {showNotice && <div className="notice"><div className="notice-icon"><AlertCircle size={18}/></div><div><strong>Welcome to your CareBridge workspace</strong><p>This is a starter environment with sample records. Connect Supabase and configure access policies before entering real client or clinical information.</p></div><button aria-label="Dismiss notice" onClick={() => setShowNotice(false)}><X size={17}/></button></div>}
 
           {active === 'Recruitment' ? <RecruitmentWorkspace /> : active === 'Careers' ? <RecruitmentWorkspace initialPortal /> : active === 'Overview' ? <>
             <div className="stat-grid">{stats.map((stat) => { const Icon = stat.icon; return <article className="stat-card" key={stat.label}><div className="stat-top"><span>{stat.label}</span><div className={`stat-icon ${stat.tone}`}><Icon size={18}/></div></div><div className="stat-value">{stat.value}</div><div className="stat-change">{stat.positive === true ? <ArrowUpRight size={14}/> : stat.positive === false ? <ArrowDownRight size={14}/> : <span className="change-dot"/>}<span>{stat.change}</span><small>{stat.positive !== null ? 'vs last month' : 'applications'}</small></div></article> })}</div>
@@ -96,8 +94,8 @@ function AdminDashboard() {
               <section className="panel visits-panel"><div className="panel-heading"><div><h2>Today's visits</h2><p>Care delivery at a glance</p></div><button className="text-button" onClick={() => setActive('Schedule')}>View schedule <ArrowUpRight size={14}/></button></div><div className="visit-summary"><div><span className="summary-number">34</span><span>Total visits</span></div><div><span className="summary-number green-text">18</span><span>Completed</span></div><div><span className="summary-number violet-text">8</span><span>In progress</span></div><div><span className="summary-number amber-text">8</span><span>Upcoming</span></div></div><div className="table-wrap"><table><thead><tr><th>CAREGIVER / CLIENT</th><th>SERVICE</th><th>TIME</th><th>STATUS</th></tr></thead><tbody>{visits.map(v => <tr key={v.name}><td><div className="person-cell"><div className={`person-avatar ${v.color}`}>{v.initials}</div><div><strong>{v.name}</strong><span>{v.client}</span></div></div></td><td>{v.type}</td><td className="time-cell">{v.time}</td><td><span className={`status-pill ${v.status === 'In progress' ? 'status-progress' : 'status-upcoming'}`}>{v.status}</span></td></tr>)}</tbody></table></div><button className="mobile-view-all" onClick={() => setActive('Visits')}>View all visits</button></section>
               <section className="panel applications-panel"><div className="panel-heading"><div><h2>Recent applications</h2><p>Latest caregiver applications</p></div><button className="icon-button"><MoreHorizontal size={19}/></button></div><div className="application-list">{applications.map(a => <div className="application-row" key={a.name}><div className="applicant-avatar"><UserRound size={18}/></div><div className="applicant-info"><strong>{a.name}</strong><span>{a.role} · {a.date}</span></div><span className={`application-status ${a.status.toLowerCase()}`}>{a.status}</span></div>)}</div><button className="button button-outline full-button" onClick={() => setActive('Recruitment')}>Review applications <ArrowUpRight size={15}/></button></section>
             </div>
-            <div className="bottom-grid"><section className="panel quick-panel"><div className="panel-heading"><div><h2>Quick actions</h2><p>Common tasks for your team</p></div></div><div className="quick-actions"><button onClick={() => setActive('Clients')}><span className="quick-icon blue"><Plus size={18}/></span><strong>Add a client</strong><small>Register a new care recipient</small></button><button onClick={() => setActive('Schedule')}><span className="quick-icon violet"><CalendarDays size={18}/></span><strong>Schedule a visit</strong><small>Assign a caregiver to a client</small></button><button onClick={() => setActive('Recruitment')}><span className="quick-icon green"><BriefcaseBusiness size={18}/></span><strong>Review applicants</strong><small>Continue the hiring process</small></button><button onClick={() => setActive('Care plans')}><span className="quick-icon amber"><FileText size={18}/></span><strong>Create care plan</strong><small>Document care needs and goals</small></button></div></section><section className="panel activity-panel"><div className="panel-heading"><div><h2>Service quality</h2><p>Operational snapshot</p></div><button className="icon-button"><MoreHorizontal size={19}/></button></div><div className="quality-score"><div className="quality-ring"><span>94<small>%</small></span></div><div><strong>Visit completion</strong><p>Visits completed on schedule this week.</p><span className="positive-label"><CheckCircle2 size={14}/> On track</span></div></div><div className="quality-footer"><span>Clinical documentation</span><strong>Pending configuration</strong></div></section></div>
-          </> : <section className="panel module-placeholder"><div className="placeholder-icon"><Stethoscope size={28}/></div><h2>{active} workspace</h2><p>This module is included in the CareBridge product plan. Its production workflows, forms, database operations and permissions will be implemented in the corresponding development milestone.</p><div className="placeholder-chips"><span><CheckCircle2 size={14}/> Module planned</span><span><ShieldCheck size={14}/> Access-controlled</span></div><button className="button button-primary" onClick={() => setActive('Overview')}>Return to overview</button></section>}
+            <div className="bottom-grid"><section className="panel quick-panel"><div className="panel-heading"><div><h2>Quick actions</h2><p>Common tasks for your team</p></div></div><div className="quick-actions"><button onClick={() => setActive('Clients')}><span className="quick-icon blue"><Plus size={18}/></span><strong>Add a client</strong><small>Register a new care recipient</small></button><button onClick={() => setActive('Schedule')}><span className="quick-icon violet"><CalendarDays size={18}/></span><strong>Schedule a visit</strong><small>Assign a caregiver to a client</small></button><button onClick={() => setActive('Recruitment')}><span className="quick-icon green"><BriefcaseBusiness size={18}/></span><strong>Review applicants</strong><small>Continue the hiring process</small></button><button onClick={() => setActive('Care plans')}><span className="quick-icon amber"><FileText size={18}/></span><strong>Create care plan</strong><small>Document care needs and goals</small></button></div></section><section className="panel activity-panel"><div className="panel-heading"><div><h2>Service quality</h2><p>Operational snapshot</p></div><button className="icon-button"><MoreHorizontal size={19}/></button></div><div className="quality-score"><div className="quality-ring"><span>94<small>%</small></span></div><div><strong>Visit completion</strong><p>Visits completed on schedule this week.</p><span className="positive-label"><CheckCircle2 size={14}/> On track</span></div></div><div className="quality-footer"><span>Clinical documentation</span><strong>In preparation</strong></div></section></div>
+          </> : <section className="panel module-placeholder"><div className="placeholder-icon"><Stethoscope size={28}/></div><h2>{active} workspace</h2><p>We're preparing this part of CareBridge. The full workspace and its tools will be introduced in a future implementation phase.</p><div className="placeholder-chips"><span><CheckCircle2 size={14}/> Module planned</span><span><ShieldCheck size={14}/> Access-controlled</span></div><button className="button button-primary" onClick={() => setActive('Overview')}>Return to overview</button></section>}
           <footer className="footer"><span>© 2026 CareBridge · Home Care Management</span><span><span className="footer-dot"/> All systems operational <span className="footer-divider">·</span> Built by ProfJero</span></footer>
         </div>
       </main>
@@ -107,13 +105,15 @@ function AdminDashboard() {
 
 
 type AccessState = 'checking' | 'signed-out' | 'allowed' | 'denied'
+const DEMO_EMAIL = 'demo@carebridge.app'
+const DEMO_PASSWORD = 'CareBridge2026!'
 function App() {
- const [path,setPath]=useState(window.location.pathname),[access,setAccess]=useState<AccessState>('checking')
+ const [path,setPath]=useState(window.location.pathname),[access,setAccess]=useState<AccessState>('checking'),[demoMode,setDemoMode]=useState(false)
  const [email,setEmail]=useState(''),[password,setPassword]=useState(''),[error,setError]=useState(''),[busy,setBusy]=useState(false)
  useEffect(()=>{const pop=()=>setPath(window.location.pathname);window.addEventListener('popstate',pop);return()=>window.removeEventListener('popstate',pop)},[])
  useEffect(()=>{const m=document.querySelector<HTMLLinkElement>('link[rel="manifest"]');if(m)m.href=path.startsWith('/admin')?'/admin-manifest.webmanifest':'/manifest.webmanifest'},[path])
  useEffect(()=>{
-  if(!path.startsWith('/admin'))return
+  if(!path.startsWith('/admin')||demoMode)return
   if(!isSupabaseConfigured||!supabase){setAccess('signed-out');return}
   let alive=true
   const verify=async()=>{
@@ -128,9 +128,11 @@ function App() {
   }
   void verify();const {data:sub}=supabase!.auth.onAuthStateChange((event)=>{if(event==='SIGNED_OUT'&&alive)setAccess('signed-out')})
   return()=>{alive=false;sub.subscription.unsubscribe()}
- },[path])
+ },[path,demoMode])
  function go(to:string){history.pushState({},'',to);setPath(to);scrollTo(0,0)}
- async function login(e:FormEvent){e.preventDefault();if(!supabase)return;setBusy(true);setError('')
+ async function login(e:FormEvent){e.preventDefault();setBusy(true);setError('')
+  if(email.trim().toLowerCase()===DEMO_EMAIL&&password===DEMO_PASSWORD){setDemoMode(true);setAccess('allowed');setBusy(false);go('/admin');return}
+  if(!supabase){setError('The administrator workspace is not connected yet. Please use the temporary demo access below.');setBusy(false);return}
   const {error:err}=await supabase.auth.signInWithPassword({email:email.trim(),password})
   if(err){setError('Unable to sign in. Check your email and password, then try again.');setBusy(false);return}
   const {data:user}=await supabase.auth.getUser(),id=user.user?.id
@@ -144,10 +146,10 @@ function App() {
   setBusy(false)
  }
  if(!path.startsWith('/admin'))return <RecruitmentWorkspace initialPortal/>
- if(access==='allowed')return <><div className="admin-session-bar"><span><ShieldCheck size={16}/> Secure administrator workspace</span><button onClick={async()=>{await supabase?.auth.signOut();setAccess('signed-out');go('/admin/login')}}>Sign out</button></div><AdminDashboard/></>
+ if(access==='allowed')return <><div className={`admin-session-bar ${demoMode?'demo-session':''}`}><span><ShieldCheck size={16}/> {demoMode?'Demo preview · Sample information only':'Administrator workspace'}</span><button onClick={async()=>{if(!demoMode)await supabase?.auth.signOut();setDemoMode(false);setAccess('signed-out');go('/admin/login')}}>Sign out</button></div><AdminDashboard/></>
  return <main className="admin-login-page"><button className="admin-back-link" onClick={()=>go('/')}>← Back to CareBridge careers</button><section className="admin-login-card"><div className="admin-login-mark"><ShieldCheck size={25}/></div><span className="admin-login-kicker">CAREBRIDGE ADMINISTRATION</span><h1>Welcome back</h1><p>Sign in with your authorised agency account to continue to the management workspace.</p>
- {!isSupabaseConfigured&&<div className="admin-config-warning">Admin sign-in is not active yet. Configure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY, apply the database migrations and create authorised staff memberships.</div>}
- {error&&<div className="admin-login-error">{error}</div>}<form onSubmit={login}><label>Email address<input type="email" autoComplete="username" required value={email} onChange={e=>setEmail(e.target.value)} placeholder="admin@youragency.com"/></label><label>Password<input type="password" autoComplete="current-password" required value={password} onChange={e=>setPassword(e.target.value)} placeholder="Enter your password"/></label><button type="submit" disabled={!isSupabaseConfigured||busy}>{busy?'Signing in…':'Sign in securely'} <ArrowUpRight size={17}/></button></form><div className="admin-login-foot"><ShieldCheck size={14}/> Access is restricted to approved CareBridge staff.</div></section></main>
+ 
+ {error&&<div className="admin-login-error">{error}</div>}<form onSubmit={login}><label>Email address<input type="email" autoComplete="username" required value={email} onChange={e=>setEmail(e.target.value)} placeholder="admin@youragency.com"/></label><label>Password<input type="password" autoComplete="current-password" required value={password} onChange={e=>setPassword(e.target.value)} placeholder="Enter your password"/></label><button type="submit" disabled={busy}>{busy?'Signing in…':'Sign in securely'} <ArrowUpRight size={17}/></button></form><div className="demo-credentials"><strong>Temporary client demo access</strong><span>Email: <b>{DEMO_EMAIL}</b></span><span>Password: <b>{DEMO_PASSWORD}</b></span><small>Use these details to explore the sample administrator workspace. No real records are used.</small></div><div className="admin-login-foot"><ShieldCheck size={14}/> Live staff access will be enabled in the next implementation phase.</div></section></main>
 }
 export default App
 
