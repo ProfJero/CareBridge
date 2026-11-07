@@ -6,3 +6,45 @@
 
 /* Comfortable reading sizes for applicant and recruitment screens */
 .rw-eyebrow,.cr-kicker{font-size:12px}.rw-heading h2{font-size:27px}.rw-heading p{font-size:14px}.rw-primary,.rw-secondary{font-size:14px}.rw-metrics article>span,.rw-metrics article>small{font-size:13px}.rw-metrics article>strong{font-size:27px}.rw-tabs button{font-size:14px}.rw-pipeline span{font-size:13px}.rw-search input,.rw-filter select{font-size:14px}.rw-list-head strong{font-size:14px}.rw-person-main strong{font-size:14px}.rw-person-main span{font-size:13px}.rw-person-main small{font-size:12px}.rw-stage,.rw-job-live,.rw-job-draft{font-size:12px}.rw-view{font-size:13px}.rw-empty-panel p,.rw-modal-note,.rw-profile-section p{font-size:13px}.rw-modal>label,.rw-modal-row label,.rw-stage-select label{font-size:14px}.rw-modal input,.rw-modal select,.rw-stage-select select{font-size:14px}.careers-brand strong{font-size:18px}.cr-link{font-size:14px}.careers-hero p{font-size:15px}.cr-primary{font-size:14px}.careers-benefits strong{font-size:14px}.careers-benefits span{font-size:13px}.cr-section-heading p,.cr-apply-intro>p{font-size:14px}.cr-job-category{font-size:12px}.cr-job-card h3{font-size:17px}.cr-job-meta span{font-size:13px}.cr-job-card>button{font-size:13px}.cr-apply-intro li{font-size:13px}.cr-form-head h3{font-size:20px}.cr-fields>label,.cr-field-row label{font-size:14px}.cr-fields input:not([type=checkbox]):not([type=file]),.cr-fields select,.cr-fields textarea{font-size:15px}.cr-upload strong{font-size:13px}.cr-upload span,.cr-upload input{font-size:12px}.cr-consent{font-size:12px!important}.cr-back{font-size:13px}.cr-success p{font-size:14px}.cr-footer{font-size:12px}
+
+
+/* Applicant and recruitment typography refinement */
+.rw-heading h1{font-size:clamp(25px,2.5vw,32px)}
+.rw-heading p,.rw-metric-label,.rw-section-subtitle{font-size:13px}
+.rw-metric strong{font-size:25px}
+.rw-tabs button,.rw-filter-row label,.rw-filter-row select,.rw-search input{font-size:13px}
+.rw-pipeline-column h3{font-size:13px}
+.rw-person-main strong{font-size:13px}
+.rw-person-main span{font-size:12px}
+.rw-person-main small{font-size:11px}
+.rw-stage{font-size:11px;padding:6px 9px}
+.rw-view{font-size:12px}
+.rw-job-apps span,.rw-job-live,.rw-job-draft{font-size:11px}
+.rw-modal>label,.rw-modal-row label,.rw-stage-select label{font-size:12px}
+.rw-modal input,.rw-modal select,.rw-stage-select select{font-size:14px}
+.rw-modal-note{font-size:12px}
+.rw-profile-summary strong{font-size:14px}
+.rw-profile-summary span,.rw-profile-section p{font-size:12px}
+.rw-profile-section>span{font-size:11px}
+.careers-brand strong{font-size:17px}
+.careers-brand small{font-size:9px}
+.cr-link{font-size:13px}
+.careers-hero p{font-size:15px}
+.cr-primary{font-size:13px;padding:13px 18px}
+.careers-hero-actions>span{font-size:12px}
+.careers-benefits strong{font-size:13px}
+.careers-benefits span{font-size:12px}
+.cr-section-heading p,.cr-apply-intro>p{font-size:13px}
+.cr-open-count{font-size:12px}
+.cr-job-category{font-size:11px}
+.cr-job-card h3{font-size:17px}
+.cr-job-meta span{font-size:11px}
+.cr-job-card>button{font-size:12px}
+.cr-apply-intro li{font-size:12px}
+.cr-fields>label,.cr-field-row label{font-size:12px}
+.cr-fields input:not([type=checkbox]):not([type=file]),.cr-fields select,.cr-fields textarea{font-size:14px}
+.cr-step-label,.cr-upload strong,.cr-back{font-size:12px}
+.cr-upload span{font-size:11px}
+.cr-consent{font-size:11px!important}
+.cr-footer{font-size:11px}
+@media(max-width:700px){.careers-hero p{font-size:14px}.cr-job-card h3{font-size:16px}}
