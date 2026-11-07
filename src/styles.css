@@ -8,3 +8,34 @@
 html{font-size:16px}.nav-item,.button{font-size:14px}.nav-group>p,.workspace-switch span,.help-card span,.profile-row span,.search-box input,.breadcrumbs,.page-heading p,.notice p,.notice strong,.stat-top,.stat-change,.stat-change small,.panel-heading p,td,.person-cell strong,.person-cell span,.status-pill,.text-button,.application-status,.applicant-info strong,.applicant-info span,.quick-actions strong,.quick-actions small,.quality-score p,.quality-footer,.footer,.module-placeholder p{font-size:13px}
 .panel-heading h2{font-size:16px}.admin-session-bar{position:relative;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:10px 22px;background:#eaf5f1;border-bottom:1px solid #cfe7de;color:#176d5f;font-size:14px}.admin-session-bar span{display:flex;align-items:center;gap:8px}.admin-session-bar button{border:1px solid #b9d9ce;border-radius:7px;background:#fff;color:#176d5f;padding:8px 13px;font-weight:700}
 .admin-login-page{min-height:100vh;background:radial-gradient(circle at 15% 15%,#e3f3ed,transparent 36%),linear-gradient(135deg,#f4f8f7,#edf3f6);display:flex;flex-direction:column;align-items:center;padding:28px 20px}.admin-back-link{align-self:flex-start;border:0;background:none;color:#52716f;font-size:14px;padding:8px}.admin-login-card{width:min(100%,460px);margin:auto;background:#fff;border:1px solid #e3ece9;border-radius:18px;padding:38px;box-shadow:0 20px 60px #173d4b12}.admin-login-mark{width:52px;height:52px;border-radius:15px;background:#e7f5ef;color:#168f7e;display:grid;place-items:center;margin-bottom:22px}.admin-login-kicker{font-size:12px;letter-spacing:1.4px;font-weight:800;color:#168f7e}.admin-login-card h1{font:800 30px Manrope,sans-serif;color:#18394d;margin:10px 0}.admin-login-card>p{font-size:15px;line-height:1.7;color:#718591;margin:0 0 24px}.admin-login-card form{display:grid;gap:17px}.admin-login-card label{display:grid;gap:8px;font-size:14px;font-weight:700;color:#425e6d}.admin-login-card input{height:49px;border:1px solid #dce7e7;border-radius:9px;padding:0 13px;font-size:15px;outline-color:#168f7e}.admin-login-card form button{height:50px;border:0;border-radius:9px;background:#168f7e;color:#fff;font-size:15px;font-weight:700;display:flex;justify-content:center;align-items:center;gap:9px}.admin-login-card form button:disabled{opacity:.5;cursor:not-allowed}.admin-login-foot{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:22px;padding-top:17px;border-top:1px solid #edf1f2;color:#718a86;font-size:12px}.admin-login-error,.admin-config-warning{padding:12px;border-radius:8px;font-size:13px;line-height:1.6;margin:0 0 16px}.admin-login-error{background:#fff0ee;color:#a3483e}.admin-config-warning{background:#fff7e8;color:#805b20}@media(max-width:520px){.admin-login-card{padding:26px 21px}.admin-session-bar{padding:9px 14px}}
+
+
+/* Client demo access and final readability pass */
+.demo-credentials{display:grid;gap:7px;margin-top:18px;padding:15px 16px;border:1px solid #dcebe5;border-radius:11px;background:#f4faf7;color:#345d54;font-size:13px}
+.demo-credentials strong{font-size:14px;color:#1d695b}
+.demo-credentials span{display:flex;justify-content:space-between;gap:12px;color:#59756e}
+.demo-credentials b{font-variant-numeric:tabular-nums;color:#244c45}
+.demo-credentials small{font-size:12px;line-height:1.55;color:#78918a;margin-top:2px}
+.admin-session-bar.demo-session{background:#fff7e8;border-color:#f0dfb9;color:#86612c}
+.admin-session-bar.demo-session button{border-color:#ead7ae;color:#86612c}
+.admin-login-card .admin-login-foot{font-size:13px;line-height:1.5}
+.page-heading h1{font-size:clamp(27px,2.4vw,34px)}
+.stat-value{font-size:30px}
+.stat-card{padding:19px}
+.nav-item{min-height:43px}
+.panel{padding:20px}
+.panel-heading h2{font-size:17px}
+.table-wrap th{font-size:11px;letter-spacing:.55px}
+.table-wrap td{font-size:13px}
+.person-cell strong{font-size:13px}
+.person-cell span{font-size:12px}
+.status-pill,.application-status{font-size:11px;padding:6px 9px}
+.visit-summary div>span:last-child{font-size:11px}
+.quick-actions button{padding:14px;min-height:120px}
+.quick-actions strong{font-size:12px}
+.quick-actions small{font-size:11px}
+.quality-score>div:last-child strong{font-size:13px}
+.quality-score p{font-size:12px}
+.footer{font-size:11px}
+.module-placeholder p{font-size:14px}
+@media(max-width:520px){.stat-card{padding:14px}.panel{padding:15px}.admin-login-card{padding:25px 20px}.demo-credentials span{display:grid;gap:2px}}
