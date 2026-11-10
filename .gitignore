@@ -1,7 +1,5 @@
-node_modules
-dist
+node_modules/
+.project_id
+.github_repo
 .env
 .env.*
-!.env.example
-.DS_Store
-*.local

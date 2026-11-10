@@ -1,0 +1,1 @@
+import{S as e,y as t}from"./index-DSfR0sdi.js";var n=e(),r=()=>(0,n.jsx)(t,{});export{r as component};

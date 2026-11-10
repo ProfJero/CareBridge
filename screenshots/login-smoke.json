@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/admin/login",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Admin sign-in — CareBridge",
+      "hasCanvas": false,
+      "bodyTextLen": 617,
+      "bodyTextHash": "51c3fd4bb2258ba726fcf1dafe06c3385e77f23c3dcfb12f628d0ca945d55a77",
+      "bodyTextPrefix": "CareBridge ADMINISTRATION The workspace for the people who organ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/login-smoke.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Admin sign-in — CareBridge",
+      "hasCanvas": false,
+      "bodyTextLen": 368,
+      "bodyTextHash": "fb6e233bd12a6fa1b20fa3da966944d46e3a512373b38da70f25563befec886c",
+      "bodyTextPrefix": "← Careers CareBridge ADMINISTRATION CAREBRIDGE ADMINISTRATION We",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/login-smoke-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/login-smoke.json"
+}

@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "CareBridge Careers — Make a difference every day",
+      "hasCanvas": false,
+      "bodyTextLen": 2437,
+      "bodyTextHash": "f736d91631933f36de60b60a43367110a998455998a1db0607d4e68ba666db5b",
+      "bodyTextPrefix": "CareBridge HOME CARE Open roles Apply Admin CAREERS Build a care",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "CareBridge Careers — Make a difference every day",
+      "hasCanvas": false,
+      "bodyTextLen": 2420,
+      "bodyTextHash": "7c22e8cddaf04e8d40548de4ebbe375f7fe4a202c079e71c2c8f7e105a196c0b",
+      "bodyTextPrefix": "CareBridge HOME CARE Admin CAREERS Build a career around making ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
