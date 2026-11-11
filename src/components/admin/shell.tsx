@@ -214,7 +214,7 @@ export function AdminApp({
 
           <footer className="mt-8 flex flex-col gap-2 border-t border-line pt-4 text-base text-faint sm:flex-row sm:justify-between">
             <span>© 2026 CareBridge · Home care management</span>
-            <span>Sample workspace · Built by ProfJero</span>
+            <span>Sample workspace · </span>
           </footer>
         </div>
       </div>
