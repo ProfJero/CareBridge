@@ -1,9 +1,5 @@
 node_modules/
-.project_id
-.github_repo
-.env
-.env.*
 dist/
+.wrangler/
 .vercel/
 .output/
-.grok/
