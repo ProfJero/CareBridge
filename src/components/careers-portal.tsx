@@ -438,7 +438,7 @@ export function CareersPortal() {
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-base text-faint sm:flex-row sm:items-center sm:justify-between">
           <strong className="font-display text-lg text-ink">CareBridge</strong>
           <span>Care that connects. People who make a difference.</span>
-          <span>© 2026 CareBridge · Built by ProfJero</span>
+          <span>© 2026 CareBridge · </span>
         </div>
       </footer>
     </div>
