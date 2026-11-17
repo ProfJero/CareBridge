@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from "react";
-import { Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
   ArrowRight,
@@ -11,7 +10,8 @@ import {
   ShieldCheck,
   UploadCloud,
 } from "lucide-react";
-import { Wordmark } from "@/components/brand";
+import { SiteShell } from "@/components/site-shell";
+import { SITE } from "@/lib/config";
 import { Button, Field, controlClass } from "@/components/ui";
 import { AREAS, JOBS, ROLES } from "@/data/demo";
 import { makeReference, sendCaregiverApplication } from "@/lib/application-inbox";
@@ -24,7 +24,7 @@ export function CareersPortal() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [role, setRole] = useState<string>(ROLES[0]);
-  const [area, setArea] = useState<string>(AREAS[2]);
+  const [area, setArea] = useState<string>(AREAS[0]);
   const [experience, setExperience] = useState("");
   const [availability, setAvailability] = useState("Immediately");
   const [consent, setConsent] = useState(false);
@@ -84,31 +84,8 @@ export function CareersPortal() {
   }
 
   return (
-    <div className="min-h-screen bg-paper text-ink">
-      <header className="sticky top-0 z-20 border-b border-line bg-card/95 backdrop-blur">
-        <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-5">
-          <a href="#top" className="min-w-0">
-            <Wordmark />
-          </a>
-          <nav className="flex items-center gap-2 sm:gap-4" aria-label="Careers">
-            <a href="#roles" className="hidden h-12 items-center px-2 text-base font-semibold text-navy sm:inline-flex">
-              Open roles
-            </a>
-            <a href="#apply" className="hidden h-12 items-center px-2 text-base font-semibold text-navy md:inline-flex">
-              Apply
-            </a>
-            <Link
-              to="/admin/login"
-              className="inline-flex h-12 items-center gap-2 rounded-xl bg-navy px-4 text-base font-semibold text-on-navy"
-            >
-              Admin
-              <ArrowRight className="size-4" aria-hidden />
-            </Link>
-          </nav>
-        </div>
-      </header>
-
-      <main id="top">
+    <SiteShell>
+      <div id="top">
         <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-12 md:grid-cols-[1.15fr_0.85fr] md:py-16">
           <div>
             <p className="text-sm font-bold tracking-widest text-sea uppercase">Careers</p>
@@ -152,7 +129,7 @@ export function CareersPortal() {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 text-base text-navy-muted">Sample openings for Grace Home Care. No real client records.</p>
+            <p className="mt-5 text-base text-navy-muted">Based in {SITE.town}, {SITE.region}. New roles are posted here first.</p>
           </aside>
         </section>
 
@@ -171,7 +148,7 @@ export function CareersPortal() {
           </div>
         </section>
 
-        <section id="roles" className="mx-auto max-w-6xl px-5 py-14">
+        <section id="roles" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-14">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-sm font-bold tracking-widest text-sea uppercase">Opportunities</p>
@@ -232,12 +209,12 @@ export function CareersPortal() {
           </ol>
         </section>
 
-        <section id="apply" className="mx-auto grid max-w-6xl gap-10 px-5 py-14 lg:grid-cols-[0.8fr_1.2fr]">
+        <section id="apply" className="mx-auto grid scroll-mt-24 max-w-6xl gap-10 px-5 py-14 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <p className="text-sm font-bold tracking-widest text-sea uppercase">Your next chapter</p>
             <h2 className="mt-2 font-display text-4xl font-semibold text-ink">Take the first step.</h2>
             <p className="mt-4 text-lg leading-relaxed text-muted">
-              This form emails the CareBridge recruiting inbox. You will see a reference number as soon as it is sent.
+              This form goes straight to the {SITE.name} recruiting team. You will see a reference number as soon as it is sent.
             </p>
             <ul className="mt-6 grid gap-3 text-base text-muted">
               {["Two short steps, comfortable on a phone", "You choose the role before you write about yourself", "Consent is asked in plain language"].map((item) => (
@@ -405,7 +382,7 @@ export function CareersPortal() {
                         checked={consent}
                         onChange={(event) => setConsent(event.target.checked)}
                       />
-                      I agree that CareBridge may use these details to assess my application and contact me about this role.
+                      I agree that {SITE.name} may use these details to assess my application and contact me about this role.
                     </label>
                     <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
                     {error ? <p className="rounded-xl bg-danger-bg px-4 py-3 text-base text-danger">{error}</p> : null}
@@ -432,15 +409,7 @@ export function CareersPortal() {
             )}
           </div>
         </section>
-      </main>
-
-      <footer className="border-t border-line bg-card">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-base text-faint sm:flex-row sm:items-center sm:justify-between">
-          <strong className="font-display text-lg text-ink">CareBridge</strong>
-          <span>Care that connects. People who make a difference.</span>
-          <span>© 2026 CareBridge · </span>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </SiteShell>
   );
 }

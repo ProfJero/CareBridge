@@ -11,8 +11,19 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as ManageRouteImport } from './routes/manage'
+import { Route as SellRouteImport } from './routes/sell'
+import { Route as VideosRouteImport } from './routes/videos'
+import { Route as AccountIndexRouteImport } from './routes/account.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as ShopIndexRouteImport } from './routes/shop.index'
+import { Route as ShopCartRouteImport } from './routes/shop.cart'
+import { Route as ShopCheckoutRouteImport } from './routes/shop.checkout'
+import { Route as AccountOrdersIdRouteImport } from './routes/account.orders.$id'
+import { Route as ShopProductIdRouteImport } from './routes/shop.product.$id'
+import { Route as ShopStoreSlugRouteImport } from './routes/shop.store.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,6 +33,31 @@ const IndexRoute = IndexRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManageRoute = ManageRouteImport.update({
+  id: '/manage',
+  path: '/manage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellRoute = SellRouteImport.update({
+  id: '/sell',
+  path: '/sell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VideosRoute = VideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountIndexRoute = AccountIndexRouteImport.update({
+  id: '/account/',
+  path: '/account/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -34,36 +70,155 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AdminRoute,
 } as any)
+const ShopIndexRoute = ShopIndexRouteImport.update({
+  id: '/shop/',
+  path: '/shop/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopCartRoute = ShopCartRouteImport.update({
+  id: '/shop/cart',
+  path: '/shop/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopCheckoutRoute = ShopCheckoutRouteImport.update({
+  id: '/shop/checkout',
+  path: '/shop/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountOrdersIdRoute = AccountOrdersIdRouteImport.update({
+  id: '/account/orders/$id',
+  path: '/account/orders/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopProductIdRoute = ShopProductIdRouteImport.update({
+  id: '/shop/product/$id',
+  path: '/shop/product/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopStoreSlugRoute = ShopStoreSlugRouteImport.update({
+  id: '/shop/store/$slug',
+  path: '/shop/store/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/careers': typeof CareersRoute
+  '/manage': typeof ManageRoute
+  '/sell': typeof SellRoute
+  '/videos': typeof VideosRoute
   '/admin/login': typeof AdminLoginRoute
+  '/shop/cart': typeof ShopCartRoute
+  '/shop/checkout': typeof ShopCheckoutRoute
+  '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
+  '/shop/': typeof ShopIndexRoute
+  '/account/orders/$id': typeof AccountOrdersIdRoute
+  '/shop/product/$id': typeof ShopProductIdRoute
+  '/shop/store/$slug': typeof ShopStoreSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/careers': typeof CareersRoute
+  '/manage': typeof ManageRoute
+  '/sell': typeof SellRoute
+  '/videos': typeof VideosRoute
   '/admin/login': typeof AdminLoginRoute
+  '/shop/cart': typeof ShopCartRoute
+  '/shop/checkout': typeof ShopCheckoutRoute
+  '/account': typeof AccountIndexRoute
   '/admin': typeof AdminIndexRoute
+  '/shop': typeof ShopIndexRoute
+  '/account/orders/$id': typeof AccountOrdersIdRoute
+  '/shop/product/$id': typeof ShopProductIdRoute
+  '/shop/store/$slug': typeof ShopStoreSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/careers': typeof CareersRoute
+  '/manage': typeof ManageRoute
+  '/sell': typeof SellRoute
+  '/videos': typeof VideosRoute
   '/admin/login': typeof AdminLoginRoute
+  '/shop/cart': typeof ShopCartRoute
+  '/shop/checkout': typeof ShopCheckoutRoute
+  '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
+  '/shop/': typeof ShopIndexRoute
+  '/account/orders/$id': typeof AccountOrdersIdRoute
+  '/shop/product/$id': typeof ShopProductIdRoute
+  '/shop/store/$slug': typeof ShopStoreSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/admin/login' | '/admin/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/careers'
+    | '/manage'
+    | '/sell'
+    | '/videos'
+    | '/admin/login'
+    | '/shop/cart'
+    | '/shop/checkout'
+    | '/account/'
+    | '/admin/'
+    | '/shop/'
+    | '/account/orders/$id'
+    | '/shop/product/$id'
+    | '/shop/store/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin/login' | '/admin'
-  id: '__root__' | '/' | '/admin' | '/admin/login' | '/admin/'
+  to:
+    | '/'
+    | '/careers'
+    | '/manage'
+    | '/sell'
+    | '/videos'
+    | '/admin/login'
+    | '/shop/cart'
+    | '/shop/checkout'
+    | '/account'
+    | '/admin'
+    | '/shop'
+    | '/account/orders/$id'
+    | '/shop/product/$id'
+    | '/shop/store/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/careers'
+    | '/manage'
+    | '/sell'
+    | '/videos'
+    | '/admin/login'
+    | '/shop/cart'
+    | '/shop/checkout'
+    | '/account/'
+    | '/admin/'
+    | '/shop/'
+    | '/account/orders/$id'
+    | '/shop/product/$id'
+    | '/shop/store/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  CareersRoute: typeof CareersRoute
+  ManageRoute: typeof ManageRoute
+  SellRoute: typeof SellRoute
+  VideosRoute: typeof VideosRoute
+  ShopCartRoute: typeof ShopCartRoute
+  ShopCheckoutRoute: typeof ShopCheckoutRoute
+  AccountIndexRoute: typeof AccountIndexRoute
+  ShopIndexRoute: typeof ShopIndexRoute
+  AccountOrdersIdRoute: typeof AccountOrdersIdRoute
+  ShopProductIdRoute: typeof ShopProductIdRoute
+  ShopStoreSlugRoute: typeof ShopStoreSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +237,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manage': {
+      id: '/manage'
+      path: '/manage'
+      fullPath: '/manage'
+      preLoaderRoute: typeof ManageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sell': {
+      id: '/sell'
+      path: '/sell'
+      fullPath: '/sell'
+      preLoaderRoute: typeof SellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/videos': {
+      id: '/videos'
+      path: '/videos'
+      fullPath: '/videos'
+      preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/': {
+      id: '/account/'
+      path: '/account'
+      fullPath: '/account/'
+      preLoaderRoute: typeof AccountIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/': {
       id: '/admin/'
       path: '/'
@@ -95,6 +285,48 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/login'
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/shop/': {
+      id: '/shop/'
+      path: '/shop'
+      fullPath: '/shop/'
+      preLoaderRoute: typeof ShopIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop/cart': {
+      id: '/shop/cart'
+      path: '/shop/cart'
+      fullPath: '/shop/cart'
+      preLoaderRoute: typeof ShopCartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop/checkout': {
+      id: '/shop/checkout'
+      path: '/shop/checkout'
+      fullPath: '/shop/checkout'
+      preLoaderRoute: typeof ShopCheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/orders/$id': {
+      id: '/account/orders/$id'
+      path: '/account/orders/$id'
+      fullPath: '/account/orders/$id'
+      preLoaderRoute: typeof AccountOrdersIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop/product/$id': {
+      id: '/shop/product/$id'
+      path: '/shop/product/$id'
+      fullPath: '/shop/product/$id'
+      preLoaderRoute: typeof ShopProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop/store/$slug': {
+      id: '/shop/store/$slug'
+      path: '/shop/store/$slug'
+      fullPath: '/shop/store/$slug'
+      preLoaderRoute: typeof ShopStoreSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -114,6 +346,17 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  CareersRoute: CareersRoute,
+  ManageRoute: ManageRoute,
+  SellRoute: SellRoute,
+  VideosRoute: VideosRoute,
+  ShopCartRoute: ShopCartRoute,
+  ShopCheckoutRoute: ShopCheckoutRoute,
+  AccountIndexRoute: AccountIndexRoute,
+  ShopIndexRoute: ShopIndexRoute,
+  AccountOrdersIdRoute: AccountOrdersIdRoute,
+  ShopProductIdRoute: ShopProductIdRoute,
+  ShopStoreSlugRoute: ShopStoreSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

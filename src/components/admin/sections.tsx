@@ -169,7 +169,7 @@ export function WorkspaceSection({ section, query }: { section: Section; query: 
       <Panel>
         <h2 className="text-2xl font-semibold">Demo sign-in</h2>
         <p className="mt-2 text-base leading-relaxed text-muted">
-          The administrator workspace opens with these sample credentials. It does not call Supabase, and it does not store staff accounts.
+          The administrator workspace opens with these sample credentials. It shows sample care-operations data only. The live marketplace, videos and care requests use real accounts in the Admin console.
         </p>
         <dl className="mt-4 grid gap-3 rounded-2xl bg-paper p-4 text-base">
           <div className="flex justify-between gap-3">
@@ -189,7 +189,7 @@ export function WorkspaceSection({ section, query }: { section: Section; query: 
           The first submission asks that inbox to confirm the address. After confirmation, each application arrives as its own email.
         </p>
         <p className="mt-3 text-base leading-relaxed text-muted">
-          Organisation shown in this sample: Grace Home Care, covering Accra, Tema, Cape Coast and Elmina.
+          Organisation shown in this sample: Sambea Son and Daughter Home Care, based in Assin Foso and serving nearby Assin communities. Live marketplace orders, videos and care requests are managed in the Admin console (/manage).
         </p>
       </Panel>
     </div>

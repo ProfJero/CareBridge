@@ -21,6 +21,9 @@
   --color-faint: #5d7686;
   --color-danger: #8d3b34;
   --color-danger-bg: #fdeceb;
+  --color-gold: #b7791f;
+  --color-gold-bg: #fdf3e1;
+  --color-cream: #fbf8f2;
 }
 
 @layer base {
@@ -67,5 +70,14 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 }

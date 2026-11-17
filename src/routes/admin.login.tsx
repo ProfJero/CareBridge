@@ -8,7 +8,7 @@ import { DEMO_EMAIL, DEMO_PASSWORD, credentialsMatch, signInDemo } from "@/lib/d
 export const Route = createFileRoute("/admin/login")({
   component: AdminLogin,
   head: () => ({
-    meta: [{ title: "Admin sign-in — CareBridge" }],
+    meta: [{ title: "Staff sign-in — Sambea Son and Daughter Home Care" }],
   }),
 });
 
@@ -45,7 +45,7 @@ function AdminLogin() {
             The workspace for the people who organise care.
           </h1>
           <p className="mt-5 max-w-md text-lg leading-relaxed text-navy-muted">
-            Review visits, caregivers and applications for Grace Home Care. This sign-in opens a sample workspace — no live records, no extra setup.
+            Review visits, caregivers and applications for Sambea Son and Daughter Home Care. This sign-in opens a sample workspace — no live records, no extra setup.
           </p>
         </div>
         <p className="flex items-center gap-2 text-base text-navy-muted">
@@ -57,14 +57,14 @@ function AdminLogin() {
       <section className="flex flex-col px-5 py-6 sm:px-10">
         <div className="flex items-center justify-between">
           <Link to="/" className="text-base font-semibold text-navy">
-            ← Careers
+            ← Website
           </Link>
           <span className="lg:hidden">
             <Wordmark kicker="Administration" />
           </span>
         </div>
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-10">
-          <p className="text-sm font-bold tracking-widest text-sea uppercase">CareBridge administration</p>
+          <p className="text-sm font-bold tracking-widest text-sea uppercase">Sambea staff workspace</p>
           <h2 className="mt-3 font-display text-4xl font-semibold text-ink">Welcome back</h2>
           <p className="mt-3 text-lg leading-relaxed text-muted">
             Sign in to the sample management workspace. The demo account is filled in for you.

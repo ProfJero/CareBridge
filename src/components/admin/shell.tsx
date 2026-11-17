@@ -41,7 +41,7 @@ const ICONS = {
 } as const;
 
 const NOTICES = [
-  "Ama Kusi checked in for the Labone visit.",
+  "Ama Kusi checked in for the Nyameye visit.",
   "Nana Akua Boateng applied for Registered Nurse.",
   "Two visits this afternoon are still unconfirmed.",
 ];
@@ -72,7 +72,7 @@ export function AdminApp({
   const title = section === "overview" ? "Good morning, Admin" : sectionTitle(section);
   const subtitle =
     section === "overview"
-      ? "A sample view of Grace Home Care. Nothing here is a real client record."
+      ? "A sample view of Sambea Son and Daughter Home Care. Nothing here is a real client record."
       : `Sample ${sectionTitle(section).toLowerCase()} for the organisation workspace.`;
 
   return (
@@ -98,8 +98,8 @@ export function AdminApp({
           </button>
         </div>
         <div className="mt-5 rounded-2xl bg-navy-2 px-3 py-3">
-          <p className="text-base font-semibold">Grace Home Care</p>
-          <p className="text-sm text-navy-muted">Organisation workspace</p>
+          <p className="text-base font-semibold">Sambea Son &amp; Daughter</p>
+          <p className="text-sm text-navy-muted">Assin Foso · Organisation workspace</p>
         </div>
         <nav className="mt-5 min-h-0 flex-1 overflow-auto pr-1" aria-label="Workspace">
           {NAV_GROUPS.map((group) => (
@@ -198,7 +198,7 @@ export function AdminApp({
         <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-sm font-bold tracking-widest text-sea uppercase">Grace Home Care</p>
+              <p className="text-sm font-bold tracking-widest text-sea uppercase">Sambea Son and Daughter Home Care</p>
               <h1 className="mt-1 text-4xl font-semibold tracking-tight text-ink">{title}</h1>
               <p className="mt-2 max-w-2xl text-lg text-muted">{subtitle}</p>
             </div>
@@ -213,7 +213,7 @@ export function AdminApp({
           )}
 
           <footer className="mt-8 flex flex-col gap-2 border-t border-line pt-4 text-base text-faint sm:flex-row sm:justify-between">
-            <span>© 2026 CareBridge · Home care management</span>
+            <span>© 2026 Sambea Son and Daughter Home Care · Assin Foso</span>
             <span>Sample workspace · </span>
           </footer>
         </div>

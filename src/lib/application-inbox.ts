@@ -1,15 +1,10 @@
-/**
- * Caregiver applications are delivered by email through FormSubmit.
- * FormSubmit needs no API key — the first real submission emails
- * profjero947@gmail.com a one-time activation link. After that, every
- * application arrives in that inbox.
- *
- * Web3Forms is slightly nicer for pure JSON APIs, but it needs an access
- * key this project does not have. FormSubmit works immediately.
- */
-export const APPLICATION_INBOX = "profjero947@gmail.com";
+import { SITE } from "@/lib/config";
+import { sendFormEmail } from "@/lib/email";
 
-const STORE_KEY = "carebridge.applications";
+/** Caregiver applications are emailed (via FormSubmit) to beagracelyn@gmail.com. */
+export const APPLICATION_INBOX = SITE.inbox;
+
+const STORE_KEY = "sambea.applications";
 
 export type SubmittedApplication = {
   id: string;
@@ -56,49 +51,25 @@ function remember(application: SubmittedApplication) {
 export function makeReference() {
   const stamp = Date.now().toString(36).toUpperCase().slice(-5);
   const salt = Math.random().toString(36).slice(2, 5).toUpperCase();
-  return `CB-2026-${stamp}${salt}`;
+  return `SSD-${stamp}${salt}`;
 }
 
 export async function sendCaregiverApplication(input: ApplicationInput, reference: string) {
-  const form = new FormData();
-  form.append("_subject", `CareBridge caregiver application — ${input.role} (${reference})`);
-  form.append("_template", "table");
-  form.append("_captcha", "false");
-  form.append("_replyto", input.email.trim());
-  form.append("_honey", "");
-  form.append("Reference", reference);
-  form.append("Full name", input.name.trim());
-  form.append("Email", input.email.trim());
-  form.append("Phone", input.phone.trim());
-  form.append("Role", input.role);
-  form.append("Preferred area", input.area);
-  form.append("Availability", input.availability);
-  form.append("Experience", input.experience.trim() || "Not provided");
-  form.append(
-    "Message",
-    `${input.name.trim()} applied for ${input.role} in ${input.area}. They can start: ${input.availability}.`,
+  await sendFormEmail(
+    `${SITE.name} — caregiver application: ${input.role} (${reference})`,
+    {
+      Reference: reference,
+      "Full name": input.name.trim(),
+      Email: input.email.trim(),
+      Phone: input.phone.trim(),
+      Role: input.role,
+      "Preferred area": input.area,
+      Availability: input.availability,
+      Experience: input.experience.trim() || "Not provided",
+      Message: `${input.name.trim()} applied for ${input.role} in ${input.area}. They can start: ${input.availability}.`,
+    },
+    { replyTo: input.email.trim(), attachment: input.cv },
   );
-  if (input.cv) form.append("attachment", input.cv, input.cv.name);
-
-  const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(APPLICATION_INBOX)}`, {
-    method: "POST",
-    headers: { Accept: "application/json" },
-    body: form,
-  });
-
-  let payload: { success?: string | boolean; message?: string } = {};
-  try {
-    payload = (await response.json()) as { success?: string | boolean; message?: string };
-  } catch {
-    payload = {};
-  }
-
-  const message = payload.message ?? "";
-  const awaitingInboxConfirmation = /activat/i.test(message);
-  const ok = response.ok && (String(payload.success) !== "false" || awaitingInboxConfirmation);
-  if (!ok) {
-    throw new Error(message || "The application could not be sent. Please try again in a moment.");
-  }
 
   const saved: SubmittedApplication = {
     id: reference,

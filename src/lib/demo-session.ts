@@ -1,7 +1,7 @@
-export const DEMO_EMAIL = "demo@carebridge.app";
-export const DEMO_PASSWORD = "CareBridge2026!";
+export const DEMO_EMAIL = "demo@sambea.app";
+export const DEMO_PASSWORD = "Sambea2026!";
 
-const KEY = "carebridge.demo.session";
+const KEY = "sambea.demo.session";
 
 export function isDemoSignedIn() {
   if (typeof window === "undefined") return false;

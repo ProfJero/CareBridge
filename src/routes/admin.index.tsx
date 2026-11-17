@@ -14,7 +14,7 @@ export const Route = createFileRoute("/admin/")({
   },
   component: AdminHome,
   head: () => ({
-    meta: [{ title: "Workspace — CareBridge" }],
+    meta: [{ title: "Workspace — Sambea Son and Daughter Home Care" }],
   }),
 });
 

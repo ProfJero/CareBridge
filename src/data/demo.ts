@@ -40,13 +40,13 @@ export const ROLES = [
 ] as const;
 
 export const AREAS = [
-  "Accra",
-  "Tema",
+  "Assin Foso",
+  "Assin Bereku",
+  "Assin Praso",
+  "Assin Manso",
+  "Assin Nyankumasi",
+  "Twifo Praso",
   "Cape Coast",
-  "Elmina",
-  "Mankessim",
-  "Kumasi",
-  "Central Region",
   "Flexible / several areas",
 ] as const;
 
@@ -54,7 +54,7 @@ export const JOBS = [
   {
     title: "Home Care Assistant",
     type: "Full-time",
-    location: "Cape Coast",
+    location: "Assin Foso",
     category: "Non-clinical care",
     summary: "Personal care, meals, mobility and companionship for clients at home.",
     applicants: 12,
@@ -63,7 +63,7 @@ export const JOBS = [
   {
     title: "Registered Nurse",
     type: "Part-time",
-    location: "Cape Coast & Elmina",
+    location: "Assin Foso & Assin Bereku",
     category: "Clinical care",
     summary: "Nursing visits, observations and documentation within professional scope.",
     applicants: 7,
@@ -72,7 +72,7 @@ export const JOBS = [
   {
     title: "Companion Caregiver",
     type: "Flexible",
-    location: "Accra",
+    location: "Assin Foso",
     category: "Non-clinical care",
     summary: "Company, errands and daily routines for older adults living alone.",
     applicants: 4,
@@ -81,7 +81,7 @@ export const JOBS = [
   {
     title: "Live-in Caregiver",
     type: "Contract",
-    location: "Central Region",
+    location: "Assin Foso",
     category: "Non-clinical care",
     summary: "Overnight presence and daily living support for one household.",
     applicants: 0,
@@ -113,7 +113,7 @@ export const CANDIDATES = [
     id: "seed-1",
     name: "Nana Akua Boateng",
     role: "Registered Nurse",
-    location: "Cape Coast",
+    location: "Assin Foso",
     experience: "5 years in ward and community nursing",
     date: "Today, 09:42",
     stage: "New" as Stage,
@@ -123,7 +123,7 @@ export const CANDIDATES = [
     id: "seed-2",
     name: "Michael Osei",
     role: "Home Care Assistant",
-    location: "Cape Coast",
+    location: "Assin Foso",
     experience: "3 years of personal care support",
     date: "Today, 08:15",
     stage: "Screening" as Stage,
@@ -133,7 +133,7 @@ export const CANDIDATES = [
     id: "seed-3",
     name: "Abigail Mensimah",
     role: "Caregiver",
-    location: "Elmina",
+    location: "Assin Bereku",
     experience: "2 years with older adults at home",
     date: "Yesterday",
     stage: "Shortlisted" as Stage,
@@ -143,7 +143,7 @@ export const CANDIDATES = [
     id: "seed-4",
     name: "Kwesi Arthur",
     role: "Enrolled Nurse",
-    location: "Cape Coast",
+    location: "Assin Foso",
     experience: "4 years of clinical support",
     date: "Yesterday",
     stage: "Interview" as Stage,
@@ -153,7 +153,7 @@ export const CANDIDATES = [
     id: "seed-5",
     name: "Akosua Frimpong",
     role: "Companion Caregiver",
-    location: "Mankessim",
+    location: "Assin Praso",
     experience: "1 year of companionship care",
     date: "6 Nov 2026",
     stage: "Credential checks" as Stage,
@@ -162,19 +162,19 @@ export const CANDIDATES = [
 ];
 
 export const CLIENTS = [
-  { name: "Mrs. Grace Mensah", area: "Accra — Labone", service: "Personal care", plan: "Morning support", status: "Active" },
-  { name: "Mr. Daniel Asare", area: "Cape Coast", service: "Nursing visit", plan: "Wound review", status: "Active" },
-  { name: "Madam Abena Ofori", area: "Elmina", service: "Companionship", plan: "Weekday afternoons", status: "Active" },
-  { name: "Mr. Joseph Tetteh", area: "Tema", service: "Medication support", plan: "Twice weekly", status: "Review" },
-  { name: "Auntie Efua Badu", area: "Accra — Dansoman", service: "Live-in support", plan: "Household routine", status: "Active" },
+  { name: "Mrs. Grace Mensah", area: "Assin Foso — Nyameye", service: "Personal care", plan: "Morning support", status: "Active" },
+  { name: "Mr. Daniel Asare", area: "Assin Foso", service: "Nursing visit", plan: "Wound review", status: "Active" },
+  { name: "Madam Abena Ofori", area: "Assin Bereku", service: "Companionship", plan: "Weekday afternoons", status: "Active" },
+  { name: "Mr. Joseph Tetteh", area: "Assin Praso", service: "Medication support", plan: "Twice weekly", status: "Review" },
+  { name: "Auntie Efua Badu", area: "Assin Foso — Station", service: "Live-in support", plan: "Household routine", status: "Active" },
 ];
 
 export const CAREGIVERS = [
-  { name: "Ama Kusi", role: "Caregiver", area: "Accra", duty: "On duty", shift: "08:00 – 16:00" },
-  { name: "Esi Owusu", role: "Registered Nurse", area: "Cape Coast", duty: "On duty", shift: "09:00 – 15:00" },
-  { name: "Kwame Agyeman", role: "Companion", area: "Elmina", duty: "On duty", shift: "10:00 – 14:00" },
-  { name: "Yaw Appiah", role: "Caregiver", area: "Tema", duty: "Scheduled", shift: "11:30 – 15:30" },
-  { name: "Adwoa Serwaa", role: "Home Care Assistant", area: "Accra", duty: "Off today", shift: "Rest day" },
+  { name: "Ama Kusi", role: "Caregiver", area: "Assin Foso", duty: "On duty", shift: "08:00 – 16:00" },
+  { name: "Esi Owusu", role: "Registered Nurse", area: "Assin Foso", duty: "On duty", shift: "09:00 – 15:00" },
+  { name: "Kwame Agyeman", role: "Companion", area: "Assin Bereku", duty: "On duty", shift: "10:00 – 14:00" },
+  { name: "Yaw Appiah", role: "Caregiver", area: "Assin Praso", duty: "Scheduled", shift: "11:30 – 15:30" },
+  { name: "Adwoa Serwaa", role: "Home Care Assistant", area: "Assin Foso", duty: "Off today", shift: "Rest day" },
 ];
 
 export const PLANS = [

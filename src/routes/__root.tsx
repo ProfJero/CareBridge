@@ -1,5 +1,9 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "sonner";
 import { AuthProvider } from "@/lib/auth/provider";
+import { SessionProvider } from "@/lib/session";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
 
@@ -8,11 +12,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CareBridge" },
+      { title: "Sambea Son and Daughter Home Care — Assin Foso" },
       { name: "theme-color", content: "#0c3354" },
       {
         name: "description",
-        content: "CareBridge helps home-care teams recruit caregivers and run day-to-day care operations.",
+        content: "Sambea Son and Daughter Home Care: personal care, elderly care, recovery support, household help and companionship at home in Assin Foso, Central Region, Ghana. Shop care essentials and watch care videos.",
       },
     ],
     links: [
@@ -28,7 +32,14 @@ export const Route = createRootRoute({
       { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
     ],
   }),
-  component: () => (
+  component: RootDocument,
+});
+
+function RootDocument() {
+  const [queryClient] = useState(
+    () => new QueryClient({ defaultOptions: { queries: { staleTime: 30_000, refetchOnWindowFocus: false, retry: 1 } } }),
+  );
+  return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
@@ -36,10 +47,15 @@ export const Route = createRootRoute({
       <body>
         <PreviewHostBridge />
         <AuthProvider>
-          <Outlet />
+          <QueryClientProvider client={queryClient}>
+            <SessionProvider>
+              <Outlet />
+              <Toaster position="top-center" richColors closeButton />
+            </SessionProvider>
+          </QueryClientProvider>
         </AuthProvider>
         <Scripts />
       </body>
     </html>
-  ),
-});
+  );
+}
