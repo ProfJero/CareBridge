@@ -2,4 +2,5 @@ node_modules/
 dist/
 .wrangler/
 .vercel/
-.output/.cf-deploy/
+.output/
+.cf-deploy/
