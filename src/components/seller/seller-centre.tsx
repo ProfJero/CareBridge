@@ -499,7 +499,7 @@ export function SellerDashboard({ store }: { store: Store }) {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="min-w-0">
           <p className="text-sm font-bold tracking-widest text-sea uppercase">Seller centre</p>
-          <h1 className="mt-1 flex items-center gap-2 font-display text-3xl font-semibold text-ink sm:text-4xl">
+          <h1 className="mt-1 flex items-center gap-2 font-display text-3xl font-bold text-ink sm:text-4xl">
             {store.name}
             {store.verified ? <BadgeCheck className="size-7 text-sea" aria-label="Verified seller" /> : null}
           </h1>

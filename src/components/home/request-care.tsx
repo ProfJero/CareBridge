@@ -69,7 +69,7 @@ export function RequestCareForm() {
         <span className="mx-auto grid size-14 place-items-center rounded-full bg-mint text-sea">
           <Check className="size-7" aria-hidden />
         </span>
-        <h3 className="mt-4 font-display text-3xl font-semibold text-ink">Thank you, {name.split(" ")[0]}.</h3>
+        <h3 className="mt-4 font-display text-3xl font-bold text-ink">Thank you, {name.split(" ")[0]}.</h3>
         <p className="mx-auto mt-2 max-w-md text-lg text-muted">
           Our care coordinator will call you on {phone} to talk through what you need. There is no obligation.
         </p>

@@ -13,7 +13,7 @@ import {
 import { SiteShell } from "@/components/site-shell";
 import { SITE } from "@/lib/config";
 import { Button, Field, controlClass } from "@/components/ui";
-import { AREAS, JOBS, ROLES } from "@/data/demo";
+import { AREAS, JOBS, ROLES } from "@/data/careers";
 import { makeReference, sendCaregiverApplication } from "@/lib/application-inbox";
 
 const steps = ["Your details", "Experience"];
@@ -89,7 +89,7 @@ export function CareersPortal() {
         <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-12 md:grid-cols-[1.15fr_0.85fr] md:py-16">
           <div>
             <p className="text-sm font-bold tracking-widest text-sea uppercase">Careers</p>
-            <h1 className="mt-3 font-display text-5xl leading-tight font-semibold text-ink md:text-6xl">
+            <h1 className="mt-3 font-display text-5xl leading-tight font-bold text-ink md:text-6xl">
               Build a career around <span className="text-sea">making lives better.</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
@@ -152,7 +152,7 @@ export function CareersPortal() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-sm font-bold tracking-widest text-sea uppercase">Opportunities</p>
-              <h2 className="mt-2 font-display text-4xl font-semibold text-ink">Find a role that fits you</h2>
+              <h2 className="mt-2 font-display text-4xl font-bold text-ink">Find a role that fits you</h2>
               <p className="mt-3 max-w-2xl text-lg text-muted">
                 Clinical and non-clinical roles are listed separately, so a caregiver application never implies a nursing scope.
               </p>
@@ -212,7 +212,7 @@ export function CareersPortal() {
         <section id="apply" className="mx-auto grid scroll-mt-24 max-w-6xl gap-10 px-5 py-14 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <p className="text-sm font-bold tracking-widest text-sea uppercase">Your next chapter</p>
-            <h2 className="mt-2 font-display text-4xl font-semibold text-ink">Take the first step.</h2>
+            <h2 className="mt-2 font-display text-4xl font-bold text-ink">Take the first step.</h2>
             <p className="mt-4 text-lg leading-relaxed text-muted">
               This form goes straight to the {SITE.name} recruiting team. You will see a reference number as soon as it is sent.
             </p>
@@ -233,7 +233,7 @@ export function CareersPortal() {
                   <Check className="size-7" aria-hidden />
                 </span>
                 <p className="mt-5 text-sm font-bold tracking-widest text-sea uppercase">Application received</p>
-                <h3 className="mt-2 font-display text-4xl font-semibold text-ink">
+                <h3 className="mt-2 font-display text-4xl font-bold text-ink">
                   Thank you, {name.split(" ")[0]}.
                 </h3>
                 <p className="mx-auto mt-3 max-w-md text-lg leading-relaxed text-muted">

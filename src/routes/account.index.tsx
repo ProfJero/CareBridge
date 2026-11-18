@@ -21,7 +21,7 @@ export const Route = createFileRoute("/account/")({
     tab: search.tab === "wishlist" || search.tab === "profile" ? search.tab : undefined,
   }),
   component: AccountPage,
-  head: () => ({ meta: [{ title: "My account — Sambea Son and Daughter Home Care" }] }),
+  head: () => ({ meta: [{ title: "My account — SamBee Son and Daughter Home Care" }] }),
 });
 
 function AccountPage() {
@@ -49,7 +49,7 @@ function AccountPage() {
         <div className="mx-auto grid max-w-5xl items-center gap-10 px-5 py-10 sm:py-16 lg:grid-cols-2">
           <div>
             <p className="text-sm font-bold tracking-widest text-sea uppercase">Your account</p>
-            <h1 className="mt-2 font-display text-4xl font-semibold text-ink">Shop, track orders and sell — in one place.</h1>
+            <h1 className="mt-2 font-display text-4xl font-bold text-ink">Shop, track orders and sell — in one place.</h1>
             <ul className="mt-6 grid gap-3 text-lg text-muted">
               <li className="flex gap-3"><Package className="mt-1 size-5 shrink-0 text-sea" aria-hidden /> Follow every order from confirmation to your door.</li>
               <li className="flex gap-3"><Heart className="mt-1 size-5 shrink-0 text-sea" aria-hidden /> Save items to your wishlist for later.</li>
@@ -68,7 +68,7 @@ function AccountPage() {
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="min-w-0">
             <p className="text-sm font-bold tracking-widest text-sea uppercase">My account</p>
-            <h1 className="mt-1 truncate font-display text-3xl font-semibold text-ink sm:text-4xl">
+            <h1 className="mt-1 truncate font-display text-3xl font-bold text-ink sm:text-4xl">
               Hello{profile?.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""}
             </h1>
             <p className="truncate text-base text-faint">{email}</p>

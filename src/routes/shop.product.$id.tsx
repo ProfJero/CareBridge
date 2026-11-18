@@ -17,7 +17,7 @@ import { cn } from "@/lib/cn";
 
 export const Route = createFileRoute("/shop/product/$id")({
   component: ProductPage,
-  head: () => ({ meta: [{ title: "Product — Sambea Marketplace" }] }),
+  head: () => ({ meta: [{ title: "Product — SamBee Online Trading Center" }] }),
 });
 
 function ProductPage() {
@@ -159,7 +159,7 @@ function ProductPage() {
             {product.category ? (
               <p className="text-sm font-bold tracking-widest text-sea uppercase">{product.category.name}</p>
             ) : null}
-            <h1 className="mt-2 font-display text-3xl leading-tight font-semibold text-ink sm:text-4xl">{product.title}</h1>
+            <h1 className="mt-2 font-display text-3xl leading-tight font-bold text-ink sm:text-4xl">{product.title}</h1>
             <div className="mt-3 flex flex-wrap items-center gap-3 text-base text-faint">
               {product.rating_count > 0 ? (
                 <a href="#reviews" className="inline-flex items-center gap-2">
@@ -268,7 +268,7 @@ function ProductPage() {
                 </div>
                 {sellerContact ? (
                   <a
-                    href={waLink(sellerContact, `Hello, I'm interested in "${product.title}" on the Sambea Marketplace.`)}
+                    href={waLink(sellerContact, `Hello, I'm interested in "${product.title}" on the SamBee Online Trading Center.`)}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#1f8f4e] px-4 font-semibold text-white"
@@ -299,7 +299,7 @@ function ProductPage() {
 
         <section id="reviews" className="mt-14 grid scroll-mt-24 gap-8 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <h2 className="font-display text-3xl font-semibold text-ink">Customer reviews</h2>
+            <h2 className="font-display text-3xl font-bold text-ink">Customer reviews</h2>
             {product.rating_count > 0 ? (
               <div className="mt-3 flex items-center gap-3">
                 <p className="text-5xl font-bold text-ink">{Number(product.rating_avg).toFixed(1)}</p>
@@ -334,7 +334,7 @@ function ProductPage() {
 
         {related.data && related.data.products.filter((item) => item.id !== product.id).length > 0 ? (
           <section className="mt-14">
-            <h2 className="font-display text-3xl font-semibold text-ink">You may also need</h2>
+            <h2 className="font-display text-3xl font-bold text-ink">You may also need</h2>
             <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
               {related.data.products
                 .filter((item) => item.id !== product.id)

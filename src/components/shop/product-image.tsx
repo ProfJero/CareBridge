@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Accessibility, Activity, Apple, BedDouble, Cross, Droplets, Gift, Package, Shirt, type LucideIcon } from "lucide-react";
+import { Accessibility, Activity, Apple, BedDouble, Cross, Droplets, Gift, Home, Laptop, Package, Shirt, Smartphone, type LucideIcon } from "lucide-react";
 import { cdnImage } from "@/lib/cloudinary";
 import { cn } from "@/lib/cn";
 
@@ -13,9 +13,12 @@ const ICONS: Record<string, LucideIcon> = {
   gift: Gift,
   shirt: Shirt,
   package: Package,
+  home: Home,
+  smartphone: Smartphone,
+  laptop: Laptop,
 };
 
-const TONES = ["bg-mint text-sea", "bg-sky text-navy", "bg-gold-bg text-gold", "bg-[#f3ecf7] text-[#6b3f86]"];
+const TONES = ["bg-mint text-sea", "bg-sky text-navy", "bg-leaf-bg text-leaf", "bg-[#eef1fb] text-navy-2"];
 
 export function categoryIcon(name?: string | null): LucideIcon {
   return ICONS[name ?? "package"] ?? Package;

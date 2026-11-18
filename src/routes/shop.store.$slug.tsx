@@ -11,7 +11,7 @@ import type { Store } from "@/lib/types";
 
 export const Route = createFileRoute("/shop/store/$slug")({
   component: StorePage,
-  head: () => ({ meta: [{ title: "Seller shop — Sambea Marketplace" }] }),
+  head: () => ({ meta: [{ title: "Seller shop — SamBee Online Trading Center" }] }),
 });
 
 function StorePage() {
@@ -51,7 +51,7 @@ function StorePage() {
             {s.logo_url ? <img src={s.logo_url} alt="" className="size-full object-cover" /> : s.name[0]}
           </span>
           <div className="min-w-0 flex-1">
-            <h1 className="flex items-center gap-2 font-display text-3xl font-semibold sm:text-4xl">
+            <h1 className="flex items-center gap-2 font-display text-3xl font-bold sm:text-4xl">
               {s.name}
               {s.verified ? <BadgeCheck className="size-7 text-mint" aria-label="Verified seller" /> : null}
             </h1>
@@ -63,7 +63,7 @@ function StorePage() {
           </div>
           {contact ? (
             <div className="flex gap-2">
-              <a href={waLink(contact, `Hello ${s.name}, I found your shop on the Sambea Marketplace.`)} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#1f8f4e] px-4 font-semibold text-white">
+              <a href={waLink(contact, `Hello ${s.name}, I found your shop on the SamBee Online Trading Center.`)} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#1f8f4e] px-4 font-semibold text-white">
                 <MessageCircle className="size-4" aria-hidden /> WhatsApp
               </a>
               {s.phone ? (

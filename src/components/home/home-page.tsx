@@ -20,10 +20,12 @@ import {
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { RequestCareForm } from "@/components/home/request-care";
+import { BannerCarousel } from "@/components/home/banner-carousel";
+import { SamBee } from "@/components/brand";
 import { ProductCard, ProductGridSkeleton } from "@/components/shop/product-card";
 import { VideoCard, VideoEmbed } from "@/components/video-player";
 import { Modal } from "@/components/ui";
-import { SITE } from "@/lib/config";
+import { SHOP, SITE } from "@/lib/config";
 import { useCategories, useProducts, useVideos } from "@/lib/queries";
 import type { Video } from "@/lib/types";
 
@@ -89,6 +91,8 @@ export function HomePage() {
 
   return (
     <SiteShell>
+      <BannerCarousel />
+
       {/* Hero */}
       <section className="relative overflow-hidden bg-cream">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-12 md:py-20 lg:grid-cols-[1.1fr_0.9fr]">
@@ -97,13 +101,13 @@ export function HomePage() {
               <MapPin className="size-4" aria-hidden />
               {SITE.town} · {SITE.region} · {SITE.country}
             </p>
-            <h1 className="mt-5 font-display text-4xl leading-[1.08] font-semibold text-ink sm:text-5xl md:text-6xl">
-              Care that feels like family, <span className="text-sea">right at home.</span>
+            <h1 className="mt-5 font-display text-4xl leading-[1.08] font-extrabold text-ink sm:text-5xl md:text-6xl">
+              <SamBee /> Son and Daughter <span className="text-sea">Home Care</span>
             </h1>
+            <p className="mt-3 font-display text-xl font-bold text-navy italic sm:text-2xl">{SITE.tagline}</p>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
-              <strong className="font-semibold text-ink">{SITE.name}</strong> is a home-care service in {SITE.town},{" "}
-              {SITE.region}, {SITE.country}, West Africa. We support people who need help while living at home — and the
-              families who love them.
+              A home-care service in {SITE.town}, {SITE.region}, {SITE.country}, West Africa. We support people who need
+              help while living at home — and the families who love them.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
@@ -134,22 +138,19 @@ export function HomePage() {
           </div>
 
           <div className="relative">
-            <div className="absolute -top-10 -right-10 size-64 rounded-full bg-mint blur-3xl" aria-hidden />
-            <div className="relative rounded-[2rem] bg-navy p-6 text-on-navy shadow-xl sm:p-8">
-              <p className="text-sm font-bold tracking-widest text-navy-muted uppercase">How we help at home</p>
-              <ul className="mt-5 grid gap-3">
-                {SERVICES.map(({ icon: Icon, title }) => (
-                  <li key={title} className="flex items-center gap-4 rounded-2xl bg-navy-2 px-4 py-3.5">
-                    <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-white/10 text-mint">
-                      <Icon className="size-5" aria-hidden />
-                    </span>
-                    <span className="text-lg font-semibold">{title}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="absolute -top-8 -right-8 size-64 rounded-full bg-mint blur-3xl" aria-hidden />
+            <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-line">
+              <img
+                src="/brand/hero-care.webp"
+                alt="A SamBee caregiver smiling with an elderly client at home"
+                width={900}
+                height={900}
+                className="aspect-square w-full object-cover"
+                loading="lazy"
+              />
               <a
                 href="#request-care"
-                className="mt-5 flex h-12 items-center justify-center gap-2 rounded-xl bg-mint font-semibold text-sea-2"
+                className="absolute inset-x-4 bottom-4 flex h-13 items-center justify-center gap-2 rounded-2xl bg-navy/95 font-bold text-on-navy shadow-lg backdrop-blur"
               >
                 <PhoneCall className="size-4" aria-hidden /> Ask for a free care conversation
               </a>
@@ -162,7 +163,7 @@ export function HomePage() {
       <section id="services" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-16">
         <div className="max-w-3xl">
           <p className="text-sm font-bold tracking-widest text-sea uppercase">What a home-care service does</p>
-          <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">
+          <h2 className="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">
             Practical support, so life at home stays possible.
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted">
@@ -215,11 +216,11 @@ export function HomePage() {
       <section className="mx-auto max-w-7xl px-5 py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-2xl">
-            <p className="text-sm font-bold tracking-widest text-sea uppercase">Sambea Marketplace</p>
-            <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">Care essentials, delivered in Assin Foso</h2>
+            <p className="text-sm font-bold tracking-widest text-sea uppercase">{SHOP.name}</p>
+            <h2 className="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">Shop smart. Shop online.</h2>
             <p className="mt-3 text-lg text-muted">
-              Shop walking aids, health monitors, hygiene supplies and more from trusted local sellers. Pay with Mobile Money or
-              cash on delivery.
+              Mobile accessories, electronics, fashion, home essentials, gifts and care supplies from trusted sellers in Assin
+              Foso. Pay with Mobile Money or cash on delivery.
             </p>
           </div>
           <Link
@@ -257,7 +258,7 @@ export function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
               <p className="text-sm font-bold tracking-widest text-sea uppercase">Video library</p>
-              <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">Learn and see how we care</h2>
+              <h2 className="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">Learn and see how we care</h2>
               <p className="mt-3 text-lg text-muted">Care tips for families, caregiver training and stories from our team.</p>
             </div>
             <Link to="/videos" className="inline-flex h-12 items-center gap-2 font-semibold text-sea">
@@ -285,7 +286,7 @@ export function HomePage() {
         <div className="grid items-center gap-8 rounded-[2rem] bg-mint p-6 sm:p-10 lg:grid-cols-[1.3fr_0.7fr]">
           <div>
             <p className="text-sm font-bold tracking-widest text-sea-2 uppercase">Careers</p>
-            <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">Build a career around making lives better.</h2>
+            <h2 className="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">Build a career around making lives better.</h2>
             <p className="mt-3 max-w-2xl text-lg leading-relaxed text-muted">
               Join a home-care team in Ghana. Support people in their own homes — with daily living, companionship, or
               professional nursing — and know exactly what you are applying for.
@@ -315,7 +316,7 @@ export function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <p className="text-sm font-bold tracking-widest text-sea uppercase">Request care</p>
-            <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">Let's talk about the care you need.</h2>
+            <h2 className="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">Let's talk about the care you need.</h2>
             <p className="mt-4 text-lg leading-relaxed text-muted">
               Fill in the short form and our coordinator will call you back. Your request goes straight to our care team.
             </p>
@@ -370,7 +371,7 @@ export function HomePage() {
 
       {/* FAQ */}
       <section className="mx-auto max-w-4xl px-5 py-16">
-        <h2 className="text-center font-display text-3xl font-semibold text-ink sm:text-4xl">Questions families ask</h2>
+        <h2 className="text-center font-display text-3xl font-bold text-ink sm:text-4xl">Questions families ask</h2>
         <div className="mt-8 divide-y divide-line rounded-2xl border border-line bg-card">
           {FAQ.map(([q, a], index) => (
             <div key={q}>

@@ -1,5 +1,8 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
+// The old sample workspace lived here; staff now use the real admin dashboard.
 export const Route = createFileRoute("/admin")({
-  component: () => <Outlet />,
+  beforeLoad: () => {
+    throw redirect({ to: "/manage" });
+  },
 });

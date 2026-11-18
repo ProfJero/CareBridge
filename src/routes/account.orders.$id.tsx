@@ -17,7 +17,7 @@ export const Route = createFileRoute("/account/orders/$id")({
     placed: search.placed === true || search.placed === "true" ? true : undefined,
   }),
   component: OrderPage,
-  head: () => ({ meta: [{ title: "Order details — Sambea Marketplace" }] }),
+  head: () => ({ meta: [{ title: "Order details — SamBee Online Trading Center" }] }),
 });
 
 const STEPS = ["pending", "confirmed", "shipped", "delivered"] as const;
@@ -90,7 +90,7 @@ function OrderPage() {
 
         <div className="mt-6 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h1 className="font-display text-3xl font-semibold text-ink">Order {o.order_number}</h1>
+            <h1 className="font-display text-3xl font-bold text-ink">Order {o.order_number}</h1>
             <p className="text-base text-faint">Placed {dateTime(o.created_at)}</p>
           </div>
           <div className="flex items-center gap-2">

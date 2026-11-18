@@ -13,7 +13,7 @@ export function sb(): SupabaseClient {
     return serverClient;
   }
   browserClient ??= createClient(SUPABASE_URL, SUPABASE_KEY, {
-    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: "sambea.auth" },
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: "sambee.auth" },
   });
   return browserClient;
 }

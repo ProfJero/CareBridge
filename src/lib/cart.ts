@@ -48,7 +48,7 @@ export const useCart = create<CartState>()(
       clear: () => set({ lines: [] }),
     }),
     {
-      name: "sambea.cart",
+      name: "sambee.cart",
       storage: createJSONStorage(() => (typeof window === "undefined" ? (undefined as never) : window.localStorage)),
       skipHydration: true,
     },

@@ -9,7 +9,7 @@ import { ghs } from "@/lib/format";
 
 export const Route = createFileRoute("/shop/cart")({
   component: CartPage,
-  head: () => ({ meta: [{ title: "Your cart — Sambea Marketplace" }] }),
+  head: () => ({ meta: [{ title: "Your cart — SamBee Online Trading Center" }] }),
 });
 
 function CartPage() {
@@ -27,7 +27,7 @@ function CartPage() {
   return (
     <SiteShell>
       <div className="mx-auto max-w-6xl px-5 py-8 sm:py-10">
-        <h1 className="font-display text-3xl font-semibold text-ink sm:text-4xl">Your cart</h1>
+        <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">Your cart</h1>
         {!hydrated ? null : lines.length === 0 ? (
           <div className="mt-8">
             <EmptyState

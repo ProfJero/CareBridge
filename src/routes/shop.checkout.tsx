@@ -14,7 +14,7 @@ import { cn } from "@/lib/cn";
 
 export const Route = createFileRoute("/shop/checkout")({
   component: CheckoutPage,
-  head: () => ({ meta: [{ title: "Checkout — Sambea Marketplace" }] }),
+  head: () => ({ meta: [{ title: "Checkout — SamBee Online Trading Center" }] }),
 });
 
 const NETWORKS = ["MTN MoMo", "Telecel Cash", "AirtelTigo Money"] as const;
@@ -138,7 +138,7 @@ function CheckoutPage() {
     <SiteShell>
       <form onSubmit={placeOrder} className="mx-auto grid max-w-6xl gap-8 px-5 py-8 sm:py-10 lg:grid-cols-[1fr_380px]">
         <div className="grid gap-6">
-          <h1 className="font-display text-3xl font-semibold text-ink sm:text-4xl">Checkout</h1>
+          <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">Checkout</h1>
 
           <section className="rounded-2xl border border-line bg-card p-5 sm:p-6">
             <h2 className="text-xl font-semibold">1. Contact</h2>

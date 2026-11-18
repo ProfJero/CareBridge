@@ -6,6 +6,8 @@ import { ProductCard, ProductGridSkeleton } from "@/components/shop/product-card
 import { categoryIcon } from "@/components/shop/product-image";
 import { Button, EmptyState, controlClass } from "@/components/ui";
 import { useCategories, useProducts, type ProductFilters } from "@/lib/queries";
+import { SamBee } from "@/components/brand";
+import { SHOP } from "@/lib/config";
 import { cn } from "@/lib/cn";
 
 type ShopSearch = {
@@ -42,10 +44,10 @@ export const Route = createFileRoute("/shop/")({
   component: ShopPage,
   head: () => ({
     meta: [
-      { title: "Shop — Sambea Marketplace, Assin Foso" },
+      { title: "Shop — SamBee Son and Daughter Online Trading Center, Assin Foso" },
       {
         name: "description",
-        content: "Shop care essentials from local sellers in Assin Foso and the Central Region. Mobile Money or cash on delivery.",
+        content: "Shop Smart... Shop Online. Mobile accessories, electronics, fashion, home essentials, gifts and care supplies from Assin Foso, Ghana. Mobile Money or cash on delivery.",
       },
     ],
   }),
@@ -163,36 +165,57 @@ function ShopPage() {
 
   return (
     <SiteShell>
-      <section className="bg-navy text-on-navy">
-        <div className="mx-auto max-w-7xl px-5 py-8 sm:py-10">
-          <p className="text-sm font-bold tracking-widest text-navy-muted uppercase">Sambea Marketplace</p>
-          <h1 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">Everything for care at home</h1>
-          <form onSubmit={submitSearch} className="mt-5 flex max-w-2xl gap-2">
+      <section className="mx-auto grid max-w-7xl gap-4 px-3 pt-3 sm:px-5 sm:pt-5 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
+        {!search.q && !search.cat ? (
+          <Link to="/shop/about" className="block overflow-hidden rounded-2xl bg-white ring-1 ring-line sm:rounded-3xl" aria-label={`About ${SHOP.name}`}>
+            <img
+              src="/brand/banner-shop.webp"
+              alt={`${SHOP.name} — online shopping, mobile accessories, electronics, fashion, home essentials and gifts. Quality products at affordable prices.`}
+              width={1280}
+              height={853}
+              className="aspect-[3/2] w-full object-cover"
+              fetchPriority="high"
+            />
+          </Link>
+        ) : null}
+        <div className={cn("flex flex-col justify-center rounded-2xl bg-navy p-4 text-on-navy sm:rounded-3xl sm:p-7", (search.q || search.cat) && "lg:col-span-2")}>
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h1 className="font-display text-2xl font-extrabold sm:text-3xl">
+                <SamBee light /> Online Trading Center
+              </h1>
+              <p className="mt-1 font-semibold text-navy-muted italic">{SHOP.slogan}</p>
+            </div>
+            <Link to="/shop/about" className="text-sm font-bold text-white underline-offset-4 hover:underline">
+              About us · Vision · Mission
+            </Link>
+          </div>
+          <form onSubmit={submitSearch} className="mt-4 flex gap-2">
             <label className="flex h-13 min-w-0 flex-1 items-center gap-2 rounded-xl bg-card px-4 text-faint">
               <Search className="size-5 shrink-0" aria-hidden />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search walkers, BP monitors, diapers…"
+                placeholder="Search phones, chargers, clothing, walkers…"
                 className="w-full min-w-0 bg-transparent text-base text-ink outline-none placeholder:text-faint"
                 aria-label="Search products"
                 type="search"
               />
             </label>
-            <Button type="submit" className="h-13 px-5">
+            <Button type="submit" className="h-13 bg-white px-5 text-navy hover:bg-mint">
               Search
             </Button>
           </form>
-          <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-navy-muted">
-            <li className="flex items-center gap-2"><Truck className="size-4 text-mint" aria-hidden /> GH₵ 10 delivery in Assin Foso</li>
-            <li className="flex items-center gap-2"><Wallet className="size-4 text-mint" aria-hidden /> Mobile Money or cash on delivery</li>
-            <li className="flex items-center gap-2"><ShieldCheck className="size-4 text-mint" aria-hidden /> Verified local sellers</li>
+          <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-navy-muted">
+            <li className="flex items-center gap-2"><Truck className="size-4 text-white" aria-hidden /> GH₵ 10 delivery in Assin Foso</li>
+            <li className="flex items-center gap-2"><Wallet className="size-4 text-white" aria-hidden /> Mobile Money or cash on delivery</li>
+            <li className="flex items-center gap-2"><ShieldCheck className="size-4 text-white" aria-hidden /> Quality products at affordable prices</li>
           </ul>
         </div>
       </section>
 
       {/* Category chips */}
-      <div className="border-b border-line bg-card">
+      <div className="mt-4 border-y border-line bg-card">
         <div className="scrollbar-none mx-auto flex max-w-7xl gap-2 overflow-x-auto px-5 py-3">
           <button
             type="button"

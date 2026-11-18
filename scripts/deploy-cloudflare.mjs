@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Build and deploy to Cloudflare Pages (project "sambea-sd" → https://sambea-sd.pages.dev).
+ * Build and deploy to Cloudflare Pages (project "sambee-snd" → https://sambee-snd.pages.dev).
  *
  *   CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… node scripts/deploy-cloudflare.mjs [--branch main]
  *
@@ -14,7 +14,7 @@ import { execFileSync } from "node:child_process";
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-const project = process.env.CF_PAGES_PROJECT ?? "sambea-sd";
+const project = process.env.CF_PAGES_PROJECT ?? "sambee-snd";
 const branchArg = process.argv.indexOf("--branch");
 const branch = branchArg > -1 ? process.argv[branchArg + 1] : "main";
 const root = process.cwd();

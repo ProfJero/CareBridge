@@ -5,18 +5,34 @@
 const env = import.meta.env as Record<string, string | undefined>;
 
 export const SITE = {
-  name: "Sambea Son and Daughter Home Care",
-  shortName: "Sambea S&D Home Care",
+  name: "SamBee Son and Daughter Home Care",
+  shortName: "SamBee S&D Home Care",
   town: "Assin Foso",
   region: "Central Region",
   country: "Ghana",
-  tagline: "Compassionate home care in Assin Foso",
+  tagline: "Caring Today... Supporting Tomorrow",
   /** Receives every form submission (applications, care requests, order alerts). */
   inbox: "beagracelyn@gmail.com",
   phone: env.VITE_CONTACT_PHONE ?? "",
   whatsapp: env.VITE_CONTACT_WHATSAPP ?? "",
   momoMerchant: env.VITE_MOMO_MERCHANT_NUMBER ?? "",
-  momoMerchantName: env.VITE_MOMO_MERCHANT_NAME ?? "Sambea Son and Daughter Home Care",
+  momoMerchantName: env.VITE_MOMO_MERCHANT_NAME ?? "SamBee Son and Daughter Online Trading Center",
+} as const;
+
+/** The e-commerce arm: SamBee Son and Daughter Online Trading Center. */
+export const SHOP = {
+  name: "SamBee Son and Daughter Online Trading Center",
+  shortName: "SamBee Online Trading Center",
+  slogan: "Shop Smart... Shop Online.",
+  about:
+    "SamBee Son and Daughter Online Trading Center is a customer-focused online trading business based in Assin Foso, Central Region, Ghana, West Africa. We are committed to making shopping convenient, accessible, and reliable by connecting customers with products and services through online platforms.",
+  goal:
+    "Our goal is to provide customers with a simple and enjoyable shopping experience while building trust through good customer service, quality products, and dependable transactions.",
+  vision: "To become a trusted and recognized online trading center serving customers in Assin Foso, Ghana, and beyond.",
+  mission:
+    "To provide convenient online shopping and trading opportunities while delivering excellent customer service and creating value for our customers and business partners.",
+  values: ["Customer satisfaction", "Trust and integrity", "Quality", "Reliability", "Convenience", "Professional service"],
+  location: "Assin Foso, Central Region, Ghana, West Africa",
 } as const;
 
 /** Publishable keys only — safe in the browser. Data is protected by RLS. */

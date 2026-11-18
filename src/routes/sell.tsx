@@ -10,8 +10,8 @@ export const Route = createFileRoute("/sell")({
   component: SellPage,
   head: () => ({
     meta: [
-      { title: "Sell with us — Sambea Marketplace" },
-      { name: "description", content: "Open a free shop on the Sambea Marketplace and sell to families in Assin Foso and the Central Region." },
+      { title: "Sell with us — SamBee Online Trading Center" },
+      { name: "description", content: "Open a free shop on the SamBee Online Trading Center and sell to families in Assin Foso and the Central Region." },
     ],
   }),
 });
@@ -37,7 +37,7 @@ function SellPage() {
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
               <p className="text-sm font-bold tracking-widest text-sea uppercase">Sell with us</p>
-              <h1 className="mt-2 font-display text-4xl font-semibold text-ink">Open your shop on the Sambea Marketplace.</h1>
+              <h1 className="mt-2 font-display text-4xl font-bold text-ink">Open your shop on the SamBee Online Trading Center.</h1>
               <p className="mt-4 text-lg text-muted">
                 Sell care supplies, health products, groceries, clothing or local crafts to families in Assin Foso and across Ghana.
                 Listing is free.

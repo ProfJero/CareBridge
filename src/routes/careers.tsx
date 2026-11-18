@@ -5,7 +5,7 @@ export const Route = createFileRoute("/careers")({
   component: CareersPortal,
   head: () => ({
     meta: [
-      { title: "Careers — Sambea Son and Daughter Home Care" },
+      { title: "Careers — SamBee Son and Daughter Home Care" },
       {
         name: "description",
         content:

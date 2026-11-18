@@ -13,8 +13,8 @@ export const Route = createFileRoute("/videos")({
   component: VideosPage,
   head: () => ({
     meta: [
-      { title: "Care videos — Sambea Son and Daughter Home Care" },
-      { name: "description", content: "Watch care tips for families, caregiver training and stories from Sambea Son and Daughter Home Care in Assin Foso." },
+      { title: "Care videos — SamBee Son and Daughter Home Care" },
+      { name: "description", content: "Watch care tips for families, caregiver training and stories from SamBee Son and Daughter Home Care in Assin Foso." },
     ],
   }),
 });
@@ -40,7 +40,7 @@ function VideosPage() {
       <section className="bg-navy text-on-navy">
         <div className="mx-auto max-w-7xl px-5 py-10">
           <p className="text-sm font-bold tracking-widest text-navy-muted uppercase">Video library</p>
-          <h1 className="mt-2 font-display text-3xl font-semibold sm:text-5xl">Watch, learn and care with confidence</h1>
+          <h1 className="mt-2 font-display text-3xl font-bold sm:text-5xl">Watch, learn and care with confidence</h1>
           <p className="mt-3 max-w-2xl text-lg text-navy-muted">
             Practical care tips for families, training for caregivers, and stories from our team in Assin Foso.
           </p>

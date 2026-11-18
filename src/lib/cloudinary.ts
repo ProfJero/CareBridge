@@ -17,7 +17,7 @@ export function uploadToCloudinary(
   const form = new FormData();
   form.append("file", file);
   form.append("upload_preset", CLOUDINARY.uploadPreset);
-  form.append("folder", `sambea/${folder}`);
+  form.append("folder", `sambee/${folder}`);
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `https://api.cloudinary.com/v1_1/${CLOUDINARY.cloudName}/${kind}/upload`);
