@@ -74,9 +74,9 @@ export const NEARBY_TOWNS = [
   "Cape Coast",
 ] as const;
 
-/** Mirrors the fee rule in the `place_order` database function. */
-export function deliveryFee(method: "delivery" | "pickup", town: string, region: string) {
-  if (method === "pickup") return 0;
+/** Mirrors the fee rule in the `place_order` database function. Delivery is free while `freeDelivery` is on. */
+export function deliveryFee(method: "delivery" | "pickup", town: string, region: string, freeDelivery = true) {
+  if (method === "pickup" || freeDelivery) return 0;
   if (town.trim().toLowerCase().startsWith("assin fo")) return 10;
   if (region.toLowerCase().startsWith("central")) return 25;
   return 45;

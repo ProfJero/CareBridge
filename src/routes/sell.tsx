@@ -19,7 +19,7 @@ export const Route = createFileRoute("/sell")({
 const PERKS = [
   { icon: Store, title: "Free shop page", copy: "Your own storefront with logo, banner and WhatsApp button." },
   { icon: Smartphone, title: "Manage from your phone", copy: "List products, update stock and accept orders anywhere." },
-  { icon: Truck, title: "Local delivery", copy: "Customers in Assin Foso pay just GH₵ 10 for delivery." },
+  { icon: Truck, title: "Free delivery", copy: "Customers get free delivery, so more of them buy." },
   { icon: TrendingUp, title: "Reach more families", copy: "Your products appear next to the care services families already trust." },
 ];
 
@@ -40,7 +40,7 @@ function SellPage() {
               <h1 className="mt-2 font-display text-4xl font-bold text-ink">Open your shop on the SamBee Online Trading Center.</h1>
               <p className="mt-4 text-lg text-muted">
                 Sell care supplies, health products, groceries, clothing or local crafts to families in Assin Foso and across Ghana.
-                Listing is free.
+                Selling on SamBee is free for now — no listing fees and no commission.
               </p>
               <ul className="mt-6 grid gap-4">
                 {PERKS.map(({ icon: Icon, title, copy }) => (

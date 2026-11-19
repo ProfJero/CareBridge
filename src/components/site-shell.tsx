@@ -6,6 +6,7 @@ import { SHOP, SITE } from "@/lib/config";
 import { cartCount, useCart } from "@/lib/cart";
 import { useSession } from "@/lib/session";
 import { cn } from "@/lib/cn";
+import { InstallAppButton } from "@/components/install-app";
 
 const NAV = [
   { to: "/", label: "Home Care" },
@@ -38,9 +39,12 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <span className="hidden truncate italic text-navy-muted md:block">
             {shopMode ? SHOP.slogan : SITE.tagline}
           </span>
-          <a href={`mailto:${SITE.inbox}`} className="hidden items-center gap-1.5 hover:underline sm:inline-flex">
-            <Mail className="size-3.5" aria-hidden /> {SITE.inbox}
-          </a>
+          <span className="flex shrink-0 items-center gap-4">
+            <a href={`mailto:${SITE.inbox}`} className="hidden items-center gap-1.5 hover:underline lg:inline-flex">
+              <Mail className="size-3.5" aria-hidden /> {SITE.inbox}
+            </a>
+            <InstallAppButton tone="dark" compact className="text-xs sm:text-sm" />
+          </span>
         </div>
       </div>
       <header className="sticky top-0 z-30 border-b border-line bg-white/95 shadow-[0_1px_0_rgba(11,31,143,0.04)] backdrop-blur">
@@ -54,7 +58,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 key={item.to}
                 to={item.to}
                 className={cn(
-                  "inline-flex h-10 items-center rounded-full px-4 text-[15px] font-bold",
+                  "inline-flex h-10 items-center rounded-full px-3.5 text-[15px] font-bold whitespace-nowrap",
                   isActive(item.to) ? "bg-navy text-on-navy" : "text-navy hover:bg-sky",
                 )}
               >
@@ -85,7 +89,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
             <Link
               to="/"
               hash="request-care"
-              className="hidden h-11 items-center rounded-full bg-sea px-5 text-[15px] font-bold text-on-sea hover:bg-sea-2 sm:inline-flex"
+              className="hidden h-11 items-center rounded-full bg-sea px-5 text-[15px] font-bold whitespace-nowrap text-on-sea hover:bg-sea-2 sm:inline-flex xl:hidden 2xl:inline-flex"
             >
               Request care
             </Link>

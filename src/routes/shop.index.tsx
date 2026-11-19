@@ -207,7 +207,7 @@ function ShopPage() {
             </Button>
           </form>
           <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-navy-muted">
-            <li className="flex items-center gap-2"><Truck className="size-4 text-white" aria-hidden /> GH₵ 10 delivery in Assin Foso</li>
+            <li className="flex items-center gap-2"><Truck className="size-4 text-white" aria-hidden /> Free delivery</li>
             <li className="flex items-center gap-2"><Wallet className="size-4 text-white" aria-hidden /> Mobile Money or cash on delivery</li>
             <li className="flex items-center gap-2"><ShieldCheck className="size-4 text-white" aria-hidden /> Quality products at affordable prices</li>
           </ul>

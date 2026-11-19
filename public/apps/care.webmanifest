@@ -1,0 +1,65 @@
+{
+  "id": "/apps/care",
+  "name": "SamBee Home Care",
+  "short_name": "SamBee Care",
+  "description": "SamBee Son and Daughter Home Care, Assin Foso \u2014 request care, watch care videos and apply for caregiver jobs.",
+  "start_url": "/?app=care",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#0b1f8f",
+  "lang": "en-GH",
+  "categories": [
+    "health",
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "src": "/apps/care-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apps/care-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apps/care-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/apps/care-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Request care",
+      "url": "/#request-care",
+      "icons": [
+        {
+          "src": "/apps/care-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Careers",
+      "url": "/careers",
+      "icons": [
+        {
+          "src": "/apps/care-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

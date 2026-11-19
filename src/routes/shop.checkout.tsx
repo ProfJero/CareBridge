@@ -9,6 +9,7 @@ import { cartSubtotal, useCart } from "@/lib/cart";
 import { sendFormEmail } from "@/lib/email";
 import { ghs } from "@/lib/format";
 import { useSession } from "@/lib/session";
+import { usePlatformSettings } from "@/lib/queries";
 import { errText, sb } from "@/lib/supabase";
 import { cn } from "@/lib/cn";
 
@@ -51,7 +52,8 @@ function CheckoutPage() {
   }, [profile]);
 
   const finalTown = town === "Other" ? customTown : town;
-  const fee = deliveryFee(method, finalTown, region);
+  const { data: platform } = usePlatformSettings();
+  const fee = deliveryFee(method, finalTown, region, platform?.free_delivery ?? true);
   const subtotal = cartSubtotal(lines);
 
   async function placeOrder(event: FormEvent) {
@@ -155,7 +157,7 @@ function CheckoutPage() {
           <section className="rounded-2xl border border-line bg-card p-5 sm:p-6">
             <h2 className="text-xl font-semibold">2. Delivery</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <Choice active={method === "delivery"} onClick={() => setMethod("delivery")} icon={<Truck className="size-5" />} title="Deliver to me" note="From GH₵ 10 in Assin Foso" />
+              <Choice active={method === "delivery"} onClick={() => setMethod("delivery")} icon={<Truck className="size-5" />} title="Deliver to me" note={platform?.free_delivery === false ? "From GH₵ 10 in Assin Foso" : "Free delivery"} />
               <Choice active={method === "pickup"} onClick={() => setMethod("pickup")} icon={<StoreIcon className="size-5" />} title="I'll pick it up" note="Free · seller will call you" />
             </div>
             {method === "delivery" ? (

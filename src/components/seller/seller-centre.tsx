@@ -3,12 +3,12 @@ import { Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AlertTriangle, BadgeCheck, Banknote, ExternalLink, Package, Pencil, Plus, ShoppingCart, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { ImageListInput, SingleImageInput } from "@/components/media-upload";
+import { ImageListInput, ShortVideoInput, SingleImageInput } from "@/components/media-upload";
 import { ProductImage } from "@/components/shop/product-image";
 import { Button, EmptyState, ErrorNote, Field, Modal, Panel, Spinner, StatusPill, Tabs, controlClass } from "@/components/ui";
 import { NEARBY_TOWNS, SITE } from "@/lib/config";
 import { STATUS_LABEL, dateTime, ghs, slugify, statusTone } from "@/lib/format";
-import { useCategories } from "@/lib/queries";
+import { useCategories, usePlatformSettings } from "@/lib/queries";
 import { useSession } from "@/lib/session";
 import { errText, must, sb } from "@/lib/supabase";
 import type { Category, Order, OrderItem, OrderStatus, Product, Store } from "@/lib/types";
@@ -26,6 +26,9 @@ export function StoreForm({ store, onSaved }: { store?: Store | null; onSaved: (
   const [town, setTown] = useState(store?.town ?? SITE.town);
   const [logo, setLogo] = useState<string | null>(store?.logo_url ?? null);
   const [banner, setBanner] = useState<string | null>(store?.banner_url ?? null);
+  const [facebook, setFacebook] = useState(store?.facebook_url ?? "");
+  const [youtube, setYoutube] = useState(store?.youtube_url ?? "");
+  const [video, setVideo] = useState<string | null>(store?.video_url ?? null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -36,6 +39,11 @@ export function StoreForm({ store, onSaved }: { store?: Store | null; onSaved: (
     if (name.trim().length < 2) return setError("Give your shop a name.");
     if (cleanSlug.length < 2) return setError("Choose a web address for your shop.");
     if (phone.replace(/\D/g, "").length < 9) return setError("Add a phone number customers and our team can reach.");
+    if (whatsapp.trim() && whatsapp.replace(/\D/g, "").length < 9) return setError("Check the WhatsApp number — it looks too short.");
+    const fb = normaliseUrl(facebook);
+    const yt = normaliseUrl(youtube);
+    if (fb && !/(facebook\.com|fb\.com|fb\.me)/i.test(fb)) return setError("The Facebook link should be a facebook.com page or profile link.");
+    if (yt && !/(youtube\.com|youtu\.be)/i.test(yt)) return setError("The YouTube link should be a youtube.com channel or video link.");
     setBusy(true);
     const row = {
       name: name.trim(),
@@ -46,6 +54,9 @@ export function StoreForm({ store, onSaved }: { store?: Store | null; onSaved: (
       town,
       logo_url: logo,
       banner_url: banner,
+      facebook_url: fb,
+      youtube_url: yt,
+      video_url: video,
     };
     const result = store
       ? await sb().from("stores").update(row).eq("id", store.id)
@@ -90,8 +101,8 @@ export function StoreForm({ store, onSaved }: { store?: Store | null; onSaved: (
         <Field label="Phone">
           <input className={controlClass} value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" required />
         </Field>
-        <Field label="WhatsApp (optional)">
-          <input className={controlClass} value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} type="tel" />
+        <Field label="WhatsApp / WhatsApp Business" hint="Customers can message you straight from your shop.">
+          <input className={controlClass} value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} type="tel" placeholder="024 000 0000" />
         </Field>
         <Field label="Town">
           <select className={controlClass} value={town} onChange={(e) => setTown(e.target.value)}>
@@ -99,6 +110,19 @@ export function StoreForm({ store, onSaved }: { store?: Store | null; onSaved: (
             {!NEARBY_TOWNS.includes(town as (typeof NEARBY_TOWNS)[number]) ? <option>{town}</option> : null}
           </select>
         </Field>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Facebook page (optional)">
+          <input className={controlClass} value={facebook} onChange={(e) => setFacebook(e.target.value)} placeholder="facebook.com/yourshop" inputMode="url" />
+        </Field>
+        <Field label="YouTube channel (optional)">
+          <input className={controlClass} value={youtube} onChange={(e) => setYoutube(e.target.value)} placeholder="youtube.com/@yourshop" inputMode="url" />
+        </Field>
+      </div>
+      <div>
+        <p className="mb-1 text-base font-semibold text-ink">Shop or product video (optional)</p>
+        <p className="mb-2 text-sm text-faint">A short clip showing what you sell. It plays on your shop page.</p>
+        <ShortVideoInput value={video} onChange={setVideo} folder="stores" />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <SingleImageInput label="Logo (optional)" value={logo} onChange={setLogo} folder="stores" />
@@ -110,6 +134,12 @@ export function StoreForm({ store, onSaved }: { store?: Store | null; onSaved: (
       </Button>
     </form>
   );
+}
+
+function normaliseUrl(value: string) {
+  const v = value.trim();
+  if (!v) return "";
+  return /^https?:\/\//i.test(v) ? v : `https://${v}`;
 }
 
 // ───────────────────────── product editor ─────────────────────────
@@ -135,6 +165,7 @@ export function ProductEditor({
   const [description, setDescription] = useState(product?.description ?? "");
   const [tags, setTags] = useState(product?.tags.join(", ") ?? "");
   const [images, setImages] = useState<string[]>(product?.images ?? []);
+  const [video, setVideo] = useState<string | null>(product?.video_url ?? null);
   const [error, setError] = useState("");
 
   const save = useMutation({
@@ -156,6 +187,7 @@ export function ProductEditor({
         description: description.trim(),
         tags: tags.split(",").map((t) => t.trim().toLowerCase()).filter(Boolean).slice(0, 10),
         images,
+        video_url: video,
       };
       if (product) must(await sb().from("products").update(row).eq("id", product.id));
       else must(await sb().from("products").insert({ ...row, store_id: storeId }));
@@ -179,9 +211,16 @@ export function ProductEditor({
         save.mutate();
       }}
     >
-      <Field label="Photos" hint="The first photo is the main one. Up to 6.">
+      <div>
+        <p className="mb-1 text-base font-semibold text-ink">Photos</p>
+        <p className="mb-2 text-sm text-faint">The first photo is the main one. Up to 6.</p>
         <ImageListInput value={images} onChange={setImages} folder="products" />
-      </Field>
+      </div>
+      <div>
+        <p className="mb-1 text-base font-semibold text-ink">Short product video (optional)</p>
+        <p className="mb-2 text-sm text-faint">Show the product in use. Keep it short: 3 MB max.</p>
+        <ShortVideoInput value={video} onChange={setVideo} folder="products" />
+      </div>
       <Field label="Product name">
         <input className={controlClass} value={title} onChange={(e) => setTitle(e.target.value)} maxLength={140} required />
       </Field>
@@ -493,6 +532,7 @@ function SellerStats({ storeId }: { storeId: string }) {
 
 export function SellerDashboard({ store }: { store: Store }) {
   const { refresh } = useSession();
+  const { data: platform } = usePlatformSettings();
   const [tab, setTab] = useState<"products" | "orders" | "settings">("orders");
   return (
     <div className="grid gap-6">
@@ -517,6 +557,10 @@ export function SellerDashboard({ store }: { store: Store }) {
           View my shop <ExternalLink className="size-4" aria-hidden />
         </Link>
       </div>
+      <p className="rounded-xl bg-leaf-bg px-4 py-3 text-base text-ink">
+        <strong>{platform?.fees_enabled ? `Seller fee: ${platform.seller_fee_percent}% per sale.` : "Selling is free."}</strong>{" "}
+        {platform?.fee_note ?? "Selling on SamBee is free for now."} {platform?.free_delivery !== false ? "Your customers get free delivery." : ""}
+      </p>
       <SellerStats storeId={store.id} />
       <Tabs
         tabs={[

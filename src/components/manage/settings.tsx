@@ -1,6 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { CheckCircle2, CircleAlert, Cloud, Database, Mail, ShieldCheck, Store } from "lucide-react";
-import { Badge, Card, PageHeader } from "@/components/manage/kit";
+import { Badge, Btn, Card, PageHeader, inputCls } from "@/components/manage/kit";
+import { usePlatformSettings } from "@/lib/queries";
+import { errText, must } from "@/lib/supabase";
 import { LogoMark } from "@/components/brand";
 import { cloudinaryReady } from "@/lib/cloudinary";
 import { CLOUDINARY, SHOP, SITE } from "@/lib/config";
@@ -42,10 +46,11 @@ export function SettingsAdmin({ onCustomers }: { onCustomers: () => void }) {
               <div><dt className="text-xs text-faint">Name</dt><dd className="font-bold">{SHOP.name}</dd></div>
               <div><dt className="text-xs text-faint">Slogan</dt><dd>{SHOP.slogan}</dd></div>
               <div><dt className="text-xs text-faint">Mobile Money merchant</dt><dd>{SITE.momoMerchant ? `${SITE.momoMerchant} (${SITE.momoMerchantName})` : <span className="text-gold">Not set — customers are called with payment details</span>}</dd></div>
-              <div><dt className="text-xs text-faint">Delivery fees</dt><dd>GH₵ 10 Assin Foso · GH₵ 25 Central Region · GH₵ 45 other regions · pickup free</dd></div>
+              <div><dt className="text-xs text-faint">Delivery</dt><dd>See “Fees &amp; delivery” below</dd></div>
             </dl>
           </div>
         </Card>
+        <FeesCard />
         <Card title="Connected services">
           <ul className="divide-y divide-line text-sm">
             <li className="flex items-center justify-between gap-3 py-3 first:pt-0">
@@ -87,5 +92,82 @@ export function SettingsAdmin({ onCustomers }: { onCustomers: () => void }) {
         </Card>
       </div>
     </>
+  );
+}
+
+/** Selling is free today; this switch is how SamBee starts charging sellers later. */
+function FeesCard() {
+  const queryClient = useQueryClient();
+  const { data } = usePlatformSettings();
+  const [enabled, setEnabled] = useState(false);
+  const [pct, setPct] = useState("0");
+  const [note, setNote] = useState("");
+  const [freeDelivery, setFreeDelivery] = useState(true);
+  useEffect(() => {
+    if (!data) return;
+    setEnabled(data.fees_enabled);
+    setPct(String(data.seller_fee_percent));
+    setNote(data.fee_note);
+    setFreeDelivery(data.free_delivery);
+  }, [data]);
+  const fees = useQuery({
+    queryKey: ["admin-fees-total"],
+    queryFn: async () => {
+      const { data: rows } = await sb().from("order_items").select("platform_fee,status").neq("status", "cancelled").gt("platform_fee", 0).limit(10000);
+      return ((rows ?? []) as { platform_fee: number }[]).reduce((s, r) => s + Number(r.platform_fee), 0);
+    },
+  });
+  const save = useMutation({
+    mutationFn: async () => {
+      const n = Number(pct);
+      if (!Number.isFinite(n) || n < 0 || n > 50) throw new Error("The fee must be between 0 and 50%.");
+      must(
+        await sb()
+          .from("platform_settings")
+          .update({ fees_enabled: enabled, seller_fee_percent: n, fee_note: note.trim() || "Selling on SamBee is free for now.", free_delivery: freeDelivery, updated_at: new Date().toISOString() })
+          .eq("id", 1),
+      );
+    },
+    onSuccess: () => {
+      toast.success("Fees and delivery saved");
+      void queryClient.invalidateQueries({ queryKey: ["platform-settings"] });
+    },
+    onError: (e) => toast.error(errText(e)),
+  });
+  return (
+    <Card title="Fees & delivery">
+      <div className="grid gap-4 text-sm">
+        <label className="flex items-start gap-3">
+          <input type="checkbox" className="mt-0.5 size-5 accent-sea" checked={freeDelivery} onChange={(e) => setFreeDelivery(e.target.checked)} />
+          <span>
+            <strong>Free delivery for customers</strong>
+            <br />
+            <span className="text-faint">When off: GH₵ 10 in Assin Foso, GH₵ 25 elsewhere in the Central Region, GH₵ 45 other regions.</span>
+          </span>
+        </label>
+        <label className="flex items-start gap-3">
+          <input type="checkbox" className="mt-0.5 size-5 accent-sea" checked={enabled} onChange={(e) => setEnabled(e.target.checked)} />
+          <span>
+            <strong>Charge sellers a fee on each sale</strong>
+            <br />
+            <span className="text-faint">Off = selling is free. Fees apply only to orders placed after you switch this on.</span>
+          </span>
+        </label>
+        <div className="grid gap-3 sm:grid-cols-[140px_1fr]">
+          <label className="grid gap-1 font-bold">
+            Fee per sale (%)
+            <input className={inputCls} value={pct} onChange={(e) => setPct(e.target.value)} inputMode="decimal" disabled={!enabled} />
+          </label>
+          <label className="grid gap-1 font-bold">
+            Message shown to sellers
+            <input className={inputCls} value={note} onChange={(e) => setNote(e.target.value)} maxLength={300} />
+          </label>
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <span className="text-faint">Fees recorded so far: <strong className="text-ink">GH₵ {(fees.data ?? 0).toFixed(2)}</strong></span>
+          <Btn tone="primary" onClick={() => save.mutate()} disabled={save.isPending}>{save.isPending ? "Saving…" : "Save"}</Btn>
+        </div>
+      </div>
+    </Card>
   );
 }

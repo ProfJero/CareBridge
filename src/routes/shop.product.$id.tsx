@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { BadgeCheck, ChevronRight, Heart, MapPin, MessageCircle, Minus, Plus, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
+import { BadgeCheck, ChevronRight, Play, Heart, MapPin, MessageCircle, Minus, Plus, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
 import { toast } from "sonner";
 import { SiteShell } from "@/components/site-shell";
 import { ProductCard, Stars } from "@/components/shop/product-card";
@@ -133,9 +133,13 @@ function ProductPage() {
         <div className="mt-5 grid gap-8 lg:grid-cols-2 lg:gap-12">
           <div>
             <div className="aspect-square overflow-hidden rounded-3xl border border-line bg-card">
-              <ProductImage src={images[imageIndex]} alt={product.title} icon={product.category?.icon} seed={product.id} width={1000} />
+              {imageIndex === -1 && product.video_url ? (
+                <video src={product.video_url} controls autoPlay muted playsInline loop className="size-full bg-black object-contain" />
+              ) : (
+                <ProductImage src={images[Math.max(0, imageIndex)]} alt={product.title} icon={product.category?.icon} seed={product.id} width={1000} />
+              )}
             </div>
-            {images.length > 1 ? (
+            {images.length > 1 || product.video_url ? (
               <div className="mt-3 flex gap-2 overflow-x-auto">
                 {images.map((src, index) => (
                   <button
@@ -151,6 +155,20 @@ function ProductPage() {
                     <ProductImage src={src} alt="" icon={product.category?.icon} seed={product.id} width={160} />
                   </button>
                 ))}
+                {product.video_url ? (
+                  <button
+                    type="button"
+                    onClick={() => setImageIndex(-1)}
+                    className={cn(
+                      "relative grid size-20 shrink-0 place-items-center overflow-hidden rounded-xl border-2 bg-navy text-white",
+                      imageIndex === -1 ? "border-sea" : "border-transparent",
+                    )}
+                    aria-label="Play product video"
+                  >
+                    <Play className="size-7 fill-current" aria-hidden />
+                    <span className="absolute bottom-1 text-[10px] font-bold uppercase">Video</span>
+                  </button>
+                ) : null}
               </div>
             ) : null}
           </div>
@@ -235,8 +253,7 @@ function ProductPage() {
               <li className="flex items-start gap-3">
                 <Truck className="mt-0.5 size-5 shrink-0 text-sea" aria-hidden />
                 <span>
-                  <strong className="font-semibold">Delivery</strong> — GH₵ 10 within Assin Foso, GH₵ 25 elsewhere in the Central
-                  Region, GH₵ 45 other regions. Free pickup available.
+                  <strong className="font-semibold">Free delivery</strong> — in Assin Foso and across Ghana. Free pickup is also available.
                 </span>
               </li>
               <li className="flex items-start gap-3">

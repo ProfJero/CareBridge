@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { sb } from "@/lib/supabase";
+import { useRouter } from "@tanstack/react-router";
 import { useCart } from "@/lib/cart";
 import type { Profile, Store } from "@/lib/types";
 
@@ -39,8 +40,14 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     setStore((storeRes.data as Store | null) ?? null);
   }, []);
 
+  const router = useRouter();
+
   useEffect(() => {
     void useCart.persist.rehydrate();
+    // Read any auth callback in the URL *before* the client consumes it. Email links
+    // can land on any page (Supabase falls back to the Site URL when the redirect
+    // isn't allow-listed), so we route the person to the right place ourselves.
+    const callback = readAuthCallback();
     const client = sb();
     let active = true;
     void client.auth.getSession().then(async ({ data }) => {
@@ -48,6 +55,15 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       setSession(data.session);
       await load(data.session);
       if (active) setReady(true);
+      if (callback) {
+        if (callback.error) {
+          void router.navigate({ to: "/welcome", search: { error: callback.error } });
+        } else if (callback.type === "recovery") {
+          void router.navigate({ to: "/account", search: { reset: true } });
+        } else if (window.location.pathname !== "/welcome") {
+          void router.navigate({ to: "/welcome" });
+        }
+      }
     });
     const { data } = client.auth.onAuthStateChange((_event, next) => {
       setSession(next);
@@ -80,6 +96,19 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   );
 
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
+}
+
+type AuthCallback = { type: string; error?: string } | null;
+
+function readAuthCallback(): AuthCallback {
+  if (typeof window === "undefined") return null;
+  const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+  const query = new URLSearchParams(window.location.search);
+  const error = hash.get("error_description") || query.get("error_description");
+  if (error) return { type: "error", error: error.replace(/\+/g, " ") };
+  if (hash.get("access_token")) return { type: hash.get("type") ?? "signup" };
+  if (query.get("code") && !window.location.pathname.startsWith("/auth")) return { type: query.get("type") ?? "signup" };
+  return null;
 }
 
 export function useSession() {

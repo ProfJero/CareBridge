@@ -77,3 +77,21 @@ export function useVideos(limit = 60) {
       ) as Video[],
   });
 }
+
+export type PlatformSettings = {
+  seller_fee_percent: number;
+  fees_enabled: boolean;
+  fee_note: string;
+  free_delivery: boolean;
+};
+
+export function usePlatformSettings() {
+  return useQuery({
+    queryKey: ["platform-settings"],
+    staleTime: 5 * 60_000,
+    queryFn: async () => {
+      const { data } = await sb().from("platform_settings").select("*").eq("id", 1).maybeSingle();
+      return (data as PlatformSettings | null) ?? { seller_fee_percent: 0, fees_enabled: false, fee_note: "Selling on SamBee is free for now.", free_delivery: true };
+    },
+  });
+}

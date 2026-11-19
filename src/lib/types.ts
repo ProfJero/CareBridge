@@ -25,6 +25,9 @@ export type Store = {
   region: string;
   status: "active" | "suspended";
   verified: boolean;
+  facebook_url: string;
+  youtube_url: string;
+  video_url: string | null;
   created_at: string;
 };
 
@@ -38,6 +41,7 @@ export type Product = {
   compare_at_price: number | null;
   stock: number;
   images: string[];
+  video_url: string | null;
   tags: string[];
   status: "active" | "draft" | "archived";
   featured: boolean;
@@ -45,7 +49,7 @@ export type Product = {
   rating_count: number;
   sold_count: number;
   created_at: string;
-  store?: Pick<Store, "id" | "name" | "slug" | "town" | "verified" | "whatsapp" | "phone" | "logo_url"> | null;
+  store?: Pick<Store, "id" | "name" | "slug" | "town" | "verified" | "whatsapp" | "phone" | "logo_url" | "facebook_url" | "youtube_url"> | null;
   category?: Pick<Category, "id" | "name" | "slug" | "icon"> | null;
 };
 
@@ -126,4 +130,4 @@ export type CareRequest = {
 };
 
 export const PRODUCT_SELECT =
-  "*, store:stores(id,name,slug,town,verified,whatsapp,phone,logo_url), category:categories(id,name,slug,icon)";
+  "*, store:stores(id,name,slug,town,verified,whatsapp,phone,logo_url,facebook_url,youtube_url), category:categories(id,name,slug,icon)";

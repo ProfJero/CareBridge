@@ -37,14 +37,14 @@ export function AuthPanel({ intro, onDone }: { intro?: string; onDone?: () => vo
         const { data, error: authError } = await client.auth.signUp({
           email: email.trim(),
           password,
-          options: { data: { full_name: name.trim(), phone: phone.trim() }, emailRedirectTo: redirect },
+          options: { data: { full_name: name.trim(), phone: phone.trim() }, emailRedirectTo: `${window.location.origin}/welcome` },
         });
         if (authError) throw authError;
         if (data.session) {
           toast.success("Your account is ready");
           onDone?.();
         } else {
-          setNotice(`We sent a confirmation link to ${email.trim()}. Open it to activate your account, then sign in.`);
+          setNotice(`We sent a confirmation link to ${email.trim()}. Open it on this device — it signs you in and takes you to finish your profile.`);
           setMode("signin");
         }
       } else {

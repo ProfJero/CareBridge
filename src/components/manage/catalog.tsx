@@ -5,7 +5,7 @@ import { BadgeCheck, ExternalLink, MessageSquare, Pencil, Plus, ShieldCheck, Sta
 import { toast } from "sonner";
 import { Badge, Btn, Card, Drawer, Empty, ExportButton, Field, FilterTabs, PageHeader, Pagination, SearchInput, Table, downloadCsv, inputCls, relTime, td, th } from "@/components/manage/kit";
 import { categoryIcon } from "@/components/shop/product-image";
-import { ghs, slugify } from "@/lib/format";
+import { ghs, slugify, waLink } from "@/lib/format";
 import { useSession } from "@/lib/session";
 import { errText, must, sb } from "@/lib/supabase";
 import type { Category, Order, Profile, Review, Store } from "@/lib/types";
@@ -213,6 +213,12 @@ export function SellersAdmin() {
                         <div>
                           <p className="flex items-center gap-1 font-bold">{s.name}{s.verified ? <BadgeCheck className="size-4 text-sea" aria-label="Verified" /> : null}</p>
                           <p className="text-xs text-faint">{s.town} · {s.phone || "no phone"}{s.owner_id ? "" : " · managed by SamBee"}</p>
+                          <p className="mt-0.5 flex flex-wrap gap-2 text-xs font-bold">
+                            {s.whatsapp ? <a href={waLink(s.whatsapp, `Hello ${s.name}, this is SamBee Online Trading Center.`)} target="_blank" rel="noreferrer" className="text-[#1f8f4e]">WhatsApp</a> : null}
+                            {s.facebook_url ? <a href={s.facebook_url} target="_blank" rel="noreferrer" className="text-[#1877f2]">Facebook</a> : null}
+                            {s.youtube_url ? <a href={s.youtube_url} target="_blank" rel="noreferrer" className="text-[#d90000]">YouTube</a> : null}
+                            {s.video_url ? <a href={s.video_url} target="_blank" rel="noreferrer" className="text-sea">Video</a> : null}
+                          </p>
                         </div>
                       </div>
                     </td>

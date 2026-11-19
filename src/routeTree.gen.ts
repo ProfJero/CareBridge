@@ -15,6 +15,7 @@ import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ManageRouteImport } from './routes/manage'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as VideosRouteImport } from './routes/videos'
+import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as AccountIndexRouteImport } from './routes/account.index'
 import { Route as AdminSplatRouteImport } from './routes/admin.$'
 import { Route as ShopIndexRouteImport } from './routes/shop.index'
@@ -53,6 +54,11 @@ const SellRoute = SellRouteImport.update({
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
   path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WelcomeRoute = WelcomeRouteImport.update({
+  id: '/welcome',
+  path: '/welcome',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccountIndexRoute = AccountIndexRouteImport.update({
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/manage': typeof ManageRoute
   '/sell': typeof SellRoute
   '/videos': typeof VideosRoute
+  '/welcome': typeof WelcomeRoute
   '/admin/$': typeof AdminSplatRoute
   '/shop/about': typeof ShopAboutRoute
   '/shop/cart': typeof ShopCartRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/manage': typeof ManageRoute
   '/sell': typeof SellRoute
   '/videos': typeof VideosRoute
+  '/welcome': typeof WelcomeRoute
   '/admin/$': typeof AdminSplatRoute
   '/shop/about': typeof ShopAboutRoute
   '/shop/cart': typeof ShopCartRoute
@@ -143,6 +151,7 @@ export interface FileRoutesById {
   '/manage': typeof ManageRoute
   '/sell': typeof SellRoute
   '/videos': typeof VideosRoute
+  '/welcome': typeof WelcomeRoute
   '/admin/$': typeof AdminSplatRoute
   '/shop/about': typeof ShopAboutRoute
   '/shop/cart': typeof ShopCartRoute
@@ -162,6 +171,7 @@ export interface FileRouteTypes {
     | '/manage'
     | '/sell'
     | '/videos'
+    | '/welcome'
     | '/admin/$'
     | '/shop/about'
     | '/shop/cart'
@@ -179,6 +189,7 @@ export interface FileRouteTypes {
     | '/manage'
     | '/sell'
     | '/videos'
+    | '/welcome'
     | '/admin/$'
     | '/shop/about'
     | '/shop/cart'
@@ -196,6 +207,7 @@ export interface FileRouteTypes {
     | '/manage'
     | '/sell'
     | '/videos'
+    | '/welcome'
     | '/admin/$'
     | '/shop/about'
     | '/shop/cart'
@@ -214,6 +226,7 @@ export interface RootRouteChildren {
   ManageRoute: typeof ManageRoute
   SellRoute: typeof SellRoute
   VideosRoute: typeof VideosRoute
+  WelcomeRoute: typeof WelcomeRoute
   ShopAboutRoute: typeof ShopAboutRoute
   ShopCartRoute: typeof ShopCartRoute
   ShopCheckoutRoute: typeof ShopCheckoutRoute
@@ -266,6 +279,13 @@ declare module '@tanstack/react-router' {
       path: '/videos'
       fullPath: '/videos'
       preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/welcome': {
+      id: '/welcome'
+      path: '/welcome'
+      fullPath: '/welcome'
+      preLoaderRoute: typeof WelcomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/account/': {
@@ -351,6 +371,7 @@ const rootRouteChildren: RootRouteChildren = {
   ManageRoute: ManageRoute,
   SellRoute: SellRoute,
   VideosRoute: VideosRoute,
+  WelcomeRoute: WelcomeRoute,
   ShopAboutRoute: ShopAboutRoute,
   ShopCartRoute: ShopCartRoute,
   ShopCheckoutRoute: ShopCheckoutRoute,

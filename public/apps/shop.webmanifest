@@ -1,0 +1,64 @@
+{
+  "id": "/apps/shop",
+  "name": "SamBee Online Trading Center",
+  "short_name": "SamBee Shop",
+  "description": "SamBee Son and Daughter Online Trading Center \u2014 Shop Smart... Shop Online. Free delivery.",
+  "start_url": "/shop?app=shop",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#0b1f8f",
+  "lang": "en-GH",
+  "categories": [
+    "shopping"
+  ],
+  "icons": [
+    {
+      "src": "/apps/shop-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apps/shop-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apps/shop-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/apps/shop-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "My cart",
+      "url": "/shop/cart",
+      "icons": [
+        {
+          "src": "/apps/shop-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "My orders",
+      "url": "/account",
+      "icons": [
+        {
+          "src": "/apps/shop-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

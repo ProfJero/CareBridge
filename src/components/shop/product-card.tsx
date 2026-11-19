@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { BadgeCheck, Plus, Star } from "lucide-react";
+import { BadgeCheck, Play, Plus, Star } from "lucide-react";
 import { toast } from "sonner";
 import { ProductImage } from "@/components/shop/product-image";
 import { useCart } from "@/lib/cart";
@@ -54,6 +54,11 @@ export function ProductCard({ product }: { product: Product }) {
         />
         {discount > 0 ? (
           <span className="absolute top-3 left-3 rounded-full bg-gold px-2.5 py-1 text-xs font-bold text-white">-{discount}%</span>
+        ) : null}
+        {product.video_url ? (
+          <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-navy/85 px-2 py-1 text-xs font-bold text-white">
+            <Play className="size-3 fill-current" aria-hidden /> Video
+          </span>
         ) : null}
         {soldOut ? (
           <span className="absolute inset-x-0 bottom-0 bg-navy/80 py-1.5 text-center text-sm font-semibold text-on-navy">Sold out</span>

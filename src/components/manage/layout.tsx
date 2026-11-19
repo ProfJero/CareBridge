@@ -25,6 +25,7 @@ import { LogoMark, SamBee } from "@/components/brand";
 import { useSession } from "@/lib/session";
 import { sb } from "@/lib/supabase";
 import { cn } from "@/lib/cn";
+import { InstallAppButton } from "@/components/install-app";
 
 export const ADMIN_SECTIONS = [
   "dashboard",
@@ -174,6 +175,7 @@ export function AdminLayout({
           ))}
         </nav>
         <div className="border-t border-line p-3">
+          <InstallAppButton className="mb-1 flex h-9 w-full rounded-lg px-2.5 text-sm text-sea hover:bg-mint" />
           <Link to="/" className="flex h-9 items-center gap-2.5 rounded-lg px-2.5 text-sm font-semibold text-muted hover:bg-paper">
             <ExternalLink className="size-[18px] text-faint" aria-hidden /> View website
           </Link>

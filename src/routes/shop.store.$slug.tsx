@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { BadgeCheck, MapPin, MessageCircle, Phone } from "lucide-react";
+import { BadgeCheck, Facebook, MapPin, MessageCircle, Phone, Youtube } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { ProductCard, ProductGridSkeleton } from "@/components/shop/product-card";
 import { EmptyState, Spinner } from "@/components/ui";
@@ -61,11 +61,23 @@ function StorePage() {
             </p>
             {s.description ? <p className="mt-3 max-w-2xl text-base text-navy-muted">{s.description}</p> : null}
           </div>
-          {contact ? (
-            <div className="flex gap-2">
-              <a href={waLink(contact, `Hello ${s.name}, I found your shop on the SamBee Online Trading Center.`)} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#1f8f4e] px-4 font-semibold text-white">
-                <MessageCircle className="size-4" aria-hidden /> WhatsApp
-              </a>
+          {contact || s.facebook_url || s.youtube_url ? (
+            <div className="flex flex-wrap gap-2">
+              {contact ? (
+                <a href={waLink(contact, `Hello ${s.name}, I found your shop on the SamBee Online Trading Center.`)} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#1f8f4e] px-4 font-semibold text-white">
+                  <MessageCircle className="size-4" aria-hidden /> WhatsApp
+                </a>
+              ) : null}
+              {s.facebook_url ? (
+                <a href={s.facebook_url} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#1877f2] px-4 font-semibold text-white">
+                  <Facebook className="size-4" aria-hidden /> Facebook
+                </a>
+              ) : null}
+              {s.youtube_url ? (
+                <a href={s.youtube_url} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#d90000] px-4 font-semibold text-white">
+                  <Youtube className="size-4" aria-hidden /> YouTube
+                </a>
+              ) : null}
               {s.phone ? (
                 <a href={`tel:${s.phone}`} className="inline-flex h-11 items-center gap-2 rounded-xl bg-white/10 px-4 font-semibold">
                   <Phone className="size-4" aria-hidden /> Call
@@ -76,6 +88,11 @@ function StorePage() {
         </div>
       </section>
       <div className="mx-auto max-w-7xl px-5 py-8">
+        {s.video_url ? (
+          <div className="mb-8 max-w-2xl overflow-hidden rounded-2xl bg-black ring-1 ring-line">
+            <video src={s.video_url} controls playsInline muted preload="metadata" className="aspect-video w-full" />
+          </div>
+        ) : null}
         <h2 className="text-2xl font-semibold text-ink">Products ({products.data?.count ?? 0})</h2>
         <div className="mt-5">
           {products.isLoading ? (
