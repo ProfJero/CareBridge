@@ -74,7 +74,7 @@ export function ProductCard({ product }: { product: Product }) {
         <Link
           to="/shop/product/$id"
           params={{ id: product.id }}
-          className="mt-1 line-clamp-2 text-base leading-snug font-semibold text-ink hover:text-sea"
+          className="mt-1 line-clamp-2 min-h-6 text-base leading-snug font-semibold text-ink hover:text-sea"
         >
           {product.title}
         </Link>

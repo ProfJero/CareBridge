@@ -351,7 +351,7 @@ export function HomePage() {
                 <Mail className="mt-0.5 size-5 shrink-0 text-sea" aria-hidden />
                 <span className="min-w-0">
                   <strong className="block font-semibold text-ink">Email</strong>
-                  <a href={`mailto:${SITE.inbox}`} className="break-all text-sea">
+                  <a href={`mailto:${SITE.inbox}`} className="inline-flex min-h-7 items-center break-all text-sea">
                     {SITE.inbox}
                   </a>
                 </span>

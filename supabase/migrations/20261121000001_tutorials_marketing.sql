@@ -247,3 +247,7 @@ drop policy if exists "categories: admin write" on public.categories;
 create policy "categories: admin insert" on public.categories for insert to authenticated with check ((select private.is_admin()));
 create policy "categories: admin update" on public.categories for update to authenticated using ((select private.is_admin())) with check ((select private.is_admin()));
 create policy "categories: admin delete" on public.categories for delete to authenticated using ((select private.is_admin()));
+
+-- Admins can see (and therefore moderate/remove) every uploaded media file.
+create policy "media: admins read all files" on storage.objects for select to authenticated
+  using (bucket_id = 'media' and (select private.is_admin()));

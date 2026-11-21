@@ -191,7 +191,7 @@ export function AdminLayout({
 
       <div className="min-w-0 lg:pl-64">
         <header className="sticky top-0 z-20 flex h-16 items-center gap-2 border-b border-line bg-white/95 px-3 backdrop-blur sm:px-5">
-          <button type="button" onClick={() => setOpen(true)} className="grid size-9 place-items-center rounded-lg text-ink hover:bg-paper lg:hidden" aria-label="Open menu">
+          <button type="button" onClick={() => setOpen(true)} className="grid size-9 shrink-0 place-items-center rounded-lg text-ink hover:bg-paper lg:hidden" aria-label="Open menu">
             <Menu className="size-5" />
           </button>
           <p className="hidden text-sm text-faint md:block">

@@ -117,10 +117,12 @@ export function BannerCarousel() {
             key={slide.src}
             type="button"
             onClick={() => go(i)}
-            className={cn("h-2.5 rounded-full transition-all", i === index ? "w-8 bg-sea" : "w-2.5 bg-line")}
+            className="grid h-7 min-w-7 place-items-center px-1"
             aria-label={`Show banner ${i + 1}: ${slide.cta}`}
             aria-current={i === index}
-          />
+          >
+            <span className={cn("block h-2.5 rounded-full transition-all", i === index ? "w-8 bg-sea" : "w-2.5 bg-line")} />
+          </button>
         ))}
       </div>
     </section>

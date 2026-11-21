@@ -272,7 +272,7 @@ function ProductPage() {
                 <span className="grid size-14 shrink-0 place-items-center overflow-hidden rounded-full bg-mint text-xl font-bold text-sea">
                   {product.store.logo_url ? <img src={product.store.logo_url} alt="" className="size-full object-cover" /> : product.store.name[0]}
                 </span>
-                <div className="min-w-0 flex-1">
+                <div className="min-w-[10rem] flex-1">
                   <p className="text-sm text-faint">Sold by</p>
                   <Link
                     to="/shop/store/$slug"
