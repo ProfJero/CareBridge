@@ -23,8 +23,9 @@ import type { Store as StoreRow } from "@/lib/types";
 import { useSession } from "@/lib/session";
 
 export const Route = createFileRoute("/sell")({
-  validateSearch: (search: Record<string, unknown>): { tab?: SellerSection } => ({
+  validateSearch: (search: Record<string, unknown>): { tab?: SellerSection; add?: boolean } => ({
     tab: SELLER_SECTIONS.includes(search.tab as SellerSection) ? (search.tab as SellerSection) : undefined,
+    add: search.add === true || search.add === "1" || search.add === 1 ? true : undefined,
   }),
   component: SellPage,
   head: () => ({
@@ -44,7 +45,7 @@ const PERKS = [
 
 function SellPage() {
   const { ready, userId, store, refresh } = useSession();
-  const { tab = "overview" } = Route.useSearch();
+  const { tab = "overview", add } = Route.useSearch();
   const navigate = useNavigate({ from: "/sell" });
   const [justOpened, setJustOpened] = useState(false);
 
@@ -54,7 +55,10 @@ function SellPage() {
         store={store}
         section={tab}
         justOpened={justOpened}
+        autoNew={Boolean(add)}
         onSection={(next) => void navigate({ search: { tab: next === "overview" ? undefined : next } })}
+        onAddProduct={() => void navigate({ search: { tab: "products", add: true } })}
+        onAutoNew={() => void navigate({ search: { tab: "products" }, replace: true })}
         onSaved={() => void refresh()}
       />
     );
@@ -114,19 +118,25 @@ function SellerApp({
   store,
   section,
   justOpened,
+  autoNew,
   onSection,
+  onAddProduct,
+  onAutoNew,
   onSaved,
 }: {
   store: StoreRow;
   section: SellerSection;
   justOpened: boolean;
+  autoNew: boolean;
   onSection: (s: SellerSection) => void;
+  onAddProduct: () => void;
+  onAutoNew: () => void;
   onSaved: () => void;
 }) {
   const { items } = useSellerData(store.id);
   const pending = (items.data ?? []).filter((i) => i.status === "pending").length;
   return (
-    <SellerLayout store={store} section={section} onSection={onSection} pendingOrders={pending}>
+    <SellerLayout store={store} section={section} onSection={onSection} pendingOrders={pending} onAddProduct={onAddProduct}>
       {justOpened && section === "overview" ? (
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-leaf/30 bg-leaf-bg p-4">
           <p className="text-sm text-ink">
@@ -147,7 +157,7 @@ function SellerApp({
       ) : section === "orders" ? (
         <SellerOrders store={store} />
       ) : section === "products" ? (
-        <ProductsAdmin storeId={store.id} />
+        <ProductsAdmin storeId={store.id} autoNew={autoNew} onAutoNew={onAutoNew} />
       ) : section === "customers" ? (
         <SellerCustomers store={store} />
       ) : section === "reviews" ? (

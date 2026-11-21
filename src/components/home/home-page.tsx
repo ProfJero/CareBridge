@@ -146,6 +146,8 @@ export function HomePage() {
             <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-line">
               <img
                 src="/brand/hero-care.webp"
+                srcSet="/brand/hero-care-540.webp 540w, /brand/hero-care.webp 900w"
+                sizes="(min-width: 1024px) 560px, 100vw"
                 alt="A SamBee caregiver smiling with an elderly client at home"
                 width={900}
                 height={900}

@@ -61,12 +61,14 @@ export function SellerLayout({
   section,
   onSection,
   pendingOrders,
+  onAddProduct,
   children,
 }: {
   store: Store;
   section: SellerSection;
   onSection: (s: SellerSection) => void;
   pendingOrders: number;
+  onAddProduct: () => void;
   children: ReactNode;
 }) {
   const { signOut, profile, email } = useSession();
@@ -159,7 +161,7 @@ export function SellerLayout({
           >
             <ExternalLink className="size-4" aria-hidden /> <span className="hidden sm:inline">View my shop</span><span className="sm:hidden">My shop</span>
           </Link>
-          <button type="button" onClick={() => onSection("products")} className="hidden h-9 items-center rounded-lg bg-sea px-3 text-sm font-bold text-white sm:inline-flex">
+          <button type="button" onClick={onAddProduct} className="hidden h-9 items-center rounded-lg bg-sea px-3 text-sm font-bold text-white sm:inline-flex">
             + Add product
           </button>
           <span className="grid size-9 shrink-0 place-items-center rounded-full bg-navy text-xs font-bold text-white" title={email ?? ""}>{initials}</span>

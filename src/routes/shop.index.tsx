@@ -172,6 +172,8 @@ function ShopPage() {
           <Link to="/shop/about" className="block overflow-hidden rounded-2xl bg-white ring-1 ring-line sm:rounded-3xl" aria-label={`About ${SHOP.name}`}>
             <img
               src="/brand/banner-shop.webp"
+              srcSet="/brand/banner-shop-720.webp 720w, /brand/banner-shop.webp 1280w"
+              sizes="(min-width: 1024px) 680px, 100vw"
               alt={`${SHOP.name} — online shopping, mobile accessories, electronics, fashion, home essentials and gifts. Quality products at affordable prices.`}
               width={1280}
               height={853}
@@ -188,7 +190,7 @@ function ShopPage() {
               </h1>
               <p className="mt-1 font-semibold text-navy-muted italic">{SHOP.slogan}</p>
             </div>
-            <Link to="/shop/about" className="text-sm font-bold text-white underline-offset-4 hover:underline">
+            <Link to="/shop/about" className="inline-flex min-h-7 items-center text-sm font-bold text-white underline-offset-4 hover:underline">
               About us · Vision · Mission
             </Link>
           </div>

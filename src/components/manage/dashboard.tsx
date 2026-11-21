@@ -197,7 +197,7 @@ export function Dashboard({ onOpen }: { onOpen: (section: AdminSection, q?: stri
       </div>
 
       <div className="mt-4 grid gap-4 xl:grid-cols-[1.6fr_1fr]">
-        <Card title="Recent orders" action={<button type="button" onClick={() => onOpen("orders")} className="text-xs font-bold text-sea">View all</button>} flush>
+        <Card title="Recent orders" action={<button type="button" onClick={() => onOpen("orders")} className="inline-flex min-h-7 items-center px-1 text-xs font-bold text-sea">View all</button>} flush>
           <Table>
             <thead>
               <tr>

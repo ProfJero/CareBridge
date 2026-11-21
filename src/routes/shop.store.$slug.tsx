@@ -70,12 +70,12 @@ function StorePage() {
           {contact || s.facebook_url || s.youtube_url ? (
             <div className="flex flex-wrap gap-2">
               {contact ? (
-                <a href={waLink(contact, `Hello ${s.name}, I found your shop on the SamBee Online Trading Center.`)} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#1f8f4e] px-4 font-semibold text-white">
+                <a href={waLink(contact, `Hello ${s.name}, I found your shop on the SamBee Online Trading Center.`)} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#137a3e] px-4 font-semibold text-white">
                   <MessageCircle className="size-4" aria-hidden /> WhatsApp
                 </a>
               ) : null}
               {s.facebook_url ? (
-                <a href={s.facebook_url} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#1877f2] px-4 font-semibold text-white">
+                <a href={s.facebook_url} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#1565d8] px-4 font-semibold text-white">
                   <Facebook className="size-4" aria-hidden /> Facebook
                 </a>
               ) : null}
@@ -111,7 +111,7 @@ function StorePage() {
             store.data.owner_id && store.data.owner_id === userId ? (
               <EmptyState
                 title="Your shop is live — add your first product"
-                action={<Link to="/sell" search={{ tab: "products" }} className="inline-flex h-11 items-center rounded-xl bg-sea px-4 font-bold text-white">Add a product</Link>}
+                action={<Link to="/sell" search={{ tab: "products", add: true }} className="inline-flex h-11 items-center rounded-xl bg-sea px-4 font-bold text-white">Add a product</Link>}
               >
                 Customers can already find your shop in the Shops directory. Products you add appear here and across the Online Trading Center straight away.
               </EmptyState>

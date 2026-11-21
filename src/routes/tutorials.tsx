@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { BookOpen, GraduationCap, Languages, PlayCircle } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { VideoCard, VideoEmbed } from "@/components/video-player";
-import { Modal, Spinner } from "@/components/ui";
+import { Modal } from "@/components/ui";
 import { useTutorials } from "@/lib/queries";
 import { useSession } from "@/lib/session";
 import type { Video } from "@/lib/types";
@@ -174,12 +174,14 @@ function TutorialsPage() {
           ))}
         </div>
 
-        <section className="mt-6" aria-labelledby="tutorial-videos">
+        <section className="mt-6 min-h-[22rem]" aria-labelledby="tutorial-videos">
           <h2 id="tutorial-videos" className="flex items-center gap-2 text-2xl font-bold text-ink">
             <PlayCircle className="size-6 text-sea" aria-hidden /> Video tutorials · {lang === "en" ? "English" : "Twi"}
           </h2>
           {tutorials.isLoading ? (
-            <div className="grid min-h-[20vh] place-items-center text-sea"><Spinner className="size-8" /></div>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true">
+              {Array.from({ length: 3 }, (_, i) => <div key={i} className="aspect-[4/3] animate-pulse rounded-2xl bg-white" />)}
+            </div>
           ) : videos.length ? (
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {videos.map((v) => <VideoCard key={v.id} video={v} onPlay={setPlaying} />)}

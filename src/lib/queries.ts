@@ -135,5 +135,11 @@ export function trackView(kind: "product" | "store", id: string) {
   } catch {
     /* storage unavailable: still count */
   }
-  void sb().rpc("track_view", { p_kind: kind, p_id: id });
+  // Supabase query builders are lazy: they only send the request once awaited/then'd.
+  sb()
+    .rpc("track_view", { p_kind: kind, p_id: id })
+    .then(
+      () => undefined,
+      () => undefined,
+    );
 }

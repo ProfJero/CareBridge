@@ -17,7 +17,7 @@ const PAGE = 25;
 type Tab = "all" | "active" | "draft" | "archived" | "low";
 
 /** Used by the admin dashboard (all products) and by each seller (scoped to their shop). */
-export function ProductsAdmin({ storeId }: { storeId?: string } = {}) {
+export function ProductsAdmin({ storeId, autoNew = false, onAutoNew }: { storeId?: string; autoNew?: boolean; onAutoNew?: () => void } = {}) {
   const isSeller = Boolean(storeId);
   const queryClient = useQueryClient();
   const { data: categories = [] } = useCategories();
@@ -28,6 +28,12 @@ export function ProductsAdmin({ storeId }: { storeId?: string } = {}) {
   const [page, setPage] = useState(0);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [editing, setEditing] = useState<Product | "new" | null>(null);
+  useEffect(() => {
+    if (autoNew) {
+      setEditing("new");
+      onAutoNew?.();
+    }
+  }, [autoNew, onAutoNew]);
 
   const products = useQuery({
     queryKey: ["admin-products", storeId ?? "all"],
@@ -172,7 +178,15 @@ export function ProductsAdmin({ storeId }: { storeId?: string } = {}) {
         {products.isLoading ? (
           <div className="h-48 animate-pulse bg-paper" />
         ) : filtered.length === 0 ? (
-          <Empty icon={<Package className="size-5" />} title="No products found" />
+          <Empty icon={<Package className="size-5" />} title={all.length ? "No products match" : "No products yet"}>
+            {all.length ? (
+              "Try another tab or search."
+            ) : (
+              <Btn tone="primary" className="mt-3" onClick={() => setEditing("new")}>
+                <Plus className="size-4" aria-hidden /> Add your first product
+              </Btn>
+            )}
+          </Empty>
         ) : (
           <>
             <Table>

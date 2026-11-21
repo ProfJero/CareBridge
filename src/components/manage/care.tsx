@@ -113,7 +113,7 @@ export function CareRequestsAdmin() {
           <div className="grid gap-4 text-sm">
             <div className="flex flex-wrap gap-2">
               <a href={`tel:${open.phone}`} className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-line px-3 font-bold"><Phone className="size-4" aria-hidden /> {open.phone}</a>
-              <a href={waLink(open.phone, `Hello ${open.name}, this is SamBee Son and Daughter Home Care about your care request.`)} target="_blank" rel="noreferrer" className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-[#1f8f4e] px-3 font-bold text-white"><MessageCircle className="size-4" aria-hidden /> WhatsApp</a>
+              <a href={waLink(open.phone, `Hello ${open.name}, this is SamBee Son and Daughter Home Care about your care request.`)} target="_blank" rel="noreferrer" className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-[#137a3e] px-3 font-bold text-white"><MessageCircle className="size-4" aria-hidden /> WhatsApp</a>
               {open.email ? <a href={`mailto:${open.email}`} className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-line px-3 font-bold"><Mail className="size-4" aria-hidden /> Email</a> : null}
             </div>
             <dl className="grid grid-cols-2 gap-3">

@@ -213,9 +213,9 @@ export function SellersAdmin() {
                         <div>
                           <p className="flex items-center gap-1 font-bold">{s.name}{s.verified ? <BadgeCheck className="size-4 text-sea" aria-label="Verified" /> : null}</p>
                           <p className="text-xs text-faint">{s.town} · {s.phone || "no phone"}{s.owner_id ? "" : " · managed by SamBee"}</p>
-                          <p className="mt-0.5 flex flex-wrap gap-2 text-xs font-bold">
-                            {s.whatsapp ? <a href={waLink(s.whatsapp, `Hello ${s.name}, this is SamBee Online Trading Center.`)} target="_blank" rel="noreferrer" className="text-[#1f8f4e]">WhatsApp</a> : null}
-                            {s.facebook_url ? <a href={s.facebook_url} target="_blank" rel="noreferrer" className="text-[#1877f2]">Facebook</a> : null}
+                          <p className="mt-0.5 flex flex-wrap gap-x-3 text-xs font-bold [&_a]:inline-flex [&_a]:min-h-7 [&_a]:items-center">
+                            {s.whatsapp ? <a href={waLink(s.whatsapp, `Hello ${s.name}, this is SamBee Online Trading Center.`)} target="_blank" rel="noreferrer" className="text-[#137a3e]">WhatsApp</a> : null}
+                            {s.facebook_url ? <a href={s.facebook_url} target="_blank" rel="noreferrer" className="text-[#1565d8]">Facebook</a> : null}
                             {s.youtube_url ? <a href={s.youtube_url} target="_blank" rel="noreferrer" className="text-[#d90000]">YouTube</a> : null}
                             {s.video_url ? <a href={s.video_url} target="_blank" rel="noreferrer" className="text-sea">Video</a> : null}
                           </p>

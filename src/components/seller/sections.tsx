@@ -211,7 +211,7 @@ export function SellerOverview({ store, onSection }: { store: Store; onSection: 
             </ResponsiveContainer>
           </div>
         </Card>
-        <Card title="Top products" flush action={<button type="button" onClick={() => onSection("products")} className="text-xs font-bold text-sea">All products</button>}>
+        <Card title="Top products" flush action={<button type="button" onClick={() => onSection("products")} className="inline-flex min-h-7 items-center px-1 text-xs font-bold text-sea">All products</button>}>
           <ul>
             {[...list].sort((a, b) => b.sold_count - a.sold_count || b.view_count - a.view_count).slice(0, 6).map((p) => (
               <li key={p.id} className="flex items-center gap-3 border-b border-line px-4 py-2.5 text-sm last:border-0">
@@ -335,7 +335,7 @@ export function SellerOrders({ store }: { store: Store }) {
                     <p className="text-faint">{g.order.delivery_method === "pickup" ? "Pickup" : `${g.order.shipping_address}, ${g.order.shipping_town}`}</p>
                     <div className="mt-1 flex justify-end gap-1.5">
                       <a href={`tel:${g.order.shipping_phone}`} className="inline-flex h-8 items-center gap-1 rounded-lg border border-line px-2 text-xs font-bold"><Phone className="size-3.5" aria-hidden /> Call</a>
-                      <a href={waLink(g.order.shipping_phone, `Hello ${g.order.shipping_name}, this is ${store.name} about your SamBee order ${g.order.order_number}.`)} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#1f8f4e] px-2 text-xs font-bold text-white">
+                      <a href={waLink(g.order.shipping_phone, `Hello ${g.order.shipping_name}, this is ${store.name} about your SamBee order ${g.order.order_number}.`)} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#137a3e] px-2 text-xs font-bold text-white">
                         <MessageCircle className="size-3.5" aria-hidden /> WhatsApp
                       </a>
                     </div>
@@ -420,7 +420,7 @@ export function SellerCustomers({ store }: { store: Store }) {
                   <td className={`${td} font-bold tabular-nums`}>{ghs(c.spent)}</td>
                   <td className={`${td} text-faint`}>{relTime(c.last)}</td>
                   <td className={`${td} text-right`}>
-                    <a href={waLink(c.phone, `Hello ${c.name}, thank you for shopping at ${store.name} on SamBee!`)} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#1f8f4e] px-2.5 text-xs font-bold text-white">
+                    <a href={waLink(c.phone, `Hello ${c.name}, thank you for shopping at ${store.name} on SamBee!`)} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#137a3e] px-2.5 text-xs font-bold text-white">
                       <MessageCircle className="size-3.5" aria-hidden /> WhatsApp
                     </a>
                   </td>
@@ -527,10 +527,10 @@ export function SellerMarketing({ store }: { store: Store }) {
             <Btn tone="primary" onClick={() => void copy(url)}><Copy className="size-4" aria-hidden /> Copy</Btn>
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
-            <a href={`https://wa.me/?text=${encodeURIComponent(message)}`} target="_blank" rel="noreferrer" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-[#1f8f4e] px-3 text-sm font-bold text-white">
+            <a href={`https://wa.me/?text=${encodeURIComponent(message)}`} target="_blank" rel="noreferrer" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-[#137a3e] px-3 text-sm font-bold text-white">
               <MessageCircle className="size-4" aria-hidden /> Share on WhatsApp
             </a>
-            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`} target="_blank" rel="noreferrer" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-[#1877f2] px-3 text-sm font-bold text-white">
+            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`} target="_blank" rel="noreferrer" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-[#1565d8] px-3 text-sm font-bold text-white">
               <Facebook className="size-4" aria-hidden /> Share on Facebook
             </a>
             <Btn onClick={() => void nativeShare(store.name, message, url)}><Share2 className="size-4" aria-hidden /> More…</Btn>
@@ -570,10 +570,10 @@ export function SellerMarketing({ store }: { store: Store }) {
                     <strong className="block text-sm">{p.title}</strong>
                     <span className="text-xs text-faint">{ghs(p.price)} · <Eye className="inline size-3" aria-hidden /> {p.view_count} views</span>
                   </span>
-                  <a href={`https://wa.me/?text=${encodeURIComponent(text)}`} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#1f8f4e] px-2.5 text-xs font-bold text-white">
+                  <a href={`https://wa.me/?text=${encodeURIComponent(text)}`} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#137a3e] px-2.5 text-xs font-bold text-white">
                     <MessageCircle className="size-3.5" aria-hidden /> WhatsApp
                   </a>
-                  <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#1877f2] px-2.5 text-xs font-bold text-white">
+                  <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#1565d8] px-2.5 text-xs font-bold text-white">
                     <Facebook className="size-3.5" aria-hidden /> Facebook
                   </a>
                   <Btn size="sm" onClick={() => void copy(link)}><Copy className="size-3.5" aria-hidden /> Link</Btn>

@@ -102,7 +102,7 @@ function CheckoutPage() {
       const orderId = data as string;
       // Save contact details for next time (best effort).
       if (userId && profile && (!profile.full_name || !profile.phone)) {
-        void sb().from("profiles").update({ full_name: profile.full_name || name, phone: profile.phone || phone }).eq("id", userId);
+        await sb().from("profiles").update({ full_name: profile.full_name || name, phone: profile.phone || phone }).eq("id", userId);
       }
       const { data: order } = await sb().from("orders").select("order_number,total").eq("id", orderId).maybeSingle();
       // Notify the team by email (best effort — the order is already saved).

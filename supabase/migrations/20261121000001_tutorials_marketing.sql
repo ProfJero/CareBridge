@@ -241,3 +241,9 @@ grant execute on function public.place_order(jsonb, jsonb, text, jsonb, text) to
 
 -- Remove the demo catalogue seeded in 20261117000002 so only real sellers' data remains.
 delete from public.stores where slug in ('sambee-care-essentials', 'sambea-care-essentials') and owner_id is null;
+
+-- One SELECT policy per role on categories (advisor: multiple permissive policies).
+drop policy if exists "categories: admin write" on public.categories;
+create policy "categories: admin insert" on public.categories for insert to authenticated with check ((select private.is_admin()));
+create policy "categories: admin update" on public.categories for update to authenticated using ((select private.is_admin())) with check ((select private.is_admin()));
+create policy "categories: admin delete" on public.categories for delete to authenticated using ((select private.is_admin()));

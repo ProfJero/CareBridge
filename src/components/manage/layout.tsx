@@ -205,7 +205,7 @@ export function AdminLayout({
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search orders, customers…"
                 aria-label="Search orders and customers"
-                className="w-full min-w-0 bg-transparent text-sm text-ink outline-none placeholder:text-faint"
+                className="h-full w-full min-w-0 bg-transparent text-sm text-ink outline-none placeholder:text-faint"
               />
             </label>
           </form>

@@ -10,7 +10,7 @@ export function Stars({ value, count, size = "sm" }: { value: number; count?: nu
   const rounded = Math.round(Number(value));
   const cls = size === "sm" ? "size-4" : "size-5";
   return (
-    <span className="inline-flex items-center gap-1" aria-label={`${Number(value).toFixed(1)} out of 5 stars`}>
+    <span className="inline-flex items-center gap-1" role="img" aria-label={`${Number(value).toFixed(1)} out of 5 stars`}>
       <span className="inline-flex">
         {[1, 2, 3, 4, 5].map((n) => (
           <Star key={n} className={`${cls} ${n <= rounded ? "fill-gold text-gold" : "text-line"}`} aria-hidden />

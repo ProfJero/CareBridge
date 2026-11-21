@@ -76,7 +76,7 @@ export function SettingsAdmin({ onCustomers }: { onCustomers: () => void }) {
             </p>
           ) : null}
         </Card>
-        <Card title="Team access" action={<button type="button" onClick={onCustomers} className="text-xs font-bold text-sea">Manage in Customers</button>}>
+        <Card title="Team access" action={<button type="button" onClick={onCustomers} className="inline-flex min-h-7 items-center px-1 text-xs font-bold text-sea">Manage in Customers</button>}>
           <p className="mb-3 text-sm text-faint">
             These accounts can open this dashboard. To add someone, ask them to create an account on the site, then open them in Customers and choose “Make admin”.
           </p>

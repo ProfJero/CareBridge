@@ -42,10 +42,10 @@ export function SiteShell({ children }: { children: ReactNode }) {
             {shopMode ? SHOP.slogan : SITE.tagline}
           </span>
           <span className="flex shrink-0 items-center gap-4">
-            <a href={`mailto:${SITE.inbox}`} className="hidden items-center gap-1.5 hover:underline lg:inline-flex">
+            <a href={`mailto:${SITE.inbox}`} className="hidden min-h-7 items-center gap-1.5 hover:underline lg:inline-flex">
               <Mail className="size-3.5" aria-hidden /> {SITE.inbox}
             </a>
-            <InstallAppButton tone="dark" compact className="text-xs sm:text-sm" />
+            <InstallAppButton tone="dark" compact className="min-h-7 text-xs sm:text-sm" />
           </span>
         </div>
       </div>
@@ -77,7 +77,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 <LayoutDashboard className="size-4" aria-hidden /> Dashboard
               </Link>
             ) : null}
-            <Link to="/account" className="grid size-11 place-items-center rounded-full text-navy hover:bg-sky" aria-label={userId ? "My account" : "Sign in"}>
+            <Link to="/account" className="hidden size-11 place-items-center rounded-full text-navy hover:bg-sky min-[360px]:grid" aria-label={userId ? "My account" : "Sign in"}>
               <User className="size-5" />
             </Link>
             <Link to="/shop/cart" className="relative grid size-11 place-items-center rounded-full text-navy hover:bg-sky" aria-label={`Cart, ${count} items`}>
@@ -181,7 +181,7 @@ export function SiteFooter() {
         </div>
         <div>
           <p className="text-sm font-bold tracking-widest text-navy-muted uppercase">Explore</p>
-          <ul className="mt-3 grid gap-2 text-base">
+          <ul className="mt-3 grid gap-1 text-base [&_a]:inline-flex [&_a]:min-h-7 [&_a]:items-center">
             <li><Link to="/" hash="services" className="hover:underline">Home care services</Link></li>
             <li><Link to="/" hash="request-care" className="hover:underline">Request a care visit</Link></li>
             <li><Link to="/shop" className="hover:underline">Shop online</Link></li>
@@ -199,7 +199,7 @@ export function SiteFooter() {
         </div>
         <div>
           <p className="text-sm font-bold tracking-widest text-navy-muted uppercase">Contact</p>
-          <ul className="mt-3 grid gap-2 text-base text-navy-muted">
+          <ul className="mt-3 grid gap-2 text-base text-navy-muted [&_a]:inline-flex [&_a]:min-h-7 [&_a]:items-center">
             <li className="flex items-start gap-2">
               <MapPin className="mt-1 size-4 shrink-0" aria-hidden />
               {SHOP.location}
@@ -221,7 +221,7 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-sm text-navy-muted sm:flex-row sm:justify-between">
           <span>© {new Date().getFullYear()} SamBee Son and Daughter. All rights reserved.</span>
           <span className="flex gap-4">
-            <Link to="/manage" className="hover:text-white">Staff login</Link>
+            <Link to="/manage" className="inline-flex min-h-7 items-center hover:text-white">Staff login</Link>
             <span>Assin Foso · Ghana</span>
           </span>
         </div>

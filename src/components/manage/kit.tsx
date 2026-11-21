@@ -41,7 +41,7 @@ export function Kpi({ label, value, hint, icon, tone = "blue" }: { label: string
         <p className="text-[13px] font-semibold text-faint">{label}</p>
         {icon ? <span className={cn("grid size-8 place-items-center rounded-lg", tones[tone])}>{icon}</span> : null}
       </div>
-      <p className="mt-2 text-2xl font-extrabold tracking-tight text-ink tabular-nums">{value}</p>
+      <p className="mt-2 text-xl font-extrabold tracking-tight text-ink tabular-nums sm:text-2xl">{value}</p>
       {hint ? <p className="mt-1 text-xs text-faint">{hint}</p> : null}
     </div>
   );
@@ -83,7 +83,7 @@ export function SearchInput({ value, onChange, placeholder = "Search" }: { value
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         aria-label={placeholder}
-        className="w-full min-w-0 bg-transparent text-sm text-ink outline-none placeholder:text-faint sm:w-56"
+        className="h-full w-full min-w-0 bg-transparent text-sm text-ink outline-none placeholder:text-faint sm:w-56"
       />
     </label>
   );
@@ -169,7 +169,7 @@ export function FilterTabs<T extends string>({ tabs, value, onChange }: { tabs: 
 
 export function Table({ children }: { children: ReactNode }) {
   return (
-    <div className="relative overflow-x-auto">
+    <div className="relative overflow-x-auto" tabIndex={0} role="region" aria-label="Scrollable table">
       <table className="w-full min-w-[720px] border-collapse text-left text-sm">{children}</table>
     </div>
   );
@@ -203,7 +203,7 @@ export function Empty({ icon, title, children }: { icon?: ReactNode; title: stri
     <div className="grid place-items-center px-6 py-14 text-center">
       {icon ? <span className="grid size-12 place-items-center rounded-full bg-mint text-sea">{icon}</span> : null}
       <p className="mt-3 font-bold text-ink">{title}</p>
-      {children ? <p className="mt-1 max-w-sm text-sm text-faint">{children}</p> : null}
+      {children ? <div className="mt-1 max-w-sm text-sm text-faint">{children}</div> : null}
     </div>
   );
 }

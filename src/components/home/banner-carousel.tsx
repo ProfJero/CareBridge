@@ -36,7 +36,7 @@ export function BannerCarousel() {
     <>
       {/* Desktop and tablet: both banners in full, side by side. */}
       <section className="mx-auto hidden max-w-7xl grid-cols-2 gap-5 px-5 pt-5 md:grid" aria-label="Featured">
-        {SLIDES.map((slide, i) => (
+        {SLIDES.map((slide) => (
           <Link
             key={slide.src}
             to={slide.to}
@@ -48,8 +48,10 @@ export function BannerCarousel() {
               alt={slide.alt}
               width={1280}
               height={853}
+              srcSet={`${slide.src.replace(".webp", "-720.webp")} 720w, ${slide.src} 1280w`}
+              sizes="(min-width: 1280px) 620px, 50vw"
               className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              fetchPriority={i === 0 ? "high" : "auto"}
+              loading="lazy"
             />
             <span className="flex items-center justify-between border-t border-line px-5 py-3 text-base font-bold text-navy">
               {slide.cta}
@@ -83,6 +85,8 @@ export function BannerCarousel() {
                 alt={slide.alt}
                 width={1280}
                 height={853}
+                srcSet={`${slide.src.replace(".webp", "-720.webp")} 720w, ${slide.src} 1280w`}
+                sizes="100vw"
                 className="aspect-[3/2] w-full object-cover"
                 fetchPriority={i === 0 ? "high" : "low"}
                 loading={i === 0 ? "eager" : "lazy"}

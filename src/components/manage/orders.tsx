@@ -300,7 +300,7 @@ function OrderDetail({ order, onItem, onPayment, busy }: { order: Order; onItem:
           </p>
           <div className="mt-2 flex gap-2">
             <a href={`tel:${order.shipping_phone}`} className="inline-flex h-8 items-center gap-1 rounded-lg border border-line px-2.5 text-xs font-bold"><Phone className="size-3.5" aria-hidden /> Call</a>
-            <a href={waLink(order.shipping_phone, `Hello ${order.shipping_name}, this is SamBee Online Trading Center about your order ${order.order_number}.`)} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#1f8f4e] px-2.5 text-xs font-bold text-white">
+            <a href={waLink(order.shipping_phone, `Hello ${order.shipping_name}, this is SamBee Online Trading Center about your order ${order.order_number}.`)} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#137a3e] px-2.5 text-xs font-bold text-white">
               <MessageCircle className="size-3.5" aria-hidden /> WhatsApp
             </a>
           </div>

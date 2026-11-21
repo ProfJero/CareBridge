@@ -63,7 +63,9 @@ export function VideoCard({ video, onPlay }: { video: Video; onPlay: (video: Vid
         ) : null}
       </span>
       <span className="flex flex-1 flex-col p-4">
-        <span className="text-xs font-bold tracking-widest text-sea uppercase">{video.category}</span>
+        <span className="text-xs font-bold tracking-widest text-sea uppercase">
+          {video.is_tutorial ? `${video.topic || "Tutorial"} · ${video.language === "tw" ? "Twi" : "English"}` : video.category}
+        </span>
         <span className="mt-1 line-clamp-2 text-lg leading-snug font-semibold text-ink">{video.title}</span>
         {video.description ? <span className="mt-1 line-clamp-2 text-base text-muted">{video.description}</span> : null}
       </span>

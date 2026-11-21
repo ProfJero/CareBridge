@@ -119,7 +119,7 @@ function ProductPage() {
   return (
     <SiteShell>
       <div className="mx-auto max-w-7xl px-5 py-6 sm:py-8">
-        <nav className="flex flex-wrap items-center gap-1 text-sm text-faint" aria-label="Breadcrumb">
+        <nav className="flex flex-wrap items-center gap-1 text-sm text-faint [&_a]:inline-flex [&_a]:min-h-7 [&_a]:items-center" aria-label="Breadcrumb">
           <Link to="/shop" className="hover:text-sea">Shop</Link>
           {product.category ? (
             <>
@@ -291,7 +291,7 @@ function ProductPage() {
                     href={waLink(sellerContact, `Hello, I'm interested in "${product.title}" on the SamBee Online Trading Center.`)}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#1f8f4e] px-4 font-semibold text-white"
+                    className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#137a3e] px-4 font-semibold text-white"
                   >
                     <MessageCircle className="size-4" aria-hidden /> Ask seller
                   </a>
