@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BadgeCheck, ChevronRight, Play, Heart, MapPin, MessageCircle, Minus, Plus, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
@@ -9,7 +9,7 @@ import { ProductImage } from "@/components/shop/product-image";
 import { Button, EmptyState, ErrorNote, Spinner, controlClass } from "@/components/ui";
 import { useCart } from "@/lib/cart";
 import { ghs, shortDate, waLink } from "@/lib/format";
-import { useProducts } from "@/lib/queries";
+import { trackView, useProducts } from "@/lib/queries";
 import { useSession } from "@/lib/session";
 import { errText, must, sb } from "@/lib/supabase";
 import { PRODUCT_SELECT, type Product, type Review } from "@/lib/types";
@@ -34,6 +34,9 @@ function ProductPage() {
     queryFn: async () => must(await sb().from("products").select(PRODUCT_SELECT).eq("id", id).maybeSingle()) as Product | null,
   });
   const product = productQuery.data;
+  useEffect(() => {
+    if (product?.id) trackView("product", product.id);
+  }, [product?.id]);
 
   const reviews = useQuery({
     queryKey: ["reviews", id],

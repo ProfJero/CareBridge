@@ -8,6 +8,7 @@ import { Button, EmptyState, ErrorNote, Field, Modal, Spinner, StatusPill, contr
 import { cloudinaryReady, uploadToCloudinary, youtubeId } from "@/lib/cloudinary";
 import { errText, must, sb } from "@/lib/supabase";
 import type { Video } from "@/lib/types";
+import { LANGUAGE_LABEL, TUTORIAL_TOPICS } from "@/lib/tutorials";
 
 const VIDEO_CATEGORIES = ["Care tips", "Caregiver training", "Elderly care", "Health & nutrition", "Our stories", "Products"];
 
@@ -23,6 +24,10 @@ function VideoForm({ video, onDone }: { video: Video | null; onDone: () => void 
   const [category, setCategory] = useState(video?.category ?? VIDEO_CATEGORIES[0]!);
   const [published, setPublished] = useState(video?.published ?? true);
   const [featured, setFeatured] = useState(video?.featured ?? false);
+  const [isTutorial, setIsTutorial] = useState(video?.is_tutorial ?? false);
+  const [language, setLanguage] = useState<"en" | "tw">(video?.language ?? "en");
+  const [topic, setTopic] = useState<string>(video?.topic || TUTORIAL_TOPICS[0]);
+  const [sort, setSort] = useState(String(video?.sort ?? 0));
   const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState("");
 
@@ -61,6 +66,10 @@ function VideoForm({ video, onDone }: { video: Video | null; onDone: () => void 
         duration_seconds: source === "cloudinary" ? duration : null,
         published,
         featured,
+        is_tutorial: isTutorial,
+        language,
+        topic: isTutorial ? topic : "",
+        sort: Number(sort) || 0,
       };
       if (video) must(await sb().from("videos").update(row).eq("id", video.id));
       else must(await sb().from("videos").insert(row));
@@ -123,6 +132,32 @@ function VideoForm({ video, onDone }: { video: Video | null; onDone: () => void 
           {[...new Set([...VIDEO_CATEGORIES, category])].map((c) => <option key={c}>{c}</option>)}
         </select>
       </Field>
+      <div className="grid gap-3 rounded-xl border border-line bg-paper p-4">
+        <label className="flex items-center gap-2 font-semibold">
+          <input type="checkbox" className="size-5 accent-sea" checked={isTutorial} onChange={(e) => setIsTutorial(e.target.checked)} />
+          This is a how-to tutorial (shows on the Tutorials page)
+        </label>
+        <div className="grid gap-3 sm:grid-cols-3">
+          <Field label="Language">
+            <select className={controlClass} value={language} onChange={(e) => setLanguage(e.target.value as "en" | "tw")}>
+              <option value="en">English</option>
+              <option value="tw">Twi</option>
+            </select>
+          </Field>
+          {isTutorial ? (
+            <>
+              <Field label="Topic">
+                <select className={controlClass} value={topic} onChange={(e) => setTopic(e.target.value)}>
+                  {TUTORIAL_TOPICS.map((t) => <option key={t}>{t}</option>)}
+                </select>
+              </Field>
+              <Field label="Order" hint="Lower shows first">
+                <input className={controlClass} value={sort} onChange={(e) => setSort(e.target.value)} inputMode="numeric" />
+              </Field>
+            </>
+          ) : null}
+        </div>
+      </div>
       <div className="flex flex-wrap gap-6">
         <label className="flex items-center gap-2 font-semibold"><input type="checkbox" className="size-5 accent-sea" checked={published} onChange={(e) => setPublished(e.target.checked)} /> Published</label>
         <label className="flex items-center gap-2 font-semibold"><input type="checkbox" className="size-5 accent-sea" checked={featured} onChange={(e) => setFeatured(e.target.checked)} /> Featured</label>
@@ -156,7 +191,7 @@ export function VideoManager() {
     <div className="grid gap-4">
       <PageHeader
         title="Videos"
-        description="Paste a YouTube link or upload a file to Cloudinary. Videos appear on the Videos page and the home page."
+        description="Paste a YouTube link (best for longer videos) or upload a file. Tick “tutorial” to publish how-to videos in English or Twi on the Tutorials page."
         actions={
           <Button className="h-9 rounded-lg px-3.5 text-sm" onClick={() => setEditing("new")}>
             <Film className="size-4" aria-hidden /> Add video
@@ -177,12 +212,13 @@ export function VideoManager() {
                 {videoThumb(video) ? <img src={videoThumb(video)} alt="" className="size-full object-cover" /> : null}
                 <span className="absolute top-2 left-2 flex gap-1">
                   <StatusPill tone={video.published ? "sea" : "neutral"}>{video.published ? "Published" : "Hidden"}</StatusPill>
+                  {video.is_tutorial ? <StatusPill tone="navy">Tutorial · {LANGUAGE_LABEL[video.language]}</StatusPill> : null}
                   {video.featured ? <StatusPill tone="navy">Featured</StatusPill> : null}
                 </span>
               </div>
               <div className="flex items-start gap-2 p-4">
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs font-bold tracking-widest text-sea uppercase">{video.source === "youtube" ? "YouTube" : "Cloudinary"} · {video.category}</p>
+                  <p className="text-xs font-bold tracking-widest text-sea uppercase">{video.source === "youtube" ? "YouTube" : "Upload"} · {video.is_tutorial ? video.topic : video.category}</p>
                   <p className="mt-1 line-clamp-2 font-semibold text-ink">{video.title}</p>
                 </div>
                 <button type="button" onClick={() => setEditing(video)} className="grid size-10 place-items-center rounded-lg text-navy hover:bg-sky" aria-label={`Edit ${video.title}`}>

@@ -16,7 +16,9 @@ import { cn } from "@/lib/cn";
 const PAGE = 25;
 type Tab = "all" | "active" | "draft" | "archived" | "low";
 
-export function ProductsAdmin() {
+/** Used by the admin dashboard (all products) and by each seller (scoped to their shop). */
+export function ProductsAdmin({ storeId }: { storeId?: string } = {}) {
+  const isSeller = Boolean(storeId);
   const queryClient = useQueryClient();
   const { data: categories = [] } = useCategories();
   const [tab, setTab] = useState<Tab>("all");
@@ -28,32 +30,35 @@ export function ProductsAdmin() {
   const [editing, setEditing] = useState<Product | "new" | null>(null);
 
   const products = useQuery({
-    queryKey: ["admin-products"],
-    queryFn: async () =>
-      must(
-        await sb()
+    queryKey: ["admin-products", storeId ?? "all"],
+    queryFn: async () => {
+      let query = sb()
           .from("products")
           .select("*, store:stores(id,name,slug,town,verified,whatsapp,phone,logo_url), category:categories(id,name,slug,icon)")
           .order("created_at", { ascending: false })
-          .limit(2000),
-      ) as Product[],
+          .limit(2000);
+      if (storeId) query = query.eq("store_id", storeId);
+      return must(await query) as Product[];
+    },
   });
   const stores = useQuery({
     queryKey: ["admin-stores"],
+    enabled: !isSeller,
     queryFn: async () => must(await sb().from("stores").select("*").order("name")) as Store[],
   });
   const houseStore = stores.data?.find((s) => s.slug === "sambee-care-essentials") ?? stores.data?.find((s) => !s.owner_id);
   const [newStore, setNewStore] = useState<string>("");
   useEffect(() => {
-    if (!newStore && houseStore) setNewStore(houseStore.id);
-  }, [houseStore, newStore]);
+    if (storeId) setNewStore(storeId);
+    else if (!newStore && houseStore) setNewStore(houseStore.id);
+  }, [houseStore, newStore, storeId]);
 
   useEffect(() => {
     setPage(0);
     setSelected(new Set());
   }, [tab, q, cat, store]);
 
-  const all = products.data ?? [];
+  const all = useMemo(() => products.data ?? [], [products.data]);
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return all.filter(
@@ -70,6 +75,7 @@ export function ProductsAdmin() {
     void queryClient.invalidateQueries({ queryKey: ["admin-products"] });
     void queryClient.invalidateQueries({ queryKey: ["products"] });
     void queryClient.invalidateQueries({ queryKey: ["admin-dashboard"] });
+    void queryClient.invalidateQueries({ queryKey: ["seller"] });
   };
   const bulk = useMutation({
     mutationFn: async (patch: Partial<Product> | "delete") => {
@@ -112,7 +118,7 @@ export function ProductsAdmin() {
     <>
       <PageHeader
         title="Products"
-        description="Everything listed on the Online Trading Center, from every seller."
+        description={isSeller ? "Everything you sell. Products go live in the shop as soon as you publish them." : "Everything listed on the Online Trading Center, from every seller."}
         actions={
           <>
             <ExportButton
@@ -144,7 +150,9 @@ export function ProductsAdmin() {
         <div className="flex flex-wrap items-center gap-2 p-3">
           <SearchInput value={q} onChange={setQ} placeholder="Search products" />
           <Select label="Category" value={cat} onChange={setCat} options={[{ value: "all", label: "All categories" }, ...categories.map((c) => ({ value: String(c.id), label: c.name }))]} />
-          <Select label="Seller" value={store} onChange={setStore} options={[{ value: "all", label: "All sellers" }, ...(stores.data ?? []).map((s) => ({ value: s.id, label: s.name }))]} />
+          {isSeller ? null : (
+            <Select label="Seller" value={store} onChange={setStore} options={[{ value: "all", label: "All sellers" }, ...(stores.data ?? []).map((s) => ({ value: s.id, label: s.name }))]} />
+          )}
         </div>
         {selected.size > 0 ? (
           <div className="flex flex-wrap items-center gap-2 border-y border-line bg-mint px-3 py-2 text-sm">
@@ -152,8 +160,12 @@ export function ProductsAdmin() {
             <Btn size="sm" onClick={() => bulk.mutate({ status: "active" })}>Publish</Btn>
             <Btn size="sm" onClick={() => bulk.mutate({ status: "draft" })}>Move to draft</Btn>
             <Btn size="sm" onClick={() => bulk.mutate({ status: "archived" })}>Archive</Btn>
-            <Btn size="sm" onClick={() => bulk.mutate({ featured: true })}>Feature</Btn>
-            <Btn size="sm" onClick={() => bulk.mutate({ featured: false })}>Unfeature</Btn>
+            {isSeller ? null : (
+              <>
+                <Btn size="sm" onClick={() => bulk.mutate({ featured: true })}>Feature</Btn>
+                <Btn size="sm" onClick={() => bulk.mutate({ featured: false })}>Unfeature</Btn>
+              </>
+            )}
             <Btn size="sm" tone="danger" onClick={() => window.confirm(`Delete ${selected.size} products? This cannot be undone.`) && bulk.mutate("delete")}>Delete</Btn>
           </div>
         ) : null}
@@ -187,7 +199,7 @@ export function ProductsAdmin() {
                   <th className={th}>Product</th>
                   <th className={th}>Status</th>
                   <th className={th}>Inventory</th>
-                  <th className={th}>Seller</th>
+                  {isSeller ? <th className={th}>Views</th> : <th className={th}>Seller</th>}
                   <th className={th}>Category</th>
                   <th className={`${th} text-right`}>Price</th>
                   <th className={th}><span className="sr-only">Actions</span></th>
@@ -216,13 +228,13 @@ export function ProductsAdmin() {
                     <td className={cn(td, "whitespace-nowrap", p.stock <= 0 ? "font-bold text-danger" : p.stock <= 3 ? "font-bold text-gold" : "text-muted")}>
                       {p.stock <= 0 ? "Out of stock" : `${p.stock} in stock`}
                     </td>
-                    <td className={`${td} text-muted`}>{p.store?.name}</td>
+                    {isSeller ? <td className={`${td} text-muted tabular-nums`}>{p.view_count}</td> : <td className={`${td} text-muted`}>{p.store?.name}</td>}
                     <td className={`${td} text-muted`}>{p.category?.name ?? "—"}</td>
                     <td className={`${td} text-right font-bold whitespace-nowrap tabular-nums`}>{ghs(p.price)}</td>
                     <td className={`${td} whitespace-nowrap text-right`}>
-                      <button type="button" onClick={() => feature.mutate(p)} className="inline-grid size-8 place-items-center rounded-lg hover:bg-mint" aria-label={p.featured ? "Remove from featured" : "Feature on home page"} title={p.featured ? "Featured" : "Feature"}>
+                      {isSeller ? null : <button type="button" onClick={() => feature.mutate(p)} className="inline-grid size-8 place-items-center rounded-lg hover:bg-mint" aria-label={p.featured ? "Remove from featured" : "Feature on home page"} title={p.featured ? "Featured" : "Feature"}>
                         <Star className={cn("size-4", p.featured ? "fill-gold text-gold" : "text-faint")} />
-                      </button>
+                      </button>}
                       <button type="button" onClick={() => setEditing(p)} className="inline-grid size-8 place-items-center rounded-lg hover:bg-mint" aria-label={`Edit ${p.title}`}>
                         <Pencil className="size-4 text-faint" />
                       </button>
@@ -240,7 +252,7 @@ export function ProductsAdmin() {
       </Card>
 
       <Modal open={editing !== null} onClose={() => setEditing(null)} title={editing === "new" ? "Add product" : "Edit product"} wide>
-        {editing === "new" ? (
+        {editing === "new" && !isSeller ? (
           <div className="mb-4">
             <label className="grid gap-1.5 text-base font-semibold">
               Sell under

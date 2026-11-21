@@ -148,6 +148,9 @@ function OrderPage() {
               <h2 className="text-lg font-semibold">Summary</h2>
               <dl className="mt-3 grid gap-2 text-base">
                 <div className="flex justify-between"><dt className="text-muted">Subtotal</dt><dd className="tabular-nums">{ghs(o.subtotal)}</dd></div>
+                {Number(o.discount) > 0 ? (
+                  <div className="flex justify-between text-leaf"><dt>Promo {o.coupon_code}</dt><dd className="tabular-nums">−{ghs(o.discount)}</dd></div>
+                ) : null}
                 <div className="flex justify-between"><dt className="text-muted">Delivery</dt><dd className="tabular-nums">{Number(o.delivery_fee) === 0 ? "Free" : ghs(o.delivery_fee)}</dd></div>
                 <div className="flex justify-between border-t border-line pt-2 text-lg font-bold"><dt>Total</dt><dd className="tabular-nums">{ghs(o.total)}</dd></div>
               </dl>

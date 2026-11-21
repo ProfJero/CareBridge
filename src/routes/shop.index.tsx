@@ -7,6 +7,8 @@ import { categoryIcon } from "@/components/shop/product-image";
 import { Button, EmptyState, controlClass } from "@/components/ui";
 import { useCategories, useProducts, type ProductFilters } from "@/lib/queries";
 import { SamBee } from "@/components/brand";
+import { StoreCard } from "@/components/shop/store-card";
+import { useStores } from "@/lib/queries";
 import { SHOP } from "@/lib/config";
 import { cn } from "@/lib/cn";
 
@@ -247,6 +249,8 @@ function ShopPage() {
         </div>
       </div>
 
+      <ShopsStrip />
+
       <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 lg:grid-cols-[250px_1fr]">
         <aside className="hidden lg:block">{filtersPanel}</aside>
 
@@ -304,6 +308,19 @@ function ShopPage() {
                   </div>
                 ) : null}
               </>
+            ) : !search.q && !search.cat && search.min === undefined && search.max === undefined && !search.stock ? (
+              <EmptyState
+                icon={<Store className="size-6" />}
+                title="Sellers are stocking their shops"
+                action={
+                  <div className="flex flex-wrap justify-center gap-2">
+                    <Link to="/shop/stores" className="inline-flex h-11 items-center rounded-xl bg-navy px-4 font-bold text-white">Browse shops</Link>
+                    <Link to="/sell" className="inline-flex h-11 items-center rounded-xl border border-line bg-white px-4 font-bold text-navy">Sell your products</Link>
+                  </div>
+                }
+              >
+                New products appear here the moment sellers list them. Meanwhile you can visit the shops below and contact sellers directly.
+              </EmptyState>
             ) : (
               <EmptyState
                 icon={<Search className="size-6" />}
@@ -346,5 +363,24 @@ function ShopPage() {
         </div>
       ) : null}
     </SiteShell>
+  );
+}
+
+function ShopsStrip() {
+  const stores = useStores(12);
+  if (!stores.data?.length) return null;
+  return (
+    <section className="mx-auto max-w-7xl px-5 pt-8" aria-labelledby="shops-strip">
+      <div className="flex items-end justify-between gap-3">
+        <div>
+          <h2 id="shops-strip" className="text-2xl font-bold text-ink">Shops on SamBee</h2>
+          <p className="text-base text-faint">Visit a seller's shop to see everything they sell.</p>
+        </div>
+        <Link to="/shop/stores" className="shrink-0 font-bold text-sea">All shops →</Link>
+      </div>
+      <div className="scrollbar-none -mx-5 mt-4 flex gap-4 overflow-x-auto px-5 pt-1 pb-2">
+        {stores.data.map((s) => <StoreCard key={s.id} store={s} compact />)}
+      </div>
+    </section>
   );
 }

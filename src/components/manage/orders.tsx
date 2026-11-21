@@ -71,7 +71,7 @@ export function OrdersAdmin({ initialQuery }: { initialQuery?: string }) {
     }
   }, [initialQuery, orders.data]);
 
-  const all = orders.data ?? [];
+  const all = useMemo(() => orders.data ?? [], [orders.data]);
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return all.filter(
@@ -283,6 +283,9 @@ function OrderDetail({ order, onItem, onPayment, busy }: { order: Order; onItem:
         </ul>
         <dl className="mt-3 grid gap-1">
           <div className="flex justify-between"><dt className="text-faint">Subtotal</dt><dd className="tabular-nums">{ghs(order.subtotal)}</dd></div>
+          {Number(order.discount) > 0 ? (
+            <div className="flex justify-between text-leaf"><dt>Promo {order.coupon_code}</dt><dd className="tabular-nums">−{ghs(order.discount)}</dd></div>
+          ) : null}
           <div className="flex justify-between"><dt className="text-faint">Delivery</dt><dd className="tabular-nums">{ghs(order.delivery_fee)}</dd></div>
           <div className="flex justify-between text-base font-extrabold"><dt>Total</dt><dd className="tabular-nums">{ghs(order.total)}</dd></div>
         </dl>

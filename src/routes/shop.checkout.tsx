@@ -40,6 +40,9 @@ function CheckoutPage() {
   const [momoNumber, setMomoNumber] = useState("");
   const [momoRef, setMomoRef] = useState("");
   const [error, setError] = useState("");
+  const [promoInput, setPromoInput] = useState("");
+  const [promo, setPromo] = useState<{ code: string; store_id: string; store_name: string; percent_off: number; min_order: number } | null>(null);
+  const [promoMsg, setPromoMsg] = useState("");
   const [busy, setBusy] = useState(false);
 
   useEffect(() => setHydrated(true), []);
@@ -55,6 +58,32 @@ function CheckoutPage() {
   const { data: platform } = usePlatformSettings();
   const fee = deliveryFee(method, finalTown, region, platform?.free_delivery ?? true);
   const subtotal = cartSubtotal(lines);
+  const promoBase = promo ? lines.filter((l) => l.storeId === promo.store_id).reduce((s, l) => s + l.price * l.quantity, 0) : 0;
+  const discount = promo && promoBase >= Number(promo.min_order) ? Math.round(promoBase * promo.percent_off) / 100 : 0;
+  const grandTotal = subtotal - discount + fee;
+
+  async function applyPromo() {
+    setPromoMsg("");
+    const code = promoInput.trim().toUpperCase();
+    if (!code) return;
+    const { data, error: rpcError } = await sb().rpc("preview_coupon", { p_code: code });
+    const row = (data as { store_id: string; store_name: string; percent_off: number; min_order: number }[] | null)?.[0];
+    if (rpcError || !row) {
+      setPromo(null);
+      return setPromoMsg("That code is not valid or has expired.");
+    }
+    if (!lines.some((l) => l.storeId === row.store_id)) {
+      setPromo(null);
+      return setPromoMsg(`That code is for products from ${row.store_name}. Add something from that shop to use it.`);
+    }
+    setPromo({ code, ...row });
+    const base = lines.filter((l) => l.storeId === row.store_id).reduce((s, l) => s + l.price * l.quantity, 0);
+    setPromoMsg(
+      base >= Number(row.min_order)
+        ? `${row.percent_off}% off your ${row.store_name} items applied.`
+        : `Spend at least ${ghs(row.min_order)} with ${row.store_name} to use this code.`,
+    );
+  }
 
   async function placeOrder(event: FormEvent) {
     event.preventDefault();
@@ -67,6 +96,7 @@ function CheckoutPage() {
         p_shipping: { name, phone, delivery_method: method, town: finalTown, region, address, notes },
         p_payment_method: payment,
         p_momo: payment === "momo" ? { network, number: momoNumber, reference: momoRef } : {},
+        p_coupon: promo && discount > 0 ? promo.code : null,
       });
       if (rpcError) throw rpcError;
       const orderId = data as string;
@@ -78,7 +108,7 @@ function CheckoutPage() {
       // Notify the team by email (best effort — the order is already saved).
       void sendFormEmail(`${SITE.name} — new marketplace order ${order?.order_number ?? ""}`, {
         Order: order?.order_number ?? orderId,
-        Total: ghs(order?.total ?? subtotal + fee),
+        Total: ghs(order?.total ?? grandTotal),
         Customer: name,
         Phone: phone,
         Email: email ?? "",
@@ -213,7 +243,7 @@ function CheckoutPage() {
                 <div className="rounded-xl bg-gold-bg p-4 text-base text-ink">
                   {SITE.momoMerchant ? (
                     <>
-                      Send <strong>{ghs(subtotal + fee)}</strong> to <strong>{SITE.momoMerchant}</strong> ({SITE.momoMerchantName}) and enter the
+                      Send <strong>{ghs(grandTotal)}</strong> to <strong>{SITE.momoMerchant}</strong> ({SITE.momoMerchantName}) and enter the
                       transaction ID below. We confirm payment before dispatch.
                     </>
                   ) : (
@@ -244,14 +274,38 @@ function CheckoutPage() {
           </ul>
           <dl className="mt-5 grid gap-2 border-t border-line pt-4 text-base">
             <div className="flex justify-between"><dt className="text-muted">Subtotal</dt><dd className="tabular-nums">{ghs(subtotal)}</dd></div>
+            {discount > 0 ? (
+              <div className="flex justify-between text-leaf"><dt>Promo {promo?.code}</dt><dd className="tabular-nums">−{ghs(discount)}</dd></div>
+            ) : null}
             <div className="flex justify-between"><dt className="text-muted">Delivery</dt><dd className="tabular-nums">{fee === 0 ? "Free" : ghs(fee)}</dd></div>
-            <div className="flex justify-between border-t border-line pt-2 text-lg font-bold"><dt>Total</dt><dd className="tabular-nums">{ghs(subtotal + fee)}</dd></div>
+            <div className="flex justify-between border-t border-line pt-2 text-lg font-bold"><dt>Total</dt><dd className="tabular-nums">{ghs(grandTotal)}</dd></div>
           </dl>
+          <div className="mt-4 grid gap-2">
+            <label htmlFor="promo" className="text-sm font-bold text-ink">Promo code</label>
+            <div className="flex gap-2">
+              <input
+                id="promo"
+                className={`${controlClass} h-11 uppercase`}
+                value={promoInput}
+                onChange={(e) => setPromoInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    void applyPromo();
+                  }
+                }}
+                placeholder="e.g. WELCOME10"
+                maxLength={20}
+              />
+              <Button tone="secondary" className="h-11" onClick={() => void applyPromo()} disabled={!promoInput.trim()}>Apply</Button>
+            </div>
+            {promoMsg ? <p className={`text-sm ${discount > 0 ? "text-leaf" : "text-gold"}`}>{promoMsg}</p> : null}
+          </div>
           <div className="mt-4">
             <ErrorNote>{error}</ErrorNote>
           </div>
           <Button type="submit" className="mt-4 h-13 w-full text-lg" disabled={busy}>
-            {busy ? "Placing order…" : `Place order · ${ghs(subtotal + fee)}`}
+            {busy ? "Placing order…" : `Place order · ${ghs(grandTotal)}`}
           </Button>
           <p className="mt-3 text-center text-sm text-faint">Prices and stock are confirmed when you place the order.</p>
         </aside>

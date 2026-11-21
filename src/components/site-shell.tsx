@@ -8,12 +8,12 @@ import { useSession } from "@/lib/session";
 import { cn } from "@/lib/cn";
 import { InstallAppButton } from "@/components/install-app";
 
-const NAV = [
+const BASE_NAV = [
   { to: "/", label: "Home Care" },
   { to: "/shop", label: "Online Shop" },
-  { to: "/videos", label: "Videos" },
+  { to: "/shop/stores", label: "Shops" },
+  { to: "/tutorials", label: "Tutorials" },
   { to: "/careers", label: "Careers" },
-  { to: "/sell", label: "Sell with us" },
 ] as const;
 
 export function SiteShell({ children }: { children: ReactNode }) {
@@ -21,13 +21,15 @@ export function SiteShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const lines = useCart((state) => state.lines);
   const [count, setCount] = useState(0);
-  const { userId, isAdmin } = useSession();
+  const { userId, isAdmin, store } = useSession();
+  const NAV = [...BASE_NAV, { to: "/sell" as const, label: store ? "My shop" : "Sell with us" }];
   const shopMode = pathname.startsWith("/shop") || pathname.startsWith("/sell");
 
   useEffect(() => setCount(cartCount(lines)), [lines]);
   useEffect(() => setOpen(false), [pathname]);
 
-  const isActive = (to: string) => (to === "/" ? pathname === "/" : pathname.startsWith(to));
+  const isActive = (to: string) =>
+    to === "/" ? pathname === "/" : to === "/shop" ? pathname.startsWith("/shop") && !pathname.startsWith("/shop/stores") : pathname.startsWith(to);
 
   return (
     <div className="flex min-h-screen flex-col bg-paper text-ink">
@@ -185,6 +187,8 @@ export function SiteFooter() {
             <li><Link to="/shop" className="hover:underline">Shop online</Link></li>
             <li><Link to="/shop/about" className="hover:underline">About the Trading Center</Link></li>
             <li><Link to="/videos" className="hover:underline">Videos</Link></li>
+            <li><Link to="/tutorials" className="hover:underline">How-to tutorials (English &amp; Twi)</Link></li>
+            <li><Link to="/shop/stores" className="hover:underline">All shops</Link></li>
             <li><Link to="/careers" className="hover:underline">Careers</Link></li>
             <li>
               <Link to="/sell" className="inline-flex items-center gap-1.5 hover:underline">

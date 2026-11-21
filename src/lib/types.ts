@@ -28,6 +28,7 @@ export type Store = {
   facebook_url: string;
   youtube_url: string;
   video_url: string | null;
+  view_count: number;
   created_at: string;
 };
 
@@ -48,6 +49,7 @@ export type Product = {
   rating_avg: number;
   rating_count: number;
   sold_count: number;
+  view_count: number;
   created_at: string;
   store?: Pick<Store, "id" | "name" | "slug" | "town" | "verified" | "whatsapp" | "phone" | "logo_url" | "facebook_url" | "youtube_url"> | null;
   category?: Pick<Category, "id" | "name" | "slug" | "icon"> | null;
@@ -72,6 +74,8 @@ export type Order = {
   notes: string;
   subtotal: number;
   delivery_fee: number;
+  discount: number;
+  coupon_code: string | null;
   total: number;
   created_at: string;
   updated_at: string;
@@ -88,6 +92,7 @@ export type OrderItem = {
   unit_price: number;
   quantity: number;
   status: OrderStatus;
+  platform_fee: number;
   created_at: string;
   order?: Order;
 };
@@ -114,6 +119,23 @@ export type Video = {
   duration_seconds: number | null;
   published: boolean;
   featured: boolean;
+  is_tutorial: boolean;
+  language: "en" | "tw";
+  topic: string;
+  sort: number;
+  created_at: string;
+};
+
+export type Coupon = {
+  id: string;
+  store_id: string;
+  code: string;
+  percent_off: number;
+  min_order: number;
+  max_uses: number | null;
+  used_count: number;
+  expires_at: string | null;
+  active: boolean;
   created_at: string;
 };
 

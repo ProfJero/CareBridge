@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { BadgeCheck, Facebook, MapPin, MessageCircle, Phone, Youtube } from "lucide-react";
@@ -5,7 +6,8 @@ import { SiteShell } from "@/components/site-shell";
 import { ProductCard, ProductGridSkeleton } from "@/components/shop/product-card";
 import { EmptyState, Spinner } from "@/components/ui";
 import { shortDate, waLink } from "@/lib/format";
-import { useProducts } from "@/lib/queries";
+import { trackView, useProducts } from "@/lib/queries";
+import { useSession } from "@/lib/session";
 import { must, sb } from "@/lib/supabase";
 import type { Store } from "@/lib/types";
 
@@ -21,6 +23,10 @@ function StorePage() {
     queryFn: async () => must(await sb().from("stores").select("*").eq("slug", slug).maybeSingle()) as Store | null,
   });
   const products = useProducts({ storeId: store.data?.id, limit: 60 }, undefined);
+  const { userId } = useSession();
+  useEffect(() => {
+    if (store.data?.id) trackView("store", store.data.id);
+  }, [store.data?.id]);
 
   if (store.isLoading) {
     return (
@@ -102,7 +108,18 @@ function StorePage() {
               {products.data.products.map((product) => <ProductCard key={product.id} product={product} />)}
             </div>
           ) : (
-            <EmptyState title="No products yet">This seller has not listed anything yet.</EmptyState>
+            store.data.owner_id && store.data.owner_id === userId ? (
+              <EmptyState
+                title="Your shop is live — add your first product"
+                action={<Link to="/sell" search={{ tab: "products" }} className="inline-flex h-11 items-center rounded-xl bg-sea px-4 font-bold text-white">Add a product</Link>}
+              >
+                Customers can already find your shop in the Shops directory. Products you add appear here and across the Online Trading Center straight away.
+              </EmptyState>
+            ) : (
+              <EmptyState title="Products coming soon">
+                This shop is getting ready. You can already contact the seller using the buttons above.
+              </EmptyState>
+            )
           )}
         </div>
       </div>

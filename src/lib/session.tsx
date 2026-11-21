@@ -76,7 +76,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       active = false;
       data.subscription.unsubscribe();
     };
-  }, [load]);
+  }, [load, router]);
 
   const value = useMemo<SessionValue>(
     () => ({

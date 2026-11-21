@@ -14,6 +14,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ManageRouteImport } from './routes/manage'
 import { Route as SellRouteImport } from './routes/sell'
+import { Route as TutorialsRouteImport } from './routes/tutorials'
 import { Route as VideosRouteImport } from './routes/videos'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as AccountIndexRouteImport } from './routes/account.index'
@@ -22,6 +23,7 @@ import { Route as ShopIndexRouteImport } from './routes/shop.index'
 import { Route as ShopAboutRouteImport } from './routes/shop.about'
 import { Route as ShopCartRouteImport } from './routes/shop.cart'
 import { Route as ShopCheckoutRouteImport } from './routes/shop.checkout'
+import { Route as ShopStoresRouteImport } from './routes/shop.stores'
 import { Route as AccountOrdersIdRouteImport } from './routes/account.orders.$id'
 import { Route as ShopProductIdRouteImport } from './routes/shop.product.$id'
 import { Route as ShopStoreSlugRouteImport } from './routes/shop.store.$slug'
@@ -49,6 +51,11 @@ const ManageRoute = ManageRouteImport.update({
 const SellRoute = SellRouteImport.update({
   id: '/sell',
   path: '/sell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TutorialsRoute = TutorialsRouteImport.update({
+  id: '/tutorials',
+  path: '/tutorials',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VideosRoute = VideosRouteImport.update({
@@ -91,6 +98,11 @@ const ShopCheckoutRoute = ShopCheckoutRouteImport.update({
   path: '/shop/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShopStoresRoute = ShopStoresRouteImport.update({
+  id: '/shop/stores',
+  path: '/shop/stores',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccountOrdersIdRoute = AccountOrdersIdRouteImport.update({
   id: '/account/orders/$id',
   path: '/account/orders/$id',
@@ -113,12 +125,14 @@ export interface FileRoutesByFullPath {
   '/careers': typeof CareersRoute
   '/manage': typeof ManageRoute
   '/sell': typeof SellRoute
+  '/tutorials': typeof TutorialsRoute
   '/videos': typeof VideosRoute
   '/welcome': typeof WelcomeRoute
   '/admin/$': typeof AdminSplatRoute
   '/shop/about': typeof ShopAboutRoute
   '/shop/cart': typeof ShopCartRoute
   '/shop/checkout': typeof ShopCheckoutRoute
+  '/shop/stores': typeof ShopStoresRoute
   '/account/': typeof AccountIndexRoute
   '/shop/': typeof ShopIndexRoute
   '/account/orders/$id': typeof AccountOrdersIdRoute
@@ -131,12 +145,14 @@ export interface FileRoutesByTo {
   '/careers': typeof CareersRoute
   '/manage': typeof ManageRoute
   '/sell': typeof SellRoute
+  '/tutorials': typeof TutorialsRoute
   '/videos': typeof VideosRoute
   '/welcome': typeof WelcomeRoute
   '/admin/$': typeof AdminSplatRoute
   '/shop/about': typeof ShopAboutRoute
   '/shop/cart': typeof ShopCartRoute
   '/shop/checkout': typeof ShopCheckoutRoute
+  '/shop/stores': typeof ShopStoresRoute
   '/account': typeof AccountIndexRoute
   '/shop': typeof ShopIndexRoute
   '/account/orders/$id': typeof AccountOrdersIdRoute
@@ -150,12 +166,14 @@ export interface FileRoutesById {
   '/careers': typeof CareersRoute
   '/manage': typeof ManageRoute
   '/sell': typeof SellRoute
+  '/tutorials': typeof TutorialsRoute
   '/videos': typeof VideosRoute
   '/welcome': typeof WelcomeRoute
   '/admin/$': typeof AdminSplatRoute
   '/shop/about': typeof ShopAboutRoute
   '/shop/cart': typeof ShopCartRoute
   '/shop/checkout': typeof ShopCheckoutRoute
+  '/shop/stores': typeof ShopStoresRoute
   '/account/': typeof AccountIndexRoute
   '/shop/': typeof ShopIndexRoute
   '/account/orders/$id': typeof AccountOrdersIdRoute
@@ -170,12 +188,14 @@ export interface FileRouteTypes {
     | '/careers'
     | '/manage'
     | '/sell'
+    | '/tutorials'
     | '/videos'
     | '/welcome'
     | '/admin/$'
     | '/shop/about'
     | '/shop/cart'
     | '/shop/checkout'
+    | '/shop/stores'
     | '/account/'
     | '/shop/'
     | '/account/orders/$id'
@@ -188,12 +208,14 @@ export interface FileRouteTypes {
     | '/careers'
     | '/manage'
     | '/sell'
+    | '/tutorials'
     | '/videos'
     | '/welcome'
     | '/admin/$'
     | '/shop/about'
     | '/shop/cart'
     | '/shop/checkout'
+    | '/shop/stores'
     | '/account'
     | '/shop'
     | '/account/orders/$id'
@@ -206,12 +228,14 @@ export interface FileRouteTypes {
     | '/careers'
     | '/manage'
     | '/sell'
+    | '/tutorials'
     | '/videos'
     | '/welcome'
     | '/admin/$'
     | '/shop/about'
     | '/shop/cart'
     | '/shop/checkout'
+    | '/shop/stores'
     | '/account/'
     | '/shop/'
     | '/account/orders/$id'
@@ -225,11 +249,13 @@ export interface RootRouteChildren {
   CareersRoute: typeof CareersRoute
   ManageRoute: typeof ManageRoute
   SellRoute: typeof SellRoute
+  TutorialsRoute: typeof TutorialsRoute
   VideosRoute: typeof VideosRoute
   WelcomeRoute: typeof WelcomeRoute
   ShopAboutRoute: typeof ShopAboutRoute
   ShopCartRoute: typeof ShopCartRoute
   ShopCheckoutRoute: typeof ShopCheckoutRoute
+  ShopStoresRoute: typeof ShopStoresRoute
   AccountIndexRoute: typeof AccountIndexRoute
   ShopIndexRoute: typeof ShopIndexRoute
   AccountOrdersIdRoute: typeof AccountOrdersIdRoute
@@ -272,6 +298,13 @@ declare module '@tanstack/react-router' {
       path: '/sell'
       fullPath: '/sell'
       preLoaderRoute: typeof SellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tutorials': {
+      id: '/tutorials'
+      path: '/tutorials'
+      fullPath: '/tutorials'
+      preLoaderRoute: typeof TutorialsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/videos': {
@@ -330,6 +363,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopCheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/shop/stores': {
+      id: '/shop/stores'
+      path: '/shop/stores'
+      fullPath: '/shop/stores'
+      preLoaderRoute: typeof ShopStoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/account/orders/$id': {
       id: '/account/orders/$id'
       path: '/account/orders/$id'
@@ -370,11 +410,13 @@ const rootRouteChildren: RootRouteChildren = {
   CareersRoute: CareersRoute,
   ManageRoute: ManageRoute,
   SellRoute: SellRoute,
+  TutorialsRoute: TutorialsRoute,
   VideosRoute: VideosRoute,
   WelcomeRoute: WelcomeRoute,
   ShopAboutRoute: ShopAboutRoute,
   ShopCartRoute: ShopCartRoute,
   ShopCheckoutRoute: ShopCheckoutRoute,
+  ShopStoresRoute: ShopStoresRoute,
   AccountIndexRoute: AccountIndexRoute,
   ShopIndexRoute: ShopIndexRoute,
   AccountOrdersIdRoute: AccountOrdersIdRoute,

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { must, sb } from "@/lib/supabase";
-import { PRODUCT_SELECT, type Category, type Product, type Video } from "@/lib/types";
+import { PRODUCT_SELECT, type Category, type Product, type Store, type Video } from "@/lib/types";
 
 export function useCategories() {
   return useQuery({
@@ -71,6 +71,7 @@ export function useVideos(limit = 60) {
           .from("videos")
           .select("*")
           .eq("published", true)
+          .eq("is_tutorial", false)
           .order("featured", { ascending: false })
           .order("created_at", { ascending: false })
           .limit(limit),
@@ -94,4 +95,45 @@ export function usePlatformSettings() {
       return (data as PlatformSettings | null) ?? { seller_fee_percent: 0, fees_enabled: false, fee_note: "Selling on SamBee is free for now.", free_delivery: true };
     },
   });
+}
+
+export type StoreWithCount = Store & { products: { count: number }[] };
+
+/** Active shops, newest first, with how many live products each has. */
+export function useStores(limit = 60) {
+  return useQuery({
+    queryKey: ["stores", limit],
+    queryFn: async () => {
+      const { data, error } = await sb()
+        .from("stores")
+        .select("*, products(count)")
+        .eq("status", "active")
+        .eq("products.status", "active")
+        .order("created_at", { ascending: false })
+        .limit(limit);
+      if (error) throw new Error(error.message);
+      return (data ?? []) as StoreWithCount[];
+    },
+  });
+}
+
+export function useTutorials() {
+  return useQuery({
+    queryKey: ["tutorials"],
+    queryFn: async () =>
+      must(await sb().from("videos").select("*").eq("published", true).eq("is_tutorial", true).order("sort").order("created_at")) as Video[],
+  });
+}
+
+/** Fire-and-forget view counter for shop analytics (one per page view per tab session). */
+export function trackView(kind: "product" | "store", id: string) {
+  if (typeof window === "undefined") return;
+  try {
+    const key = `sambee.viewed.${kind}.${id}`;
+    if (window.sessionStorage.getItem(key)) return;
+    window.sessionStorage.setItem(key, "1");
+  } catch {
+    /* storage unavailable: still count */
+  }
+  void sb().rpc("track_view", { p_kind: kind, p_id: id });
 }

@@ -26,7 +26,8 @@ import { ProductCard, ProductGridSkeleton } from "@/components/shop/product-card
 import { VideoCard, VideoEmbed } from "@/components/video-player";
 import { Modal } from "@/components/ui";
 import { SHOP, SITE } from "@/lib/config";
-import { useCategories, useProducts, useVideos } from "@/lib/queries";
+import { useCategories, useProducts, useStores, useVideos } from "@/lib/queries";
+import { StoreCard } from "@/components/shop/store-card";
 import type { Video } from "@/lib/types";
 
 const SERVICES = [
@@ -84,7 +85,10 @@ const FAQ = [
 
 export function HomePage() {
   const { data: categories } = useCategories();
-  const featured = useProducts({ featured: true, limit: 4 }, categories);
+  const featuredOnly = useProducts({ featured: true, limit: 8 }, categories);
+  const latest = useProducts({ limit: 8 }, categories);
+  const featured = featuredOnly.data?.products.length ? featuredOnly : latest;
+  const shops = useStores(8);
   const videos = useVideos(3);
   const [playing, setPlaying] = useState<Video | null>(null);
   const [faq, setFaq] = useState<number | null>(0);
@@ -233,13 +237,24 @@ export function HomePage() {
         <div className="mt-8">
           {featured.isLoading ? (
             <ProductGridSkeleton count={4} />
-          ) : (
+          ) : featured.data?.products.length ? (
             <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-              {(featured.data?.products ?? []).map((product) => (
+              {featured.data.products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
-          )}
+          ) : null}
+          {shops.data?.length ? (
+            <div className="mt-8">
+              <div className="flex items-end justify-between gap-3">
+                <h3 className="text-xl font-bold text-ink">Shops on SamBee</h3>
+                <Link to="/shop/stores" className="font-bold text-sea">All shops →</Link>
+              </div>
+              <div className="scrollbar-none -mx-5 mt-4 flex gap-4 overflow-x-auto px-5 pt-1 pb-2">
+                {shops.data.map((st) => <StoreCard key={st.id} store={st} compact />)}
+              </div>
+            </div>
+          ) : null}
         </div>
         <div className="mt-6 flex flex-col items-start gap-3 rounded-2xl border border-line bg-gold-bg p-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-lg text-ink">
