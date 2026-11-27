@@ -3,3 +3,5 @@ dist/
 .wrangler/
 .vercel/
 .output/
+.cf-deploy/
+.tanstack/

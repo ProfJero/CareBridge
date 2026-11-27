@@ -171,6 +171,9 @@ export default defineConfig(({ command, isPreview }) => ({
       ? [
           nitro({
             preset: "cloudflare-pages",
+            // CF_INLINE_ASSETS=1 bundles static files into the worker, for
+            // deploys that cannot use the Pages asset-upload API.
+            ...(process.env.CF_INLINE_ASSETS ? { serveStatic: "inline" as const } : {}),
             // Auto-registers server/middleware/* (the PWA install page +
             // manifest + head-tag middleware). Nitro v3 defaults serverDir to
             // false, so removing this silently unwires /?install=1 on deploys.

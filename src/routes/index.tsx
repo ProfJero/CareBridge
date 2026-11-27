@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CareersPortal } from "@/components/careers-portal";
+import { HomePage } from "@/components/home/home-page";
 
 export const Route = createFileRoute("/")({
-  component: CareersPortal,
+  component: HomePage,
   head: () => ({
     meta: [
-      { title: "CareBridge Careers — Make a difference every day" },
+      { title: "SamBee Son and Daughter Home Care — Home care in Assin Foso, Ghana" },
       {
         name: "description",
         content:
-          "Apply to join CareBridge home care in Ghana. Browse open roles and send a caregiver application by email.",
+          "Home care in Assin Foso, Central Region, Ghana: personal care, elderly care, recovery support, household help and companionship. Request care, shop care essentials and watch care videos.",
       },
     ],
   }),

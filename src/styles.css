@@ -1,26 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Source Sans 3", "Segoe UI", sans-serif;
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Montserrat", "Segoe UI", system-ui, sans-serif;
 
-  --color-ink: #10283a;
-  --color-navy: #0c3354;
-  --color-navy-2: #16456e;
-  --color-on-navy: #f4f8f7;
-  --color-navy-muted: #c5d5e2;
-  --color-sea: #0e7c66;
-  --color-sea-2: #0a6553;
-  --color-on-sea: #f3fbf8;
-  --color-mint: #e5f4ee;
-  --color-sky: #e7f1f8;
-  --color-paper: #f3f6f5;
+  /* SamBee brand: deep logo blue, bright action blue, white; logo green as a small accent. */
+  --color-ink: #0a1440;
+  --color-navy: #0b1f8f;
+  --color-navy-2: #1730a8;
+  --color-on-navy: #ffffff;
+  --color-navy-muted: #c8d2f6;
+  --color-sea: #1a45d8;
+  --color-sea-2: #1236b0;
+  --color-on-sea: #ffffff;
+  --color-mint: #e9efff;
+  --color-sky: #f0f4ff;
+  --color-paper: #f5f7fd;
   --color-card: #ffffff;
-  --color-line: #d3e0e4;
-  --color-muted: #3e596b;
-  --color-faint: #5d7686;
-  --color-danger: #8d3b34;
-  --color-danger-bg: #fdeceb;
+  --color-line: #dce3f3;
+  --color-muted: #3b4766;
+  --color-faint: #5e6a88;
+  --color-danger: #b42318;
+  --color-danger-bg: #fdecea;
+  --color-gold: #8f5200;
+  --color-gold-bg: #fff4e0;
+  --color-cream: #f7f9ff;
+  --color-leaf: #0b7a24;
+  --color-leaf-bg: #e8f6eb;
 }
 
 @layer base {
@@ -53,6 +59,13 @@
     cursor: pointer;
   }
 
+  h1,
+  h2,
+  h3,
+  .font-display {
+    letter-spacing: -0.01em;
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-sea);
     outline-offset: 2px;
@@ -67,5 +80,14 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 }
