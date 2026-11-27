@@ -3,8 +3,8 @@ import { cn } from "@/lib/cn";
 export type BrandKind = "care" | "shop";
 
 const ICON: Record<BrandKind, { src: string; w: number; h: number; alt: string }> = {
-  care: { src: "/brand/care-icon.webp", w: 320, h: 224, alt: "SamBee Home Care logo" },
-  shop: { src: "/brand/shop-icon.webp", w: 480, h: 174, alt: "SamBee Online Trading Center logo" },
+  care: { src: "/brand/bee.webp", w: 300, h: 278, alt: "JonnyBee Home Care logo" },
+  shop: { src: "/brand/jb-logo.webp", w: 360, h: 267, alt: "JonnyBee Online Trading Platform logo" },
 };
 
 /** The extracted logo artwork. On dark backgrounds it sits on a white badge so the edges stay clean. */
@@ -24,25 +24,25 @@ export function LogoMark({ kind = "care", className, badge = false }: { kind?: B
   return <span className={cn("inline-flex items-center rounded-xl bg-white px-2 py-1.5", className)}>{img}</span>;
 }
 
-/** "SamBee" wordmark in the logo colours: Sam in deep blue, Bee in green. */
-export function SamBee({ className, light = false }: { className?: string; light?: boolean }) {
+/** "JonnyBee" wordmark in the logo blues: Jonny in deep blue, Bee in bright blue. */
+export function JonnyBee({ className, light = false }: { className?: string; light?: boolean }) {
   return (
     <span className={cn("font-display font-extrabold tracking-tight", className)}>
-      <span className={light ? "text-white" : "text-navy"}>Sam</span>
-      <span className={light ? "text-[#7be08f]" : "text-leaf"}>Bee</span>
+      <span className={light ? "text-white" : "text-navy"}>Jonny</span>
+      <span className={light ? "text-[#ffd23f]" : "text-sea"}>Bee</span>
     </span>
   );
 }
 
 export function Wordmark({ kind = "care", light = false, compact = false }: { kind?: BrandKind; light?: boolean; compact?: boolean }) {
-  const line2 = kind === "shop" ? "Online Trading Center" : "Son and Daughter Home Care";
+  const line2 = kind === "shop" ? "Online Trading Platform" : "Home Care";
   return (
     <span className="flex min-w-0 items-center gap-2.5">
       <span className={cn("flex shrink-0 items-center", kind === "shop" ? "h-10 sm:h-11" : "h-11 sm:h-12")}>
         <LogoMark kind={kind} badge={light} className="h-full" />
       </span>
       <span className="min-w-0 leading-none">
-        <SamBee light={light} className="block text-xl sm:text-2xl" />
+        <JonnyBee light={light} className="block text-xl sm:text-2xl" />
         <span
           className={cn(
             "mt-0.5 block truncate text-[11px] font-bold tracking-wide uppercase sm:text-xs",
@@ -50,7 +50,7 @@ export function Wordmark({ kind = "care", light = false, compact = false }: { ki
             compact && "hidden min-[400px]:block",
           )}
         >
-          {kind === "shop" ? `Son & Daughter · ${line2}` : line2}
+          {kind === "shop" ? `${line2}` : line2}
         </span>
       </span>
     </span>

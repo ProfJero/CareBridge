@@ -124,7 +124,7 @@ export function ProductsAdmin({ storeId, autoNew = false, onAutoNew }: { storeId
     <>
       <PageHeader
         title="Products"
-        description={isSeller ? "Everything you sell. Products go live in the shop as soon as you publish them." : "Everything listed on the Online Trading Center, from every seller."}
+        description={isSeller ? "Everything you sell. Products go live in the shop as soon as you publish them." : "Everything listed on the Online Trading Platform, from every seller."}
         actions={
           <>
             <ExportButton

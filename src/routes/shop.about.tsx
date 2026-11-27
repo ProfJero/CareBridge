@@ -1,14 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BadgeCheck, Eye, Handshake, HeartHandshake, MapPin, ShieldCheck, ShoppingBag, Sparkles, Star, Target, Truck } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
-import { SamBee } from "@/components/brand";
+import { JonnyBee } from "@/components/brand";
 import { SHOP, SITE } from "@/lib/config";
 
 export const Route = createFileRoute("/shop/about")({
   component: AboutShop,
   head: () => ({
     meta: [
-      { title: "About — SamBee Son and Daughter Online Trading Center" },
+      { title: "About — JonnyBee Online Trading Platform" },
       { name: "description", content: `${SHOP.about} ${SHOP.slogan}` },
     ],
   }),
@@ -26,7 +26,7 @@ function AboutShop() {
               <MapPin className="size-4" aria-hidden /> {SHOP.location}
             </p>
             <h1 className="mt-5 font-display text-4xl leading-tight font-extrabold text-ink sm:text-5xl">
-              <SamBee /> Son and Daughter <span className="text-sea">Online Trading Center</span>
+              <JonnyBee /> <span className="text-sea">Online Trading Platform</span>
             </h1>
             <p className="mt-3 font-display text-2xl font-bold text-navy italic">“{SHOP.slogan}”</p>
             <p className="mt-6 text-lg leading-relaxed text-muted">{SHOP.about}</p>
@@ -41,7 +41,7 @@ function AboutShop() {
             </div>
           </div>
           <div className="mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-line">
-            <img src="/brand/shop-logo.webp" alt={`${SHOP.name} logo`} width={480} height={480} className="w-full" />
+            <img src="/brand/banner-shop-720.webp" alt={`${SHOP.name} — ${SHOP.slogan}`} width={720} height={480} className="w-full" />
           </div>
         </div>
       </section>
@@ -80,7 +80,7 @@ function AboutShop() {
       <section className="mx-auto max-w-7xl px-5 py-14">
         <div className="flex flex-col items-start gap-4 rounded-3xl bg-mint p-7 sm:flex-row sm:items-center sm:justify-between sm:p-9">
           <div>
-            <h2 className="font-display text-2xl font-extrabold text-ink">Visit us or shop from anywhere</h2>
+            <h2 className="font-display text-2xl font-extrabold text-ink">Visit us or shop from anywhere within Assin Municipality</h2>
             <p className="mt-1 text-lg text-muted">
               {SHOP.location} · <a href={`mailto:${SITE.inbox}`} className="font-bold text-sea">{SITE.inbox}</a>
             </p>

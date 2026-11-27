@@ -21,7 +21,7 @@ export const Route = createFileRoute("/account/")({
     tab: search.tab === "wishlist" || search.tab === "profile" ? search.tab : undefined,
   }),
   component: AccountPage,
-  head: () => ({ meta: [{ title: "My account — SamBee Son and Daughter Home Care" }] }),
+  head: () => ({ meta: [{ title: "My account — JonnyBee Home Care" }] }),
 });
 
 function AccountPage() {

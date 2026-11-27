@@ -6,7 +6,7 @@ import { ProductCard, ProductGridSkeleton } from "@/components/shop/product-card
 import { categoryIcon } from "@/components/shop/product-image";
 import { Button, EmptyState, controlClass } from "@/components/ui";
 import { useCategories, useProducts, type ProductFilters } from "@/lib/queries";
-import { SamBee } from "@/components/brand";
+import { JonnyBee } from "@/components/brand";
 import { StoreCard } from "@/components/shop/store-card";
 import { useStores } from "@/lib/queries";
 import { SHOP } from "@/lib/config";
@@ -46,10 +46,10 @@ export const Route = createFileRoute("/shop/")({
   component: ShopPage,
   head: () => ({
     meta: [
-      { title: "Shop — SamBee Son and Daughter Online Trading Center, Assin Foso" },
+      { title: "Shop — JonnyBee Online Trading Platform, Assin Municipality" },
       {
         name: "description",
-        content: "Shop Smart... Shop Online. Mobile accessories, electronics, fashion, home essentials, gifts and care supplies from Assin Foso, Ghana. Mobile Money or cash on delivery.",
+        content: "JonnyBee Online Trading Platform — Shop Smart, Trade Better! Electronics, gadgets, fashion, home and kitchen items from sellers in Assin Municipality, Ghana. Free delivery, Mobile Money or cash on delivery.",
       },
     ],
   }),
@@ -186,7 +186,7 @@ function ShopPage() {
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h1 className="font-display text-2xl font-extrabold sm:text-3xl">
-                <SamBee light /> Online Trading Center
+                <JonnyBee light /> Online Trading Platform
               </h1>
               <p className="mt-1 font-semibold text-navy-muted italic">{SHOP.slogan}</p>
             </div>
@@ -341,7 +341,7 @@ function ShopPage() {
           <div className="mt-10 flex flex-col items-start gap-3 rounded-2xl bg-mint p-5 sm:flex-row sm:items-center sm:justify-between">
             <p className="flex items-center gap-3 text-lg text-ink">
               <Store className="size-6 shrink-0 text-sea" aria-hidden />
-              Sell your products to families in Assin Foso and beyond.
+              Sell your products to families across Assin Municipality and beyond.
             </p>
             <Link to="/sell" className="inline-flex h-11 shrink-0 items-center rounded-xl bg-sea px-4 font-semibold text-on-sea">
               Open your shop — it's free
@@ -375,7 +375,7 @@ function ShopsStrip() {
     <section className="mx-auto max-w-7xl px-5 pt-8" aria-labelledby="shops-strip">
       <div className="flex items-end justify-between gap-3">
         <div>
-          <h2 id="shops-strip" className="text-2xl font-bold text-ink">Shops on SamBee</h2>
+          <h2 id="shops-strip" className="text-2xl font-bold text-ink">Shops on JonnyBee</h2>
           <p className="text-base text-faint">Visit a seller's shop to see everything they sell.</p>
         </div>
         <Link to="/shop/stores" className="shrink-0 font-bold text-sea">All shops →</Link>

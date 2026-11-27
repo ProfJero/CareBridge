@@ -92,7 +92,7 @@ export function Dashboard({ onOpen }: { onOpen: (section: AdminSection, q?: stri
     <>
       <PageHeader
         title="Dashboard"
-        description="How the Online Trading Center and Home Care are doing."
+        description="How the Online Trading Platform and Home Care are doing."
         actions={
           <Select
             label="Date range"

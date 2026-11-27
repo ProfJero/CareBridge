@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { LayoutDashboard, Mail, MapPin, Menu, Phone, ShoppingBag, Store, User, X } from "lucide-react";
-import { LogoMark, SamBee, Wordmark } from "@/components/brand";
+import { LogoMark, JonnyBee, Wordmark } from "@/components/brand";
 import { SHOP, SITE } from "@/lib/config";
 import { cartCount, useCart } from "@/lib/cart";
 import { useSession } from "@/lib/session";
@@ -121,7 +121,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
               ))}
               <li>
                 <Link to="/shop/about" className="flex h-12 items-center rounded-xl px-3 text-lg font-bold text-navy">
-                  About the Online Trading Center
+                  About the Online Trading Platform
                 </Link>
               </li>
               <li>
@@ -159,8 +159,8 @@ export function SiteFooter() {
           <div className="flex items-center gap-3">
             <span className="h-14"><LogoMark kind="care" badge className="h-full" /></span>
             <span>
-              <SamBee light className="block text-2xl" />
-              <span className="text-sm font-bold text-navy-muted">Son and Daughter Home Care</span>
+              <JonnyBee light className="block text-2xl" />
+              <span className="text-sm font-bold text-navy-muted">Home Care</span>
             </span>
           </div>
           <p className="mt-4 max-w-sm text-base leading-relaxed text-navy-muted">
@@ -171,8 +171,8 @@ export function SiteFooter() {
           <div className="flex items-center gap-3">
             <span className="h-14"><LogoMark kind="shop" badge className="h-full" /></span>
             <span>
-              <SamBee light className="block text-2xl" />
-              <span className="text-sm font-bold text-navy-muted">Online Trading Center</span>
+              <JonnyBee light className="block text-2xl" />
+              <span className="text-sm font-bold text-navy-muted">Online Trading Platform</span>
             </span>
           </div>
           <p className="mt-4 max-w-sm text-base leading-relaxed text-navy-muted">
@@ -185,7 +185,7 @@ export function SiteFooter() {
             <li><Link to="/" hash="services" className="hover:underline">Home care services</Link></li>
             <li><Link to="/" hash="request-care" className="hover:underline">Request a care visit</Link></li>
             <li><Link to="/shop" className="hover:underline">Shop online</Link></li>
-            <li><Link to="/shop/about" className="hover:underline">About the Trading Center</Link></li>
+            <li><Link to="/shop/about" className="hover:underline">About the Trading Platform</Link></li>
             <li><Link to="/videos" className="hover:underline">Videos</Link></li>
             <li><Link to="/tutorials" className="hover:underline">How-to tutorials (English &amp; Twi)</Link></li>
             <li><Link to="/shop/stores" className="hover:underline">All shops</Link></li>
@@ -219,10 +219,10 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-sm text-navy-muted sm:flex-row sm:justify-between">
-          <span>© {new Date().getFullYear()} SamBee Son and Daughter. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} JonnyBee. All rights reserved.</span>
           <span className="flex gap-4">
             <Link to="/manage" className="inline-flex min-h-7 items-center hover:text-white">Staff login</Link>
-            <span>Assin Foso · Ghana</span>
+            <span>Assin Municipality · Ghana</span>
           </span>
         </div>
       </div>

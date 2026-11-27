@@ -17,7 +17,7 @@ export const Route = createFileRoute("/account/orders/$id")({
     placed: search.placed === true || search.placed === "true" ? true : undefined,
   }),
   component: OrderPage,
-  head: () => ({ meta: [{ title: "Order details — SamBee Online Trading Center" }] }),
+  head: () => ({ meta: [{ title: "Order details — JonnyBee Online Trading Platform" }] }),
 });
 
 const STEPS = ["pending", "confirmed", "shipped", "delivered"] as const;

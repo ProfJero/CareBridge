@@ -17,7 +17,7 @@ import { cn } from "@/lib/cn";
 
 export const Route = createFileRoute("/shop/product/$id")({
   component: ProductPage,
-  head: () => ({ meta: [{ title: "Product — SamBee Online Trading Center" }] }),
+  head: () => ({ meta: [{ title: "Product — JonnyBee Online Trading Platform" }] }),
 });
 
 function ProductPage() {
@@ -288,7 +288,7 @@ function ProductPage() {
                 </div>
                 {sellerContact ? (
                   <a
-                    href={waLink(sellerContact, `Hello, I'm interested in "${product.title}" on the SamBee Online Trading Center.`)}
+                    href={waLink(sellerContact, `Hello, I'm interested in "${product.title}" on the JonnyBee Online Trading Platform.`)}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#137a3e] px-4 font-semibold text-white"

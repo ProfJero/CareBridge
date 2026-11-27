@@ -13,8 +13,8 @@ export const Route = createFileRoute("/videos")({
   component: VideosPage,
   head: () => ({
     meta: [
-      { title: "Care videos — SamBee Son and Daughter Home Care" },
-      { name: "description", content: "Watch care tips for families, caregiver training and stories from SamBee Son and Daughter Home Care in Assin Foso." },
+      { title: "Care videos — JonnyBee Home Care" },
+      { name: "description", content: "Watch care tips for families, caregiver training and stories from JonnyBee Home Care in Assin Foso." },
     ],
   }),
 });

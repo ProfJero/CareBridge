@@ -5,7 +5,7 @@ export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
     meta: [
-      { title: "SamBee Son and Daughter Home Care — Home care in Assin Foso, Ghana" },
+      { title: "JonnyBee Home Care — Home care in Assin Foso, Ghana" },
       {
         name: "description",
         content:

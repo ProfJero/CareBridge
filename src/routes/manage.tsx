@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ShieldAlert } from "lucide-react";
 import { AuthPanel } from "@/components/auth-panel";
-import { LogoMark, SamBee } from "@/components/brand";
+import { LogoMark, JonnyBee } from "@/components/brand";
 import { CareRequestsAdmin, ApplicationsAdmin } from "@/components/manage/care";
 import { CategoriesAdmin, CustomersAdmin, ReviewsAdmin, SellersAdmin } from "@/components/manage/catalog";
 import { Dashboard } from "@/components/manage/dashboard";
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/manage")({
     q: typeof search.q === "string" && search.q ? search.q : undefined,
   }),
   component: ManagePage,
-  head: () => ({ meta: [{ title: "Admin — SamBee Son and Daughter" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Admin — JonnyBee" }, { name: "robots", content: "noindex" }] }),
 });
 
 function ManagePage() {
@@ -41,10 +41,10 @@ function ManagePage() {
         <section className="hidden flex-col justify-between bg-navy p-12 text-white lg:flex">
           <div className="flex items-center gap-3">
             <span className="h-12"><LogoMark kind="care" badge className="h-full" /></span>
-            <SamBee light className="text-2xl" />
+            <JonnyBee light className="text-2xl" />
           </div>
           <div>
-            <h1 className="font-display text-4xl leading-tight font-extrabold">Run Home Care and the Online Trading Center from one dashboard.</h1>
+            <h1 className="font-display text-4xl leading-tight font-extrabold">Run Home Care and the Online Trading Platform from one dashboard.</h1>
             <p className="mt-4 max-w-md text-lg text-navy-muted">Orders, payments, products, sellers, customers, care requests, job applications and videos.</p>
           </div>
           <p className="text-sm text-navy-muted">{SITE.town}, {SITE.region}, {SITE.country}</p>
@@ -53,7 +53,7 @@ function ManagePage() {
           <div className="w-full max-w-md">
             <div className="mb-6 flex items-center gap-3 lg:hidden">
               <span className="h-11"><LogoMark kind="care" className="h-full" /></span>
-              <SamBee className="text-2xl" />
+              <JonnyBee className="text-2xl" />
             </div>
             <h2 className="font-display text-3xl font-extrabold text-ink">Staff sign-in</h2>
             {userId && !isAdmin ? (

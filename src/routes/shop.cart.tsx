@@ -9,7 +9,7 @@ import { ghs } from "@/lib/format";
 
 export const Route = createFileRoute("/shop/cart")({
   component: CartPage,
-  head: () => ({ meta: [{ title: "Your cart — SamBee Online Trading Center" }] }),
+  head: () => ({ meta: [{ title: "Your cart — JonnyBee Online Trading Platform" }] }),
 });
 
 function CartPage() {

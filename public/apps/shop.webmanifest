@@ -1,8 +1,8 @@
 {
   "id": "/apps/shop",
-  "name": "SamBee Online Trading Center",
-  "short_name": "SamBee Shop",
-  "description": "SamBee Son and Daughter Online Trading Center \u2014 Shop Smart... Shop Online. Free delivery.",
+  "name": "JonnyBee Online Trading Platform",
+  "short_name": "JonnyBee Shop",
+  "description": "JonnyBee Online Trading Platform \u2014 Shop Smart, Trade Better! Free delivery in Assin Municipality.",
   "start_url": "/shop?app=shop",
   "scope": "/",
   "display": "standalone",

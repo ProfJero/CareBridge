@@ -13,7 +13,7 @@ import type { Store } from "@/lib/types";
 
 export const Route = createFileRoute("/shop/store/$slug")({
   component: StorePage,
-  head: () => ({ meta: [{ title: "Seller shop — SamBee Online Trading Center" }] }),
+  head: () => ({ meta: [{ title: "Seller shop — JonnyBee Online Trading Platform" }] }),
 });
 
 function StorePage() {
@@ -70,7 +70,7 @@ function StorePage() {
           {contact || s.facebook_url || s.youtube_url ? (
             <div className="flex flex-wrap gap-2">
               {contact ? (
-                <a href={waLink(contact, `Hello ${s.name}, I found your shop on the SamBee Online Trading Center.`)} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#137a3e] px-4 font-semibold text-white">
+                <a href={waLink(contact, `Hello ${s.name}, I found your shop on the JonnyBee Online Trading Platform.`)} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#137a3e] px-4 font-semibold text-white">
                   <MessageCircle className="size-4" aria-hidden /> WhatsApp
                 </a>
               ) : null}
@@ -113,7 +113,7 @@ function StorePage() {
                 title="Your shop is live — add your first product"
                 action={<Link to="/sell" search={{ tab: "products", add: true }} className="inline-flex h-11 items-center rounded-xl bg-sea px-4 font-bold text-white">Add a product</Link>}
               >
-                Customers can already find your shop in the Shops directory. Products you add appear here and across the Online Trading Center straight away.
+                Customers can already find your shop in the Shops directory. Products you add appear here and across the Online Trading Platform straight away.
               </EmptyState>
             ) : (
               <EmptyState title="Products coming soon">

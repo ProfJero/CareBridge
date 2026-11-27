@@ -21,7 +21,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-import { LogoMark, SamBee } from "@/components/brand";
+import { LogoMark, JonnyBee } from "@/components/brand";
 import { useSession } from "@/lib/session";
 import { sb } from "@/lib/supabase";
 import { cn } from "@/lib/cn";
@@ -46,7 +46,7 @@ type NavItem = { id: AdminSection; label: string; icon: typeof LayoutDashboard; 
 const NAV: { group: string; items: NavItem[] }[] = [
   { group: "", items: [{ id: "dashboard", label: "Dashboard", icon: LayoutDashboard }] },
   {
-    group: "Online Trading Center",
+    group: "Online Trading Platform",
     items: [
       { id: "orders", label: "Orders", icon: ShoppingCart, badge: "orders" },
       { id: "products", label: "Products", icon: Package },
@@ -139,7 +139,7 @@ export function AdminLayout({
         <div className="flex h-16 items-center gap-2.5 border-b border-line px-4">
           <span className="h-9"><LogoMark kind="care" className="h-full" /></span>
           <div className="min-w-0 leading-none">
-            <SamBee className="block text-lg" />
+            <JonnyBee className="block text-lg" />
             <span className="text-[11px] font-bold tracking-wide text-faint uppercase">Admin</span>
           </div>
           <button type="button" onClick={() => setOpen(false)} className="ml-auto grid size-8 place-items-center rounded-lg lg:hidden" aria-label="Close menu">

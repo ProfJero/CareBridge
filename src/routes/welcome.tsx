@@ -4,7 +4,7 @@ import { BadgeCheck, CircleAlert, HeartHandshake, ShoppingBag, Store, UserRound 
 import { toast } from "sonner";
 import { SiteShell } from "@/components/site-shell";
 import { AuthPanel } from "@/components/auth-panel";
-import { SamBee } from "@/components/brand";
+import { JonnyBee } from "@/components/brand";
 import { Button, ErrorNote, Field, Spinner, controlClass } from "@/components/ui";
 import { NEARBY_TOWNS, SITE } from "@/lib/config";
 import { useSession } from "@/lib/session";
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/welcome")({
     error: typeof search.error === "string" && search.error ? search.error.slice(0, 200) : undefined,
   }),
   component: WelcomePage,
-  head: () => ({ meta: [{ title: "Welcome — SamBee Son and Daughter" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Welcome — JonnyBee" }, { name: "robots", content: "noindex" }] }),
 });
 
 function WelcomePage() {
@@ -96,7 +96,7 @@ function WelcomePage() {
           </span>
           <div className="min-w-0">
             <h1 className="font-display text-3xl font-extrabold text-ink sm:text-4xl">
-              Welcome to <SamBee />{profile?.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""}!
+              Welcome to <JonnyBee />{profile?.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""}!
             </h1>
             <p className="mt-2 text-lg text-muted">
               Your email <strong className="break-all text-ink">{email}</strong> is confirmed and you are signed in.

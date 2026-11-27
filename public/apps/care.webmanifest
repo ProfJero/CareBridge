@@ -1,8 +1,8 @@
 {
   "id": "/apps/care",
-  "name": "SamBee Home Care",
-  "short_name": "SamBee Care",
-  "description": "SamBee Son and Daughter Home Care, Assin Foso \u2014 request care, watch care videos and apply for caregiver jobs.",
+  "name": "JonnyBee Home Care",
+  "short_name": "JonnyBee Care",
+  "description": "JonnyBee Home Care, Assin Foso \u2014 request care, watch care videos and apply for caregiver jobs.",
   "start_url": "/?app=care",
   "scope": "/",
   "display": "standalone",

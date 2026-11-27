@@ -92,7 +92,7 @@ export function usePlatformSettings() {
     staleTime: 5 * 60_000,
     queryFn: async () => {
       const { data } = await sb().from("platform_settings").select("*").eq("id", 1).maybeSingle();
-      return (data as PlatformSettings | null) ?? { seller_fee_percent: 0, fees_enabled: false, fee_note: "Selling on SamBee is free for now.", free_delivery: true };
+      return (data as PlatformSettings | null) ?? { seller_fee_percent: 0, fees_enabled: false, fee_note: "Selling on JonnyBee is free for now.", free_delivery: true };
     },
   });
 }

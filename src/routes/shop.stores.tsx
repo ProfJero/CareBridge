@@ -12,8 +12,8 @@ export const Route = createFileRoute("/shop/stores")({
   component: StoresPage,
   head: () => ({
     meta: [
-      { title: "Shops — SamBee Online Trading Center" },
-      { name: "description", content: "Browse every shop on the SamBee Online Trading Center in Assin Foso, Ghana." },
+      { title: "Shops — JonnyBee Online Trading Platform" },
+      { name: "description", content: "Browse every shop on the JonnyBee Online Trading Platform in Assin Foso, Ghana." },
     ],
   }),
 });
@@ -42,9 +42,9 @@ function StoresPage() {
     <SiteShell>
       <section className="bg-navy text-on-navy">
         <div className="mx-auto max-w-7xl px-5 py-10">
-          <p className="text-sm font-bold tracking-widest text-navy-muted uppercase">Online Trading Center</p>
-          <h1 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">Shops on SamBee</h1>
-          <p className="mt-2 max-w-2xl text-lg text-navy-muted">Every seller trading on SamBee — from Assin Foso and beyond. Visit a shop to see its products, videos and contacts.</p>
+          <p className="text-sm font-bold tracking-widest text-navy-muted uppercase">Online Trading Platform</p>
+          <h1 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">Shops on JonnyBee</h1>
+          <p className="mt-2 max-w-2xl text-lg text-navy-muted">Every seller trading on JonnyBee — from Assin Foso and beyond. Visit a shop to see its products, videos and contacts.</p>
           <div className="mt-6 flex max-w-2xl flex-col gap-2 sm:flex-row">
             <label className="flex h-12 min-w-0 flex-1 items-center gap-2 rounded-xl bg-white px-4 text-faint">
               <Search className="size-5 shrink-0" aria-hidden />

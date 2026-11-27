@@ -1,8 +1,8 @@
 {
   "id": "/apps/admin",
-  "name": "SamBee Admin",
-  "short_name": "SamBee Admin",
-  "description": "Admin dashboard for SamBee Son and Daughter Home Care and Online Trading Center.",
+  "name": "JonnyBee Admin",
+  "short_name": "JonnyBee Admin",
+  "description": "Admin dashboard for JonnyBee Home Care and Online Trading Platform.",
   "start_url": "/manage?app=admin",
   "scope": "/",
   "display": "standalone",

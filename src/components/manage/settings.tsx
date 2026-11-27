@@ -39,7 +39,7 @@ export function SettingsAdmin({ onCustomers }: { onCustomers: () => void }) {
             </dl>
           </div>
         </Card>
-        <Card title="Online Trading Center">
+        <Card title="Online Trading Platform">
           <div className="flex items-start gap-4">
             <span className="h-12"><LogoMark kind="shop" className="h-full" /></span>
             <dl className="grid min-w-0 flex-1 gap-2 text-sm break-words">
@@ -95,7 +95,7 @@ export function SettingsAdmin({ onCustomers }: { onCustomers: () => void }) {
   );
 }
 
-/** Selling is free today; this switch is how SamBee starts charging sellers later. */
+/** Selling is free today; this switch is how JonnyBee starts charging sellers later. */
 function FeesCard() {
   const queryClient = useQueryClient();
   const { data } = usePlatformSettings();
@@ -124,7 +124,7 @@ function FeesCard() {
       must(
         await sb()
           .from("platform_settings")
-          .update({ fees_enabled: enabled, seller_fee_percent: n, fee_note: note.trim() || "Selling on SamBee is free for now.", free_delivery: freeDelivery, updated_at: new Date().toISOString() })
+          .update({ fees_enabled: enabled, seller_fee_percent: n, fee_note: note.trim() || "Selling on JonnyBee is free for now.", free_delivery: freeDelivery, updated_at: new Date().toISOString() })
           .eq("id", 1),
       );
     },

@@ -335,7 +335,7 @@ export function SellerOrders({ store }: { store: Store }) {
                     <p className="text-faint">{g.order.delivery_method === "pickup" ? "Pickup" : `${g.order.shipping_address}, ${g.order.shipping_town}`}</p>
                     <div className="mt-1 flex justify-end gap-1.5">
                       <a href={`tel:${g.order.shipping_phone}`} className="inline-flex h-8 items-center gap-1 rounded-lg border border-line px-2 text-xs font-bold"><Phone className="size-3.5" aria-hidden /> Call</a>
-                      <a href={waLink(g.order.shipping_phone, `Hello ${g.order.shipping_name}, this is ${store.name} about your SamBee order ${g.order.order_number}.`)} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#137a3e] px-2 text-xs font-bold text-white">
+                      <a href={waLink(g.order.shipping_phone, `Hello ${g.order.shipping_name}, this is ${store.name} about your JonnyBee order ${g.order.order_number}.`)} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#137a3e] px-2 text-xs font-bold text-white">
                         <MessageCircle className="size-3.5" aria-hidden /> WhatsApp
                       </a>
                     </div>
@@ -420,7 +420,7 @@ export function SellerCustomers({ store }: { store: Store }) {
                   <td className={`${td} font-bold tabular-nums`}>{ghs(c.spent)}</td>
                   <td className={`${td} text-faint`}>{relTime(c.last)}</td>
                   <td className={`${td} text-right`}>
-                    <a href={waLink(c.phone, `Hello ${c.name}, thank you for shopping at ${store.name} on SamBee!`)} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#137a3e] px-2.5 text-xs font-bold text-white">
+                    <a href={waLink(c.phone, `Hello ${c.name}, thank you for shopping at ${store.name} on JonnyBee!`)} target="_blank" rel="noreferrer" className="inline-flex h-8 items-center gap-1 rounded-lg bg-[#137a3e] px-2.5 text-xs font-bold text-white">
                       <MessageCircle className="size-3.5" aria-hidden /> WhatsApp
                     </a>
                   </td>
@@ -487,11 +487,11 @@ function openPoster(store: Store, qr: string, url: string) {
   const w = window.open("", "_blank", "width=820,height=1100");
   if (!w) return toast.error("Allow pop-ups to print your poster.");
   const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
-  w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(store.name)} — SamBee poster</title>
+  w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(store.name)} — JonnyBee poster</title>
 <style>body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#0a1440}.p{width:180mm;margin:10mm auto;border:6px solid #0b1f8f;border-radius:16px;padding:14mm;text-align:center}
 h1{font-size:34px;margin:8px 0}h2{font-size:20px;margin:0;color:#1a45d8}.qr{width:120mm;height:120mm}.s{font-size:18px;margin-top:10px}.u{font-size:14px;color:#3b4766;word-break:break-all}
 .b{display:inline-block;background:#0b1f8f;color:#fff;border-radius:999px;padding:6px 16px;font-weight:bold}@media print{.p{margin:0 auto}}</style></head>
-<body><div class="p"><img src="${location.origin}/brand/shop-icon.webp" style="height:60px" alt=""><h2>SamBee Online Trading Center</h2><h1>${esc(store.name)}</h1>
+<body><div class="p"><img src="${location.origin}/brand/jb-logo.webp" style="height:70px" alt=""><h2>JonnyBee Online Trading Platform</h2><h1>${esc(store.name)}</h1>
 <p class="b">Scan to shop · Free delivery</p><img class="qr" src="${qr}" alt="QR code"><p class="s"><strong>${esc(SHOP.slogan)}</strong></p>
 <p class="u">${esc(url)}</p>${store.whatsapp ? `<p class="s">WhatsApp: ${esc(store.whatsapp)}</p>` : ""}<p class="u">${esc(store.town)}, Ghana</p></div>
 <script>window.onload=()=>setTimeout(()=>window.print(),300)</script></body></html>`);
@@ -502,7 +502,7 @@ export function SellerMarketing({ store }: { store: Store }) {
   const { products } = useSellerData(store.id);
   const url = shopUrl(store);
   const qr = useQr(url);
-  const message = `Shop ${store.name} on SamBee Online Trading Center — free delivery! ${url}`;
+  const message = `Shop ${store.name} on JonnyBee Online Trading Platform — free delivery! ${url}`;
   const live = (products.data ?? []).filter((p) => p.status === "active");
 
   async function nativeShare(title: string, text: string, link: string) {
@@ -562,7 +562,7 @@ export function SellerMarketing({ store }: { store: Store }) {
           <ul className="divide-y divide-line">
             {live.map((p) => {
               const link = productUrl(p.id);
-              const text = `${p.title} — ${ghs(p.price)} at ${store.name} on SamBee. Free delivery! ${link}`;
+              const text = `${p.title} — ${ghs(p.price)} at ${store.name} on JonnyBee. Free delivery! ${link}`;
               return (
                 <li key={p.id} className="flex flex-wrap items-center gap-3 p-3">
                   <span className="size-11 shrink-0 overflow-hidden rounded-lg border border-line"><ProductImage src={p.images[0]} alt="" seed={p.id} width={90} /></span>
@@ -628,7 +628,7 @@ export function SellerPromos({ store }: { store: Store }) {
           max_uses: maxUses ? Number(maxUses) : null,
           expires_at: expires ? new Date(`${expires}T23:59:59`).toISOString() : null,
         });
-      if (res.error) throw new Error(/duplicate|unique/i.test(res.error.message) ? "That code is already used on SamBee — try another." : res.error.message);
+      if (res.error) throw new Error(/duplicate|unique/i.test(res.error.message) ? "That code is already used on JonnyBee — try another." : res.error.message);
     },
     onSuccess: () => {
       toast.success("Promo code created");
@@ -690,7 +690,7 @@ export function SellerPromos({ store }: { store: Store }) {
                       </span>
                     </span>
                     <Badge tone={!c.active ? "gray" : expired || usedUp ? "amber" : "green"}>{!c.active ? "Off" : expired ? "Expired" : usedUp ? "Used up" : "Active"}</Badge>
-                    <Btn size="sm" onClick={() => void copy(`Use code ${c.code} for ${c.percent_off}% off at ${store.name} on SamBee: ${shopUrl(store)}`, "Promo message")}><Copy className="size-3.5" aria-hidden /> Share</Btn>
+                    <Btn size="sm" onClick={() => void copy(`Use code ${c.code} for ${c.percent_off}% off at ${store.name} on JonnyBee: ${shopUrl(store)}`, "Promo message")}><Copy className="size-3.5" aria-hidden /> Share</Btn>
                     <Btn size="sm" onClick={() => toggle.mutate(c)}>{c.active ? "Turn off" : "Turn on"}</Btn>
                     <Btn size="sm" tone="danger" onClick={() => window.confirm(`Delete ${c.code}?`) && remove.mutate(c.id)}>Delete</Btn>
                   </li>
@@ -713,11 +713,11 @@ export function SellerPlan({ store }: { store: Store }) {
   const charging = Boolean(platform?.fees_enabled && Number(platform.seller_fee_percent) > 0);
   return (
     <>
-      <PageHeader title="Plan & fees" description="What it costs to sell on SamBee." />
+      <PageHeader title="Plan & fees" description="What it costs to sell on JonnyBee." />
       <div className="grid gap-4 lg:grid-cols-2">
         <Card title="Your plan">
           <p className="text-3xl font-extrabold text-ink">{charging ? `${platform?.seller_fee_percent}% per sale` : "Free"}</p>
-          <p className="mt-1 text-muted">{platform?.fee_note ?? "Selling on SamBee is free for now."}</p>
+          <p className="mt-1 text-muted">{platform?.fee_note ?? "Selling on JonnyBee is free for now."}</p>
           <ul className="mt-4 grid gap-2 text-sm">
             {["Unlimited products", "Your own shop page with QR code", "Short product videos", "Promo codes", "Orders, customers and sales dashboard", "Free delivery for your customers"].map((f) => (
               <li key={f} className="flex items-center gap-2"><CheckCircle2 className="size-4 text-leaf" aria-hidden /> {f}</li>
@@ -729,8 +729,8 @@ export function SellerPlan({ store }: { store: Store }) {
           <p className="mt-1 text-3xl font-extrabold tabular-nums">{ghs(fees)}</p>
           <p className="mt-3 text-sm text-muted">
             {charging
-              ? "Fees are calculated on each item when an order is placed. The SamBee team will contact you about settlement."
-              : "You pay nothing right now. If SamBee introduces seller fees in future, you will be told in advance and fees will only apply to new orders."}
+              ? "Fees are calculated on each item when an order is placed. The JonnyBee team will contact you about settlement."
+              : "You pay nothing right now. If JonnyBee introduces seller fees in future, you will be told in advance and fees will only apply to new orders."}
           </p>
         </Card>
       </div>

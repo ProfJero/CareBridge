@@ -99,8 +99,8 @@ export function InstallAppButton({ className, compact = false, tone = "light" }:
             {kind === "admin"
               ? "Add the admin dashboard to your home screen to manage orders and requests in one tap."
               : kind === "shop"
-                ? "Add the SamBee shop to your home screen to shop in one tap."
-                : "Add SamBee Home Care to your home screen to request care in one tap."}
+                ? "Add the JonnyBee shop to your home screen to shop in one tap."
+                : "Add JonnyBee Home Care to your home screen to request care in one tap."}
           </p>
         </div>
         {isIos() ? (

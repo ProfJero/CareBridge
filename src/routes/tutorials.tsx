@@ -22,8 +22,8 @@ export const Route = createFileRoute("/tutorials")({
   component: TutorialsPage,
   head: () => ({
     meta: [
-      { title: "How-to tutorials (English & Twi) — SamBee" },
-      { name: "description", content: "Video tutorials in English and Twi: how to shop, sell, request home care and use the SamBee apps." },
+      { title: "How-to tutorials (English & Twi) — JonnyBee" },
+      { name: "description", content: "Video tutorials in English and Twi: how to shop, sell, request home care and use the JonnyBee apps." },
     ],
   }),
 });
@@ -136,7 +136,7 @@ function TutorialsPage() {
           <p className="inline-flex items-center gap-2 text-sm font-bold tracking-widest text-navy-muted uppercase">
             <GraduationCap className="size-4" aria-hidden /> Help centre
           </p>
-          <h1 className="mt-2 font-display text-3xl font-extrabold sm:text-5xl">How to use SamBee</h1>
+          <h1 className="mt-2 font-display text-3xl leading-tight font-extrabold sm:text-5xl">How to use JonnyBee Online Trading Platform</h1>
           <p className="mt-3 max-w-2xl text-lg text-navy-muted">
             Short video tutorials in <strong className="text-white">English</strong> and <strong className="text-white">Twi</strong> — shopping, selling, home care and the apps.
           </p>

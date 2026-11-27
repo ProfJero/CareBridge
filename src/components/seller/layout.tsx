@@ -17,7 +17,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-import { LogoMark, SamBee } from "@/components/brand";
+import { LogoMark, JonnyBee } from "@/components/brand";
 import { InstallAppButton } from "@/components/install-app";
 import { useSession } from "@/lib/session";
 import type { Store } from "@/lib/types";
@@ -89,7 +89,7 @@ export function SellerLayout({
           <Link to="/shop" className="flex min-w-0 items-center gap-2.5">
             <span className="h-8"><LogoMark kind="shop" className="h-full" /></span>
             <span className="min-w-0 leading-none">
-              <SamBee className="block text-lg" />
+              <JonnyBee className="block text-lg" />
               <span className="text-[11px] font-bold tracking-wide text-faint uppercase">Seller centre</span>
             </span>
           </Link>

@@ -21,7 +21,7 @@ import {
 import { SiteShell } from "@/components/site-shell";
 import { RequestCareForm } from "@/components/home/request-care";
 import { BannerCarousel } from "@/components/home/banner-carousel";
-import { SamBee } from "@/components/brand";
+import { JonnyBee } from "@/components/brand";
 import { ProductCard, ProductGridSkeleton } from "@/components/shop/product-card";
 import { VideoCard, VideoEmbed } from "@/components/video-player";
 import { Modal } from "@/components/ui";
@@ -106,7 +106,7 @@ export function HomePage() {
               {SITE.town} · {SITE.region} · {SITE.country}
             </p>
             <h1 className="mt-5 font-display text-4xl leading-[1.08] font-extrabold text-ink sm:text-5xl md:text-6xl">
-              <SamBee /> Son and Daughter <span className="text-sea">Home Care</span>
+              <JonnyBee /> <span className="text-sea">Home Care</span>
             </h1>
             <p className="mt-3 font-display text-xl font-bold text-navy italic sm:text-2xl">{SITE.tagline}</p>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
@@ -146,12 +146,10 @@ export function HomePage() {
             <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-line">
               <img
                 src="/brand/hero-care.webp"
-                srcSet="/brand/hero-care-540.webp 540w, /brand/hero-care.webp 900w"
-                sizes="(min-width: 1024px) 560px, 100vw"
-                alt="A SamBee caregiver smiling with an elderly client at home"
-                width={900}
-                height={900}
-                className="aspect-square w-full object-cover"
+                alt="A JonnyBee Home Care caregiver smiling with an elderly client at home"
+                width={512}
+                height={780}
+                className="aspect-[4/5] w-full object-cover object-[50%_35%]"
                 loading="lazy"
               />
               <a
@@ -249,7 +247,7 @@ export function HomePage() {
           {shops.data?.length ? (
             <div className="mt-8">
               <div className="flex items-end justify-between gap-3">
-                <h3 className="text-xl font-bold text-ink">Shops on SamBee</h3>
+                <h3 className="text-xl font-bold text-ink">Shops on JonnyBee</h3>
                 <Link to="/shop/stores" className="font-bold text-sea">All shops →</Link>
               </div>
               <div className="scrollbar-none -mx-5 mt-4 flex gap-4 overflow-x-auto px-5 pt-1 pb-2">

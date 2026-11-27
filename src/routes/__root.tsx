@@ -13,11 +13,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SamBee Son and Daughter — Home Care & Online Trading Center, Assin Foso" },
+      { title: "JonnyBee — Home Care & Online Trading Platform, Assin Foso" },
       { name: "theme-color", content: "#0b1f8f" },
       {
         name: "description",
-        content: "SamBee Son and Daughter Home Care: personal care, elderly care, recovery support, household help and companionship at home in Assin Foso, Central Region, Ghana. Shop care essentials and watch care videos.",
+        content: "JonnyBee Home Care: personal care, elderly care, recovery support, household help and companionship at home in Assin Foso, Central Region, Ghana. Shop care essentials and watch care videos.",
       },
     ],
     links: [

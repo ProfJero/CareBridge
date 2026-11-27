@@ -15,7 +15,7 @@ import { cn } from "@/lib/cn";
 
 export const Route = createFileRoute("/shop/checkout")({
   component: CheckoutPage,
-  head: () => ({ meta: [{ title: "Checkout — SamBee Online Trading Center" }] }),
+  head: () => ({ meta: [{ title: "Checkout — JonnyBee Online Trading Platform" }] }),
 });
 
 const NETWORKS = ["MTN MoMo", "Telecel Cash", "AirtelTigo Money"] as const;
