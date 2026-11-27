@@ -66,7 +66,7 @@ export function SettingsAdmin({ onCustomers }: { onCustomers: () => void }) {
               <Status ok label="Active" />
             </li>
             <li className="flex items-center justify-between gap-3 py-3 last:pb-0">
-              <span className="flex min-w-0 items-center gap-2.5"><Store className="size-5 text-sea" aria-hidden /><span><strong>Hosting</strong><br /><span className="text-faint">Cloudflare Pages · sambee-snd.pages.dev</span></span></span>
+              <span className="flex min-w-0 items-center gap-2.5"><Store className="size-5 text-sea" aria-hidden /><span><strong>Hosting</strong><br /><span className="text-faint">Cloudflare Pages · jonnybee.pages.dev</span></span></span>
               <Status ok label="Live" />
             </li>
           </ul>
