@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BadgeCheck, Eye, Handshake, HeartHandshake, MapPin, ShieldCheck, ShoppingBag, Sparkles, Star, Target, Truck } from "lucide-react";
+import { BadgeCheck, Banknote, Eye, Gift, Laptop, ShoppingCart, Smartphone, Tv, Zap, Handshake, HeartHandshake, MapPin, ShieldCheck, ShoppingBag, Sparkles, Star, Target, Truck } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { JonnyBee } from "@/components/brand";
 import { SHOP, SITE } from "@/lib/config";
@@ -8,13 +8,14 @@ export const Route = createFileRoute("/shop/about")({
   component: AboutShop,
   head: () => ({
     meta: [
-      { title: "About — JonnyBee Online Trading Platform" },
+      { title: "About — JonnyBee Son and Daughter Online Trading Platform" },
       { name: "description", content: `${SHOP.about} ${SHOP.slogan}` },
     ],
   }),
 });
 
 const VALUE_ICONS = [HeartHandshake, ShieldCheck, Star, BadgeCheck, Truck, Handshake];
+const SERVICE_ICONS = [ShoppingCart, Laptop, Smartphone, Zap, Tv, Banknote, Gift, Handshake];
 
 function AboutShop() {
   return (
@@ -26,7 +27,7 @@ function AboutShop() {
               <MapPin className="size-4" aria-hidden /> {SHOP.location}
             </p>
             <h1 className="mt-5 font-display text-4xl leading-tight font-extrabold text-ink sm:text-5xl">
-              <JonnyBee /> <span className="text-sea">Online Trading Platform</span>
+              <JonnyBee /> <span className="text-navy">Son and Daughter</span> <span className="text-sea">Online Trading Platform</span>
             </h1>
             <p className="mt-3 font-display text-2xl font-bold text-navy italic">“{SHOP.slogan}”</p>
             <p className="mt-6 text-lg leading-relaxed text-muted">{SHOP.about}</p>
@@ -43,6 +44,29 @@ function AboutShop() {
           <div className="mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-line">
             <img src="/brand/banner-shop-720.webp" alt={`${SHOP.name} — ${SHOP.slogan}`} width={720} height={480} className="w-full" />
           </div>
+        </div>
+      </section>
+
+      <section className="border-y border-line bg-paper">
+        <div className="mx-auto max-w-7xl px-5 py-14">
+          <p className="text-sm font-bold tracking-widest text-sea uppercase">What we offer</p>
+          <h2 className="mt-2 font-display text-3xl font-extrabold text-ink">Our Services</h2>
+          <p className="mt-2 max-w-2xl text-lg text-muted">
+            Shop online here. For airtime, bills, TV subscriptions, mobile money transfers and business solutions, contact us at{" "}
+            <a href={`mailto:${SITE.inbox}`} className="font-bold break-words text-sea">{SITE.inbox}</a>
+            {SITE.phone ? <> or <a href={`tel:${SITE.phone}`} className="font-bold text-sea">{SITE.phone}</a></> : null}.
+          </p>
+          <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {SHOP.services.map((service, i) => {
+              const Icon = SERVICE_ICONS[i] ?? Sparkles;
+              return (
+                <li key={service} className="flex flex-col items-start gap-3 rounded-2xl border border-line bg-white p-4 sm:p-5">
+                  <span className="grid size-11 place-items-center rounded-xl bg-mint text-sea"><Icon className="size-5" aria-hidden /></span>
+                  <span className="text-base font-bold text-ink">{service}</span>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 

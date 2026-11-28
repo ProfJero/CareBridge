@@ -2,7 +2,7 @@
   "id": "/apps/admin",
   "name": "JonnyBee Admin",
   "short_name": "JonnyBee Admin",
-  "description": "Admin dashboard for JonnyBee Home Care and Online Trading Platform.",
+  "description": "Admin dashboard for JonnyBee Son and Daughter Home Care Services and Online Trading Platform.",
   "start_url": "/manage?app=admin",
   "scope": "/",
   "display": "standalone",

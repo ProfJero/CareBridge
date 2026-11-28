@@ -3,8 +3,8 @@ import { cn } from "@/lib/cn";
 export type BrandKind = "care" | "shop";
 
 const ICON: Record<BrandKind, { src: string; w: number; h: number; alt: string }> = {
-  care: { src: "/brand/bee.webp", w: 300, h: 278, alt: "JonnyBee Home Care logo" },
-  shop: { src: "/brand/jb-logo.webp", w: 360, h: 267, alt: "JonnyBee Online Trading Platform logo" },
+  care: { src: "/brand/care-logo.webp", w: 320, h: 293, alt: "JonnyBee Son and Daughter Home Care Services logo" },
+  shop: { src: "/brand/shop-logo.webp", w: 320, h: 303, alt: "JonnyBee Son and Daughter Online Trading Platform logo" },
 };
 
 /** The extracted logo artwork. On dark backgrounds it sits on a white badge so the edges stay clean. */
@@ -35,10 +35,10 @@ export function JonnyBee({ className, light = false }: { className?: string; lig
 }
 
 export function Wordmark({ kind = "care", light = false, compact = false }: { kind?: BrandKind; light?: boolean; compact?: boolean }) {
-  const line2 = kind === "shop" ? "Online Trading Platform" : "Home Care";
+  const line2 = kind === "shop" ? "Son & Daughter Online Trading" : "Son & Daughter Home Care";
   return (
     <span className="flex min-w-0 items-center gap-2.5">
-      <span className={cn("flex shrink-0 items-center", kind === "shop" ? "h-10 sm:h-11" : "h-11 sm:h-12")}>
+      <span className={cn("flex shrink-0 items-center", "h-11 sm:h-12")}>
         <LogoMark kind={kind} badge={light} className="h-full" />
       </span>
       <span className="min-w-0 leading-none">
@@ -50,7 +50,7 @@ export function Wordmark({ kind = "care", light = false, compact = false }: { ki
             compact && "hidden min-[400px]:block",
           )}
         >
-          {kind === "shop" ? `${line2}` : line2}
+          {line2}
         </span>
       </span>
     </span>

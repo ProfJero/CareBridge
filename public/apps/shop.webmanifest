@@ -1,8 +1,8 @@
 {
   "id": "/apps/shop",
-  "name": "JonnyBee Online Trading Platform",
+  "name": "JonnyBee Son and Daughter Online Trading Platform",
   "short_name": "JonnyBee Shop",
-  "description": "JonnyBee Online Trading Platform \u2014 Shop Smart, Trade Better! Free delivery in Assin Municipality.",
+  "description": "JonnyBee Son and Daughter Online Trading Platform \u2014 Shop Smart, Trade Smart with JonnyBee! Free delivery in Assin Municipality.",
   "start_url": "/shop?app=shop",
   "scope": "/",
   "display": "standalone",

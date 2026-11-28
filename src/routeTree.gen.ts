@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CareRouteImport } from './routes/care'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ManageRouteImport } from './routes/manage'
 import { Route as SellRouteImport } from './routes/sell'
@@ -36,6 +37,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareRoute = CareRouteImport.update({
+  id: '/care',
+  path: '/care',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareersRoute = CareersRouteImport.update({
@@ -122,6 +128,7 @@ const ShopStoreSlugRoute = ShopStoreSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/care': typeof CareRoute
   '/careers': typeof CareersRoute
   '/manage': typeof ManageRoute
   '/sell': typeof SellRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/care': typeof CareRoute
   '/careers': typeof CareersRoute
   '/manage': typeof ManageRoute
   '/sell': typeof SellRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/care': typeof CareRoute
   '/careers': typeof CareersRoute
   '/manage': typeof ManageRoute
   '/sell': typeof SellRoute
@@ -185,6 +194,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/care'
     | '/careers'
     | '/manage'
     | '/sell'
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/admin'
+    | '/care'
     | '/careers'
     | '/manage'
     | '/sell'
@@ -225,6 +236,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/care'
     | '/careers'
     | '/manage'
     | '/sell'
@@ -246,6 +258,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  CareRoute: typeof CareRoute
   CareersRoute: typeof CareersRoute
   ManageRoute: typeof ManageRoute
   SellRoute: typeof SellRoute
@@ -277,6 +290,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/care': {
+      id: '/care'
+      path: '/care'
+      fullPath: '/care'
+      preLoaderRoute: typeof CareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/careers': {
@@ -407,6 +427,7 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  CareRoute: CareRoute,
   CareersRoute: CareersRoute,
   ManageRoute: ManageRoute,
   SellRoute: SellRoute,

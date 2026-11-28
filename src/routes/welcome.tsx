@@ -134,7 +134,7 @@ function WelcomePage() {
               {[
                 { to: "/shop" as const, icon: ShoppingBag, title: "Shop online", copy: "Browse products with free delivery." },
                 { to: "/sell" as const, icon: Store, title: "Open your shop", copy: "Sell your products for free. Add WhatsApp, Facebook, YouTube and short product videos." },
-                { to: "/" as const, icon: HeartHandshake, title: "Request home care", copy: "Personal care, elderly care and household support in Assin Foso.", hash: "request-care" },
+                { to: "/care" as const, icon: HeartHandshake, title: "Request home care", copy: "Personal care, elderly care and household support in Assin Foso.", hash: "request-care" },
                 { to: "/account" as const, icon: UserRound, title: "My account", copy: "Orders, wishlist and profile." },
               ].map(({ to, icon: Icon, title, copy, hash }) => (
                 <Link key={title} to={to} hash={hash} className="flex items-start gap-4 rounded-2xl border border-line bg-white p-4 hover:border-sea/50">

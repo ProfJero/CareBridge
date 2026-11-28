@@ -5,12 +5,13 @@
 const env = import.meta.env as Record<string, string | undefined>;
 
 export const SITE = {
-  name: "JonnyBee Home Care",
-  shortName: "JonnyBee Care",
+  name: "JonnyBee Son and Daughter Home Care Services",
+  shortName: "JonnyBee Home Care",
   town: "Assin Foso",
   region: "Central Region",
   country: "Ghana",
-  tagline: "Caring Today... Supporting Tomorrow",
+  tagline: "Your Family, Our Care!",
+  promise: "Let us care for your loved ones at home!",
   /** Receives every form submission (applications, care requests, order alerts). */
   inbox: "beagracelyn@gmail.com",
   phone: env.VITE_CONTACT_PHONE ?? "",
@@ -21,20 +22,31 @@ export const SITE = {
 
 /** The e-commerce arm: JonnyBee Online Trading Platform. */
 export const SHOP = {
-  name: "JonnyBee Online Trading Platform",
+  name: "JonnyBee Son and Daughter Online Trading Platform",
   shortName: "JonnyBee",
-  slogan: "Shop Smart, Trade Better!",
-  promise: "Your Trusted Online Trading Partner!",
+  slogan: "Shop Smart, Trade Smart with JonnyBee!",
+  promise: "Your Trusted Online Shopping Partner!",
   area: "Assin Municipality",
   about:
-    "JonnyBee Online Trading Platform is a customer-focused online trading business based in Assin Foso, Assin Municipality, Central Region, Ghana, West Africa. We are committed to making shopping convenient, accessible, and reliable by connecting customers with products and services through online platforms.",
+    "JonnyBee Son and Daughter Online Trading Platform is a customer-focused online trading business based in Assin Foso, Assin Municipality, Central Region, Ghana, West Africa. We are committed to making shopping convenient, accessible, and reliable by connecting customers with products and services through online platforms.",
   goal:
     "Our goal is to provide customers with a simple and enjoyable shopping experience while building trust through good customer service, quality products, and dependable transactions.",
   vision: "To become a trusted and recognized online trading platform serving customers in Assin Municipality, Ghana, and beyond.",
   mission:
     "To provide convenient online shopping and trading opportunities while delivering excellent customer service and creating value for our customers and business partners.",
   values: ["Customer satisfaction", "Trust and integrity", "Quality", "Reliability", "Convenience", "Professional service"],
-  location: "Assin Municipality, Central Region, Ghana, West Africa",
+  location: "Assin Foso, Central Region, Ghana, West Africa",
+  /** From the banner. Services beyond the marketplace are arranged by phone, WhatsApp or email. */
+  services: [
+    "Online Shopping (All Categories)",
+    "E-Commerce Solutions",
+    "Airtime & Data Top-Up",
+    "Utility Bills Payment",
+    "TV Subscription",
+    "Money Transfer (Mobile Money)",
+    "Gift Items & More",
+    "Reliable & Secure Trade",
+  ],
 } as const;
 
 /** Publishable keys only — safe in the browser. Data is protected by RLS. */

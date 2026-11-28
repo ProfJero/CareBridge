@@ -6,11 +6,13 @@ import { sendFormEmail } from "@/lib/email";
 import { errText, sb } from "@/lib/supabase";
 
 export const SERVICE_OPTIONS = [
-  "Personal care",
-  "Elderly care",
-  "Illness & recovery support",
-  "Household support",
-  "Companionship & family respite",
+  "Personal care assistance",
+  "Elderly care & support",
+  "Child care & supervision",
+  "Housekeeping services",
+  "Meal preparation",
+  "Companionship & support",
+  "Health monitoring support",
   "Not sure yet — please advise",
 ] as const;
 

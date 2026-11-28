@@ -1,9 +1,9 @@
 {
   "id": "/apps/care",
-  "name": "JonnyBee Home Care",
+  "name": "JonnyBee Son and Daughter Home Care Services",
   "short_name": "JonnyBee Care",
-  "description": "JonnyBee Home Care, Assin Foso \u2014 request care, watch care videos and apply for caregiver jobs.",
-  "start_url": "/?app=care",
+  "description": "JonnyBee Son and Daughter Home Care Services, Assin Foso \u2014 Your Family, Our Care! Request care, watch care videos and apply for caregiver jobs.",
+  "start_url": "/care?app=care",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
@@ -43,7 +43,7 @@
   "shortcuts": [
     {
       "name": "Request care",
-      "url": "/#request-care",
+      "url": "/care#request-care",
       "icons": [
         {
           "src": "/apps/care-192.png",

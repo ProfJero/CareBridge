@@ -1,61 +1,48 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import {
+  Activity,
   ArrowRight,
+  Baby,
   Bath,
   BriefcaseBusiness,
   ChevronDown,
-  ClipboardCheck,
+  CookingPot,
   HandHeart,
-  HeartPulse,
   Home,
   Mail,
   MapPin,
   PhoneCall,
   ShieldCheck,
-  ShoppingBag,
   Sparkles,
+  Truck,
   UserRound,
   Users,
 } from "lucide-react";
 import { SiteShell } from "@/components/site-shell";
 import { RequestCareForm } from "@/components/home/request-care";
-import { BannerCarousel } from "@/components/home/banner-carousel";
 import { JonnyBee } from "@/components/brand";
-import { ProductCard, ProductGridSkeleton } from "@/components/shop/product-card";
 import { VideoCard, VideoEmbed } from "@/components/video-player";
 import { Modal } from "@/components/ui";
-import { SHOP, SITE } from "@/lib/config";
-import { useCategories, useProducts, useStores, useVideos } from "@/lib/queries";
-import { StoreCard } from "@/components/shop/store-card";
+import { SITE } from "@/lib/config";
+import { useVideos } from "@/lib/queries";
 import type { Video } from "@/lib/types";
 
 const SERVICES = [
-  {
-    icon: Bath,
-    title: "Personal care",
-    copy: "Bathing, dressing, grooming, and other daily activities — done gently and with dignity.",
-  },
-  {
-    icon: UserRound,
-    title: "Elderly care",
-    copy: "Helping older people with daily routines, meals, mobility, and companionship.",
-  },
-  {
-    icon: HeartPulse,
-    title: "Illness & recovery support",
-    copy: "Support with everyday activities and following a care plan provided by health professionals.",
-  },
-  {
-    icon: Home,
-    title: "Household support",
-    copy: "Light housekeeping, meal preparation, and maintaining a safe home environment.",
-  },
-  {
-    icon: Users,
-    title: "Companionship & family support",
-    copy: "Spending time with clients and helping families manage their care responsibilities.",
-  },
+  { icon: Bath, title: "Personal care assistance", copy: "Bathing, dressing, grooming and other daily activities, done gently and with dignity." },
+  { icon: UserRound, title: "Elderly care & support", copy: "Helping older people with daily routines, meals, mobility and companionship." },
+  { icon: Baby, title: "Child care & supervision", copy: "Safe, attentive care and supervision for children at home while parents are busy." },
+  { icon: Home, title: "Housekeeping services", copy: "Light housekeeping and keeping the home clean, tidy and safe." },
+  { icon: CookingPot, title: "Meal preparation", copy: "Healthy, home-cooked meals prepared to suit your loved one's needs and tastes." },
+  { icon: Users, title: "Companionship & support", copy: "Spending time with clients and helping families manage their care responsibilities." },
+  { icon: Activity, title: "Health monitoring support", copy: "Help following care plans from health professionals, with regular checks shared with the family." },
+] as const;
+
+const PROMISES = [
+  { icon: HandHeart, label: "Caring with love" },
+  { icon: ShieldCheck, label: "Trusted & reliable" },
+  { icon: Sparkles, label: "Safe & professional" },
+  { icon: Truck, label: "At your doorstep" },
 ] as const;
 
 const STEPS = [
@@ -77,88 +64,62 @@ const FAQ = [
     "Can I book care for a few hours only?",
     "Yes. Care can be a short daily visit, several days a week, or longer support. We agree the schedule with you.",
   ],
-  [
-    "What is the marketplace?",
-    "A shop where local sellers list care supplies and everyday items — walking aids, health monitors, hygiene products and more — with delivery or pickup in Assin Foso.",
-  ],
 ] as const;
 
 export function HomePage() {
-  const { data: categories } = useCategories();
-  const featuredOnly = useProducts({ featured: true, limit: 8 }, categories);
-  const latest = useProducts({ limit: 8 }, categories);
-  const featured = featuredOnly.data?.products.length ? featuredOnly : latest;
-  const shops = useStores(8);
   const videos = useVideos(3);
   const [playing, setPlaying] = useState<Video | null>(null);
   const [faq, setFaq] = useState<number | null>(0);
 
   return (
     <SiteShell>
-      <BannerCarousel />
-
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-cream">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-12 md:py-20 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <p className="inline-flex items-center gap-2 rounded-full bg-mint px-3 py-1.5 text-sm font-semibold text-sea-2">
+      {/* Hero: the Home Care banner */}
+      <section className="bg-cream">
+        <div className="mx-auto grid max-w-7xl gap-6 px-3 pt-3 pb-10 sm:px-5 sm:pt-5 md:pb-14 lg:grid-cols-[1.25fr_0.75fr] lg:items-stretch">
+          <img
+            src="/brand/banner-care.webp"
+            srcSet="/brand/banner-care-720.webp 720w, /brand/banner-care.webp 1280w"
+            sizes="(min-width: 1024px) 760px, 100vw"
+            alt={`${SITE.name} — ${SITE.tagline} ${SITE.promise} A JonnyBee caregiver with an elderly client in ${SITE.town}.`}
+            width={1280}
+            height={853}
+            className="aspect-[3/2] w-full rounded-2xl object-cover ring-1 ring-line sm:rounded-3xl"
+            fetchPriority="high"
+          />
+          <div className="flex flex-col justify-center rounded-2xl bg-white p-5 ring-1 ring-line sm:rounded-3xl sm:p-8">
+            <p className="inline-flex w-fit items-center gap-2 rounded-full bg-mint px-3 py-1.5 text-sm font-semibold text-sea-2">
               <MapPin className="size-4" aria-hidden />
-              {SITE.town} · {SITE.region} · {SITE.country}
+              {SITE.town} · {SITE.region}
             </p>
-            <h1 className="mt-5 font-display text-4xl leading-[1.08] font-extrabold text-ink sm:text-5xl md:text-6xl">
-              <JonnyBee /> <span className="text-sea">Home Care</span>
+            <h1 className="mt-4 font-display text-3xl leading-[1.1] font-extrabold text-ink sm:text-4xl">
+              <JonnyBee /> <span className="text-navy">Son and Daughter</span>{" "}
+              <span className="text-sea">Home Care Services</span>
             </h1>
-            <p className="mt-3 font-display text-xl font-bold text-navy italic sm:text-2xl">{SITE.tagline}</p>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
-              A home-care service in {SITE.town}, {SITE.region}, {SITE.country}, West Africa. We support people who need
-              help while living at home — and the families who love them.
+            <p className="mt-3 font-display text-xl font-bold text-navy italic">{SITE.tagline}</p>
+            <p className="mt-3 text-lg leading-relaxed text-muted">
+              {SITE.promise} We support people who need help while living at home, and the families who love them.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
               <a
                 href="#request-care"
-                className="inline-flex h-13 items-center justify-center gap-2 rounded-xl bg-sea px-6 text-lg font-semibold text-on-sea hover:bg-sea-2"
+                className="inline-flex h-13 items-center sm:flex-1 lg:flex-none xl:flex-1 justify-center gap-2 rounded-xl bg-sea px-6 text-lg font-semibold text-on-sea hover:bg-sea-2"
               >
-                Request care
-                <ArrowRight className="size-5" aria-hidden />
+                Request care <ArrowRight className="size-5" aria-hidden />
               </a>
               <a
                 href="#services"
-                className="inline-flex h-13 items-center justify-center rounded-xl border border-line bg-card px-6 text-lg font-semibold text-navy hover:bg-sky"
+                className="inline-flex h-13 items-center sm:flex-1 lg:flex-none xl:flex-1 justify-center rounded-xl border border-line bg-card px-6 text-lg font-semibold text-navy hover:bg-sky"
               >
-                Explore our services
+                Our services
               </a>
             </div>
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-base text-muted">
-              <li className="flex items-center gap-2">
-                <ShieldCheck className="size-5 text-sea" aria-hidden /> Vetted, trained caregivers
-              </li>
-              <li className="flex items-center gap-2">
-                <ClipboardCheck className="size-5 text-sea" aria-hidden /> Personal care plan
-              </li>
-              <li className="flex items-center gap-2">
-                <HandHeart className="size-5 text-sea" aria-hidden /> Respect and dignity
-              </li>
+            <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 text-base text-muted">
+              {PROMISES.map(({ icon: Icon, label }) => (
+                <li key={label} className="flex items-center gap-2">
+                  <Icon className="size-5 shrink-0 text-sea" aria-hidden /> {label}
+                </li>
+              ))}
             </ul>
-          </div>
-
-          <div className="relative">
-            <div className="absolute -top-8 -right-8 size-64 rounded-full bg-mint blur-3xl" aria-hidden />
-            <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-line">
-              <img
-                src="/brand/hero-care.webp"
-                alt="A JonnyBee Home Care caregiver smiling with an elderly client at home"
-                width={512}
-                height={780}
-                className="aspect-[4/5] w-full object-cover object-[50%_35%]"
-                loading="lazy"
-              />
-              <a
-                href="#request-care"
-                className="absolute inset-x-4 bottom-4 flex h-13 items-center justify-center gap-2 rounded-2xl bg-navy/95 font-bold text-on-navy shadow-lg backdrop-blur"
-              >
-                <PhoneCall className="size-4" aria-hidden /> Ask for a free care conversation
-              </a>
-            </div>
           </div>
         </div>
       </section>
@@ -166,7 +127,7 @@ export function HomePage() {
       {/* What home care does */}
       <section id="services" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-16">
         <div className="max-w-3xl">
-          <p className="text-sm font-bold tracking-widest text-sea uppercase">What a home-care service does</p>
+          <p className="text-sm font-bold tracking-widest text-sea uppercase">Our services</p>
           <h2 className="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">
             Practical support, so life at home stays possible.
           </h2>
@@ -213,57 +174,6 @@ export function HomePage() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      {/* Marketplace teaser */}
-      <section className="mx-auto max-w-7xl px-5 py-16">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div className="max-w-2xl">
-            <p className="text-sm font-bold tracking-widest text-sea uppercase">{SHOP.name}</p>
-            <h2 className="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">Shop smart. Shop online.</h2>
-            <p className="mt-3 text-lg text-muted">
-              Mobile accessories, electronics, fashion, home essentials, gifts and care supplies from trusted sellers in Assin
-              Foso. Pay with Mobile Money or cash on delivery.
-            </p>
-          </div>
-          <Link
-            to="/shop"
-            className="inline-flex h-12 items-center gap-2 rounded-xl bg-navy px-5 font-semibold text-on-navy hover:bg-navy-2"
-          >
-            <ShoppingBag className="size-5" aria-hidden /> Visit the shop
-          </Link>
-        </div>
-        <div className="mt-8">
-          {featured.isLoading ? (
-            <ProductGridSkeleton count={4} />
-          ) : featured.data?.products.length ? (
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-              {featured.data.products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          ) : null}
-          {shops.data?.length ? (
-            <div className="mt-8">
-              <div className="flex items-end justify-between gap-3">
-                <h3 className="text-xl font-bold text-ink">Shops on JonnyBee</h3>
-                <Link to="/shop/stores" className="font-bold text-sea">All shops →</Link>
-              </div>
-              <div className="scrollbar-none -mx-5 mt-4 flex gap-4 overflow-x-auto px-5 pt-1 pb-2">
-                {shops.data.map((st) => <StoreCard key={st.id} store={st} compact />)}
-              </div>
-            </div>
-          ) : null}
-        </div>
-        <div className="mt-6 flex flex-col items-start gap-3 rounded-2xl border border-line bg-gold-bg p-5 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-lg text-ink">
-            <strong className="font-semibold">Have something to sell?</strong> Open a free shop and reach families across the
-            Central Region.
-          </p>
-          <Link to="/sell" className="inline-flex h-11 shrink-0 items-center gap-2 rounded-xl bg-gold px-4 font-semibold text-white">
-            Become a seller <ArrowRight className="size-4" aria-hidden />
-          </Link>
         </div>
       </section>
 

@@ -49,7 +49,7 @@ export const Route = createFileRoute("/shop/")({
       { title: "Shop — JonnyBee Online Trading Platform, Assin Municipality" },
       {
         name: "description",
-        content: "JonnyBee Online Trading Platform — Shop Smart, Trade Better! Electronics, gadgets, fashion, home and kitchen items from sellers in Assin Municipality, Ghana. Free delivery, Mobile Money or cash on delivery.",
+        content: "JonnyBee Son and Daughter Online Trading Platform — Shop Smart, Trade Smart with JonnyBee! Electronics, gadgets, fashion, home and kitchen items from sellers in Assin Municipality, Ghana. Free delivery, Mobile Money or cash on delivery.",
       },
     ],
   }),

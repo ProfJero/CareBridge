@@ -491,7 +491,7 @@ function openPoster(store: Store, qr: string, url: string) {
 <style>body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#0a1440}.p{width:180mm;margin:10mm auto;border:6px solid #0b1f8f;border-radius:16px;padding:14mm;text-align:center}
 h1{font-size:34px;margin:8px 0}h2{font-size:20px;margin:0;color:#1a45d8}.qr{width:120mm;height:120mm}.s{font-size:18px;margin-top:10px}.u{font-size:14px;color:#3b4766;word-break:break-all}
 .b{display:inline-block;background:#0b1f8f;color:#fff;border-radius:999px;padding:6px 16px;font-weight:bold}@media print{.p{margin:0 auto}}</style></head>
-<body><div class="p"><img src="${location.origin}/brand/jb-logo.webp" style="height:70px" alt=""><h2>JonnyBee Online Trading Platform</h2><h1>${esc(store.name)}</h1>
+<body><div class="p"><img src="${location.origin}/brand/shop-logo.webp" style="height:70px" alt=""><h2>JonnyBee Son and Daughter Online Trading Platform</h2><h1>${esc(store.name)}</h1>
 <p class="b">Scan to shop · Free delivery</p><img class="qr" src="${qr}" alt="QR code"><p class="s"><strong>${esc(SHOP.slogan)}</strong></p>
 <p class="u">${esc(url)}</p>${store.whatsapp ? `<p class="s">WhatsApp: ${esc(store.whatsapp)}</p>` : ""}<p class="u">${esc(store.town)}, Ghana</p></div>
 <script>window.onload=()=>setTimeout(()=>window.print(),300)</script></body></html>`);
